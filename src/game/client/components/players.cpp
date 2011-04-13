@@ -484,6 +484,66 @@ void CPlayers::RenderPlayer(
 		}
 
 	}
+ 	bool LocalPlayerInGame = m_pClient->m_aClients[m_pClient->m_Snap.m_pLocalInfo->m_ClientID].m_Team != -1;
+	bool CurPlayerIsEnemy = 
+		IsTeamplay == false ||
+		(IsTeamplay && m_pClient->m_aClients[m_pClient->m_Snap.m_pLocalInfo->m_ClientID].m_Team != m_pClient->m_aClients[pInfo.m_ClientID].m_Team); 
+
+	if (g_Config.m_AntiPing  && 
+		g_Config.m_AntiPing  != 2 && // if == 2, than we should show only grenage shadows
+		pInfo.m_Local == false  &&
+		LocalPlayerInGame &&
+		CurPlayerIsEnemy &&
+		pPlayerChar && pPlayerChar->m_PlayerFlags&PLAYERFLAG_PLAYING)
+	{
+/* 	
+	CWorldCore TempWorld;
+	CCharacterCore TempCore;
+	mem_zero(&TempCore, sizeof(TempCore));
+	TempCore.Init(&TempWorld, g_GameClient.Collision());
+	TempCore.Read(pCharacter);
+	 */
+		CCharacterCore ShadowPlayer;
+		
+		CNetObj_CharacterCore buf;
+		m_pClient->m_aClients[pInfo.m_ClientID].m_Predicted.Write(&buf);
+		CWorldCore world;
+		ShadowPlayer.Init(&world, 0);
+		//ShadowPlayer.m_pWorld = &world;
+		ShadowPlayer.Reset(); 
+		ShadowPlayer.Read(&buf);
+
+		CNetObj_CharacterCore next;
+		ShadowPlayer.Write(&next);
+
+		vec2 Prev = m_pClient->m_aClients[pInfo.m_ClientID].m_PreviousPrediction;
+		vec2 NextVec = vec2(next.m_X, next.m_Y);
+		vec2 ShadowPosition = NextVec;
+
+		float dist = distance(NextVec, Prev);
+		if (dist < 0) dist *= -1;
+		if (dist < 300) // like it should be usual
+			ShadowPosition = mix(Prev, NextVec, Client()->PredIntraGameTick());
+
+		m_pClient->m_aClients[pInfo.m_ClientID].m_PreviousPrediction = ShadowPosition;
+
+		CTeeRenderInfo shadow = RenderInfo;
+		float color_body_mix = (shadow.m_ColorBody.r + shadow.m_ColorBody.g + shadow.m_ColorBody.b) / 2.5f;
+		float color_feet_mix = (shadow.m_ColorFeet.r + shadow.m_ColorFeet.g + shadow.m_ColorFeet.b) / 2.5f;
+		shadow.m_ColorBody.a = 0.25f;
+		shadow.m_ColorFeet.a = 0.25f;
+		shadow.m_ColorBody.r = color_body_mix;
+		shadow.m_ColorBody.g = color_body_mix;
+		shadow.m_ColorBody.b = color_body_mix;
+		shadow.m_ColorFeet.r = color_feet_mix;
+		shadow.m_ColorFeet.g = color_feet_mix;
+		shadow.m_ColorFeet.b = color_feet_mix;
+
+		shadow.m_Texture = m_pClient->m_pSkins->Get(m_pClient->m_aClients[pInfo.m_ClientID].m_SkinID)->m_ColorTexture;
+		
+		// Render shadow
+		RenderTools()->RenderTee(&State, &shadow, Player.m_Emote, Direction, ShadowPosition); 
+	}
 
 	// render the "shadow" tee
 	if(pInfo.m_Local && g_Config.m_Debug)

@@ -23,6 +23,13 @@ public:
 
 	CCamera();
 	virtual void OnRender();
+		
+	static void ConKeyZoomIn(IConsole::IResult *pResult, void *pUserData);
+	static void ConKeyZoomOut(IConsole::IResult *pResult, void *pUserData);
+	static void ConZoomReset(IConsole::IResult *pResult, void *pUserData);
+
+	virtual void OnConsoleInit();
+
 };
 
 #endif

@@ -58,6 +58,7 @@ void CMenus::RenderServerbrowserServerList(CUIRect View)
 		COL_PLAYERS,
 		COL_PING,
 		COL_VERSION,
+		COL_FRIEND_HEART,
 	};
 
 	static CColumn s_aCols[] = {
@@ -67,9 +68,10 @@ void CMenus::RenderServerbrowserServerList(CUIRect View)
 		{COL_FLAG_FAV,	-1,						" ",		-1, 14.0f, 0, {0}, {0}},
 		{COL_NAME,		IServerBrowser::SORT_NAME,		"Name",		0, 300.0f, 0, {0}, {0}},	// Localize - these strings are localized within CLocConstString 
 		{COL_GAMETYPE,	IServerBrowser::SORT_GAMETYPE,	"Type",		1, 50.0f, 0, {0}, {0}},
-		{COL_MAP,		IServerBrowser::SORT_MAP,			"Map", 		1, 100.0f, 0, {0}, {0}},
+		{COL_MAP,		IServerBrowser::SORT_MAP,			"Map", 		1, 90.0f, 0, {0}, {0}},
+		{COL_FRIEND_HEART,		-1,				"", 		1, 14.0f, 0, {0}, {0}},
 		{COL_PLAYERS,	IServerBrowser::SORT_NUMPLAYERS,	"Players",	1, 60.0f, 0, {0}, {0}},
-		{-1,			-1,						" ",		1, 10.0f, 0, {0}, {0}},
+		{COL_FRIEND_HEART,		-1,				"", 		1, 14.0f, 0, {0}, {0}},
 		{COL_PING,		IServerBrowser::SORT_PING,		"Ping",		1, 40.0f, FIXED, {0}, {0}},
 	};
 	// This is just for scripts/update_localization.py to work correctly (all other strings are already Localize()'d somewhere else). Don't remove!
@@ -154,10 +156,15 @@ void CMenus::RenderServerbrowserServerList(CUIRect View)
 	int ScrollNum = NumServers-Num+1;
 	if(ScrollNum > 0)
 	{
-		if(Input()->KeyPresses(KEY_MOUSE_WHEEL_UP))
+/* 		if(Input()->KeyPresses(KEY_MOUSE_WHEEL_UP))
 			s_ScrollValue -= 3.0f/ScrollNum;
 		if(Input()->KeyPresses(KEY_MOUSE_WHEEL_DOWN))
+			s_ScrollValue += 3.0f/ScrollNum; */
+		if(Input()->KeyPresses(KEY_MOUSE_WHEEL_UP)&&(UI()->MouseY()>=View.y && UI()->MouseY()<=View.y+View.h)&&(UI()->MouseX()>=View.x && UI()->MouseX()<=View.x+View.w))
+			s_ScrollValue -= 3.0f/ScrollNum;
+		if(Input()->KeyPresses(KEY_MOUSE_WHEEL_DOWN)&&(UI()->MouseY()>=View.y && UI()->MouseY()<=View.y+View.h)&&(UI()->MouseX()>=View.x && UI()->MouseX()<=View.x+View.w))
 			s_ScrollValue += 3.0f/ScrollNum;
+
 	}
 	else
 		ScrollNum = 0;
@@ -303,6 +310,11 @@ void CMenus::RenderServerbrowserServerList(CUIRect View)
 				if(pItem->m_Favorite)
 					DoButton_Icon(IMAGE_BROWSEICONS, SPRITE_BROWSE_HEART, &Button);
 			}
+			else if(ID == COL_FRIEND_HEART)
+			{
+				if(g_Config.m_BrFilterFriends)
+					DoButton_Icon(IMAGE_BROWSEICONS, SPRITE_BROWSE_HEART, &Button);
+			}
 			else if(ID == COL_NAME)
 			{
 				CTextCursor Cursor;
@@ -353,19 +365,59 @@ void CMenus::RenderServerbrowserServerList(CUIRect View)
 			}
 			else if(ID == COL_PLAYERS)
 			{
+				float perc = 0.0f;
 				if(g_Config.m_BrFilterSpectators)
+				{
 					str_format(aTemp, sizeof(aTemp), "%i/%i", pItem->m_NumPlayers, pItem->m_MaxPlayers);
+					perc = pItem->m_NumPlayers * 100.0f / pItem->m_MaxPlayers;
+				}
 				else
+				{
 					str_format(aTemp, sizeof(aTemp), "%i/%i", pItem->m_NumClients, pItem->m_MaxClients);
+					perc = pItem->m_NumPlayers * 100.0f / pItem->m_MaxClients;
+				}
+				if(g_Config.m_ClHighlightPlayer == 1)
+				{
+					if (perc <= 15.0f)
+						TextRender()->TextColor(0.5f,1,0.5f,1);
+					else if (perc <= 25.0f)
+						TextRender()->TextColor(0.65f,1.0f,0.65f,1);
+					else if (perc <= 45.0f)
+						TextRender()->TextColor(0.75f,1.0f,0.65f,1);
+					else if (perc <= 65.0f)
+						TextRender()->TextColor(0.95f,0.95f,0.65f,1);
+					else if (perc <= 85.0f)
+						TextRender()->TextColor(0.95f,0.65f,0.65f,1);
+					else if (perc <= 100.0f)
+						TextRender()->TextColor(0.95f,0.25f,0.25f,1);
+					else
+						TextRender()->TextColor(1,1,1,1);		
+				}
+					
 				if(g_Config.m_BrFilterString[0] && (pItem->m_QuickSearchHit&IServerBrowser::QUICK_PLAYER))
 					TextRender()->TextColor(0.4f,0.4f,1.0f,1);
 				UI()->DoLabelScaled(&Button, aTemp, 12.0f, 1);
 				TextRender()->TextColor(1,1,1,1);
 			}
 			else if(ID == COL_PING)
-			{
+			{			
+				if(g_Config.m_ClHighlightPing == 1)
+				{
+					float ping = pItem->m_Latency;
+					if (ping <= 45)
+						TextRender()->TextColor(0.5f,1,0.5f,1);
+					else if (ping <= 95)
+						TextRender()->TextColor(0.85f,1.0f,0.65f,1);
+					else if (ping <= 110)
+						TextRender()->TextColor(0.95f,0.85f,0.65f,1);
+					else if (ping <= 135)
+						TextRender()->TextColor(0.95f,0.45f,0.45f,1);
+					else
+						TextRender()->TextColor(0.95f,0.25f,0.25f,1);
+				}
 				str_format(aTemp, sizeof(aTemp), "%i", pItem->m_Latency);
 				UI()->DoLabelScaled(&Button, aTemp, 12.0f, 1);
+				TextRender()->TextColor(1,1,1,1);
 			}
 			else if(ID == COL_VERSION)
 			{
@@ -377,7 +429,15 @@ void CMenus::RenderServerbrowserServerList(CUIRect View)
 				CTextCursor Cursor;
 				TextRender()->SetCursor(&Cursor, Button.x, Button.y, 12.0f*UI()->Scale(), TEXTFLAG_RENDER|TEXTFLAG_STOP_AT_END);
 				Cursor.m_LineWidth = Button.w;
+				if(g_Config.m_ClHighlightGametypes == 1) 
+				{
+					if (str_comp(pItem->m_aGameType, "DM") == 0 || str_comp(pItem->m_aGameType, "TDM") == 0 || str_comp(pItem->m_aGameType, "CTF") == 0) 
+						TextRender()->TextColor(0.5f,1,0.5f,1);
+					else 
+						TextRender()->TextColor(1,1,1,1);
+				}
 				TextRender()->TextEx(&Cursor, pItem->m_aGameType, -1);
+				TextRender()->TextColor(1,1,1,1);
 			}
 
 		}
@@ -753,7 +813,6 @@ void CMenus::RenderServerbrowserFriends(CUIRect View)
 		str_format(aBuf, sizeof(aBuf), "%s:", Localize("Name"));
 		UI()->DoLabelScaled(&Button, aBuf, FontSize, -1);
 		Button.VSplitLeft(80.0f, 0, &Button);
-		static char s_aName[MAX_NAME_LENGTH] = {0};
 		static float s_OffsetName = 0.0f;
 		DoEditBox(&s_aName, &Button, s_aName, sizeof(s_aName), FontSize, &s_OffsetName);
 
@@ -762,16 +821,17 @@ void CMenus::RenderServerbrowserFriends(CUIRect View)
 		str_format(aBuf, sizeof(aBuf), "%s:", Localize("Clan"));
 		UI()->DoLabelScaled(&Button, aBuf, FontSize, -1);
 		Button.VSplitLeft(80.0f, 0, &Button);
-		static char s_aClan[MAX_CLAN_LENGTH] = {0};
 		static float s_OffsetClan = 0.0f;
 		DoEditBox(&s_aClan, &Button, s_aClan, sizeof(s_aClan), FontSize, &s_OffsetClan);
 
 		ServerFriends.HSplitTop(3.0f, 0, &ServerFriends);
 		ServerFriends.HSplitTop(20.0f, &Button, &ServerFriends);
 		static int s_RemoveButton = 0;
-		if(DoButton_Menu(&s_RemoveButton, Localize("Add Friend"), 0, &Button))
+		if(DoButton_Menu(&s_RemoveButton, Localize("Add Friend"), 0, &Button) || (m_EnterPressed && ((UI()->LastActiveItem() == &s_aName) || (UI()->LastActiveItem() == &s_aClan))))
 		{
 			m_pClient->Friends()->AddFriend(s_aName, s_aClan);
+			s_aName[0] = 0;
+			s_aClan[0] = 0;
 			Client()->ServerBrowserUpdate();
 		}
 	}
@@ -867,7 +927,10 @@ void CMenus::RenderServerbrowser(CUIRect MainView)
 			TextRender()->TextColor(1.0f, 0.4f, 0.4f, 1.0f);
 		}
 		else
+		{
 			str_format(aBuf, sizeof(aBuf), Localize("Current version: %s"), GAME_VERSION);
+			str_append(aBuf, " (TDTW)", sizeof(aBuf));
+		}
 		UI()->DoLabelScaled(&Button, aBuf, 14.0f, -1);
 		TextRender()->TextColor(1.0f, 1.0f, 1.0f, 1.0f);
 
@@ -894,7 +957,7 @@ void CMenus::RenderServerbrowser(CUIRect MainView)
 		Button.VMargin(2.0f, &Button);
 		
 		static int s_JoinButton = 0;
-		if(DoButton_Menu(&s_JoinButton, Localize("Connect"), 0, &Button) || m_EnterPressed)
+		if(DoButton_Menu(&s_JoinButton, Localize("Connect"), 0, &Button) || (m_EnterPressed && ((UI()->LastActiveItem() != &s_aName) && (UI()->LastActiveItem() != &s_aClan))))
 		{
 			Client()->Connect(g_Config.m_UiServerAddress);
 			m_EnterPressed = false;

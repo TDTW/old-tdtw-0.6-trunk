@@ -41,7 +41,7 @@ MACRO_CONFIG_INT(PlayerColorBody, player_color_body, 65408, 0, 0xFFFFFF, CFGFLAG
 MACRO_CONFIG_INT(PlayerColorFeet, player_color_feet, 65408, 0, 0xFFFFFF, CFGFLAG_CLIENT|CFGFLAG_SAVE, "Player feet color")
 MACRO_CONFIG_STR(PlayerSkin, player_skin, 24, "default", CFGFLAG_CLIENT|CFGFLAG_SAVE, "Player skin")
 
-MACRO_CONFIG_INT(UiPage, ui_page, 5, 0, 9, CFGFLAG_CLIENT|CFGFLAG_SAVE, "Interface page")
+MACRO_CONFIG_INT(UiPage, ui_page, 5, 0, 10, CFGFLAG_CLIENT|CFGFLAG_SAVE, "Interface page")
 MACRO_CONFIG_INT(UiToolboxPage, ui_toolbox_page, 0, 0, 2, CFGFLAG_CLIENT|CFGFLAG_SAVE, "Toolbox page")
 MACRO_CONFIG_STR(UiServerAddress, ui_server_address, 64, "localhost:8303", CFGFLAG_CLIENT|CFGFLAG_SAVE, "Interface server address")
 MACRO_CONFIG_INT(UiScale, ui_scale, 100, 50, 150, CFGFLAG_CLIENT|CFGFLAG_SAVE, "Interface scale")
@@ -52,6 +52,33 @@ MACRO_CONFIG_INT(UiColorLht, ui_color_lht, 175, 0, 255, CFGFLAG_CLIENT|CFGFLAG_S
 MACRO_CONFIG_INT(UiColorAlpha, ui_color_alpha, 228, 0, 255, CFGFLAG_CLIENT|CFGFLAG_SAVE, "Interface alpha")
 
 MACRO_CONFIG_INT(GfxNoclip, gfx_noclip, 0, 0, 1, CFGFLAG_CLIENT|CFGFLAG_SAVE, "Disable clipping")
+
+// TDTW
+MACRO_CONFIG_STR(ClFontfile, cl_fontfile, 255, "comic.ttf", CFGFLAG_CLIENT|CFGFLAG_SAVE|CFGFLAG_SAVETDTW, "What font file to use")
+MACRO_CONFIG_INT(ZoomMax, zoom_max, 160, 110, 500, CFGFLAG_CLIENT|CFGFLAG_SAVETDTW, "Zoom maximum")
+MACRO_CONFIG_INT(ZoomMin, zoom_min, 40, 20, 90, CFGFLAG_CLIENT|CFGFLAG_SAVETDTW, "Zoom minimum")
+
+MACRO_CONFIG_INT(ReconnectBanTimeout, reconnect_ban_timeout, 10, 1, 120, CFGFLAG_CLIENT|CFGFLAG_SAVETDTW, "How many seconds to wait before reconnecting (when banned)")
+MACRO_CONFIG_INT(ReconnectFullTimeout, reconnect_full_timeout, 3, 1, 120, CFGFLAG_CLIENT|CFGFLAG_SAVETDTW, "How many seconds to wait before reconnecting (when server is full)")
+
+MACRO_CONFIG_INT(AntiPing, cl_antiping, 0, 0, 2, CFGFLAG_CLIENT|CFGFLAG_SAVETDTW, "Antiping")
+MACRO_CONFIG_INT(AntiPingGrenade, cl_antiping_grenade, 0, 0, 1, CFGFLAG_CLIENT|CFGFLAG_SAVETDTW, "Antiping")
+
+MACRO_CONFIG_INT(ClStandartHud, cl_standart_hud, 0, 0, 1, CFGFLAG_CLIENT|CFGFLAG_SAVETDTW, "standart hud")
+MACRO_CONFIG_INT(ClHudShowAmmo, cl_hud_show_ammo, 1, 0, 1, CFGFLAG_CLIENT|CFGFLAG_SAVETDTW, "Show ammo")
+MACRO_CONFIG_INT(ClHudShowWeapon, cl_hud_show_weapon, 1, 0, 1, CFGFLAG_CLIENT|CFGFLAG_SAVETDTW, "Show weapon")
+
+MACRO_CONFIG_INT(ClChatShowtime, cl_chat_showtime, 15, 5, 60, CFGFLAG_CLIENT|CFGFLAG_SAVETDTW, "Time to show message")
+MACRO_CONFIG_INT(ClChatHeightlimit, cl_chat_heightlimit, 80, 50, 184, CFGFLAG_CLIENT|CFGFLAG_SAVETDTW, "Chat height limit")
+
+MACRO_CONFIG_INT(ClEffectsFlagtrail, cl_effects_flagtrail, 1, 0, 1, CFGFLAG_CLIENT|CFGFLAG_SAVETDTW, "FlagTrail")
+MACRO_CONFIG_INT(ClEffectsWeapontrail, cl_effects_weapontrail, 1, 0, 1, CFGFLAG_CLIENT|CFGFLAG_SAVETDTW, "WeaponTrail")
+
+MACRO_CONFIG_INT(ClHighlightPlayer, cl_highlight_player, 1, 0, 1, CFGFLAG_SAVETDTW|CFGFLAG_CLIENT, "Highlight for number of players")
+MACRO_CONFIG_INT(ClHighlightPing, cl_highlight_ping, 1, 0, 1, CFGFLAG_SAVETDTW|CFGFLAG_CLIENT, "Highlight for ping")
+MACRO_CONFIG_INT(ClHighlightGametypes, cl_highlight_gametypes, 1, 0, 1, CFGFLAG_SAVETDTW|CFGFLAG_CLIENT, "Highlight for gametypes")
+MACRO_CONFIG_INT(ClHighlightWeaponBar, cl_highlight_weaponbar, 1, 0, 1, CFGFLAG_SAVETDTW|CFGFLAG_CLIENT, "Highlight for weapons bar")
+MACRO_CONFIG_INT(ClBulletWeaponBar, cl_bullet_weaponbar, 1, 0, 1, CFGFLAG_SAVETDTW|CFGFLAG_CLIENT, "Show num of bullets for weapons bar")
 
 // server
 MACRO_CONFIG_INT(SvWarmup, sv_warmup, 0, 0, 0, CFGFLAG_SERVER, "Number of seconds to do warmup before round starts")

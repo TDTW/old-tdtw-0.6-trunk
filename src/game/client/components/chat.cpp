@@ -17,7 +17,8 @@
 #include <game/localization.h>
 
 #include "chat.h"
-
+#include "menus.h"
+#include <string.h>
 
 CChat::CChat()
 {
@@ -41,6 +42,8 @@ void CChat::OnReset()
 	m_PlaceholderOffset = 0;
 	m_PlaceholderLength = 0;
 	m_pHistoryEntry = 0x0;
+	m_Blend_Box[0] = 0.0f;
+	m_Blend_Box[1] = 0.0f;
 }
 
 void CChat::OnRelease()
@@ -265,6 +268,8 @@ void CChat::AddLine(int ClientID, int Team, const char *pLine)
 		m_aLines[m_CurrentLine].m_Team = Team;
 		m_aLines[m_CurrentLine].m_NameColor = -2;
 		m_aLines[m_CurrentLine].m_Highlighted = str_find_nocase(pLine, m_pClient->m_aClients[m_pClient->m_Snap.m_LocalClientID].m_aName) != 0;
+		m_aLines[m_CurrentLine].m_YOffset2 = 0.0f;
+		m_aLines[m_CurrentLine].m_Blend = 0.0f;
 		if(m_aLines[m_CurrentLine].m_Highlighted)
 			Highlighted = true;
 
@@ -306,16 +311,33 @@ void CChat::AddLine(int ClientID, int Team, const char *pLine)
 
 void CChat::OnRender()
 {
-	float Width = 300.0f*Graphics()->ScreenAspect();
-	Graphics()->MapScreen(0.0f, 0.0f, Width, 300.0f);
-	float x = 5.0f;
-	float y = 300.0f-20.0f;
+	Graphics()->MapScreen(0,0,300*Graphics()->ScreenAspect(),300);
+	float x = 10.0f;
+	float y = 300.0f-25.0f;
+	float LineWidth = m_pClient->m_pScoreboard->Active() /* || g_Config.m_ClSpecMessageShow */ ? 95.0f : 200.0f;
+	
+	if(m_Mode != MODE_NONE && m_Blend_Box[0] < 0.40f)
+		m_Blend_Box[0] += 0.04f;
+	else if (m_Blend_Box[0] > 0.0f && m_Mode == MODE_NONE)
+		m_Blend_Box[0] -= 0.02f;
+		
+	if(m_Show && m_Blend_Box[1] < 0.40f)
+		m_Blend_Box[1] += 0.04f;
+	else if (m_Blend_Box[1] > 0.0f && !m_Show)
+		m_Blend_Box[1] -= 0.02f;
+	
+		Graphics()->TextureSet(-1);
+		Graphics()->QuadsBegin();
+		Graphics()->SetColor(1,1,1,m_Blend_Box[0]);
+		RenderTools()->DrawRoundRectExt(x-5, y, LineWidth+10, 20, 2.0f, CUI::CORNER_B);
+		Graphics()->QuadsEnd(); 
+		
 	if(m_Mode != MODE_NONE)
-	{
+	{					
 		// render chat input
 		CTextCursor Cursor;
 		TextRender()->SetCursor(&Cursor, x, y, 8.0f, TEXTFLAG_RENDER);
-		Cursor.m_LineWidth = Width-190.0f;
+		Cursor.m_LineWidth = LineWidth;
 		Cursor.m_MaxLines = 2;
 		
 		if(m_Mode == MODE_ALL)
@@ -357,22 +379,45 @@ void CChat::OnRender()
 		CTextCursor Marker = Cursor;
 		TextRender()->TextEx(&Marker, "|", -1);
 		TextRender()->TextEx(&Cursor, m_Input.GetString()+m_Input.GetCursorOffset(), -1);
+		m_LastBlendBox = 1;		
+		m_Show = true;
 	}
+	else if (m_Blend_Box[1] <= 0.0f)
+		m_LastBlendBox = 0;
 
 	y -= 8.0f;
 
 	int64 Now = time_get();
-	float LineWidth = m_pClient->m_pScoreboard->Active() ? 90.0f : 200.0f;
-	float HeightLimit = m_pClient->m_pScoreboard->Active() ? 230.0f : m_Show ? 50.0f : 200.0f;
 	float Begin = x;
 	float FontSize = 6.0f;
 	CTextCursor Cursor;
-	int OffsetType = m_pClient->m_pScoreboard->Active() ? 1 : 0;
+	int OffsetType = m_pClient->m_pScoreboard->Active() /* || g_Config.m_ClSpecMessageShow */ ? 1 : 0;
+		
+	float Limit = 310.0f - g_Config.m_ClChatHeightlimit;
+	//float HeightLimit2 = m_Show ? 300.0f - 184.0f : Limit;
+	float HeightLimit2 = m_pClient->m_pScoreboard->Active() ? 238.0f : m_Show ? 310.0f - 184.0f : Limit;
+			
+		if(m_HeightLimit < HeightLimit2)
+			m_HeightLimit += 1.0f;
+		else if(m_HeightLimit > HeightLimit2)
+			m_HeightLimit -= 1.0f;
+	
+	float HeightLimit = m_HeightLimit;
+	
+	Graphics()->TextureSet(-1);
+	Graphics()->QuadsBegin();
+	Graphics()->SetColor(0,0,0,m_Blend_Box[1]);
+	if(m_LastBlendBox)
+		RenderTools()->DrawRoundRectExt(x-5, y-275.0f+HeightLimit, LineWidth+10, 275.0f-HeightLimit+8.0f, 2.0f, CUI::CORNER_T);
+	else
+		RenderTools()->DrawRoundRect(x-5, y-275.0f+HeightLimit, LineWidth+10, 275.0f-HeightLimit+8.0f, 2.0f);
+	Graphics()->QuadsEnd(); 
+				
 	for(int i = 0; i < MAX_LINES; i++)
 	{
 		int r = ((m_CurrentLine-i)+MAX_LINES)%MAX_LINES;
-		if(Now > m_aLines[r].m_Time+16*time_freq() && !m_Show)
-			break;
+		
+		int Timetoshow = g_Config.m_ClChatShowtime;
 		
 		// get the y offset (calculate it if we haven't done that yet)
 		if(m_aLines[r].m_YOffset[OffsetType] < 0.0f)
@@ -381,16 +426,34 @@ void CChat::OnRender()
 			Cursor.m_LineWidth = LineWidth;
 			TextRender()->TextEx(&Cursor, m_aLines[r].m_aName, -1);
 			TextRender()->TextEx(&Cursor, m_aLines[r].m_aText, -1);
-			m_aLines[r].m_YOffset[OffsetType] = Cursor.m_Y + Cursor.m_FontSize;
+			m_aLines[r].m_YOffset[OffsetType] = Cursor.m_Y + FontSize;
 		}
-		y -= m_aLines[r].m_YOffset[OffsetType];
+
+		if(m_aLines[r].m_YOffset2 < m_aLines[r].m_YOffset[OffsetType])
+			m_aLines[r].m_YOffset2 += 0.1f;
+		else if(m_aLines[r].m_YOffset2 > m_aLines[r].m_YOffset[OffsetType] + 0.1f)
+			m_aLines[r].m_YOffset2 -= 0.1f;
+			
+		y -= m_aLines[r].m_YOffset2;
 
 		// cut off if msgs waste too much space
-		if(y < HeightLimit)
-			break;
 		
-		float Blend = Now > m_aLines[r].m_Time+14*time_freq() && !m_Show ? 1.0f-(Now-m_aLines[r].m_Time-14*time_freq())/(2.0f*time_freq()) : 1.0f;
-
+		if(y < HeightLimit-5)
+		{
+			if(m_aLines[r].m_Blend > -0.1f)
+				m_aLines[r].m_Blend -= 0.08f;
+			else
+				break;
+		}
+		else
+		{
+			if(Now > m_aLines[r].m_Time+(Timetoshow-2)*time_freq() && m_aLines[r].m_Blend >= -0.1f && !m_Show)
+				m_aLines[r].m_Blend -= 0.08f;
+			else if(m_aLines[r].m_Blend < 1.0f)	
+				m_aLines[r].m_Blend += 0.08f;			
+		}
+		
+		float Blend = m_aLines[r].m_Blend;
 		// reset the cursor
 		TextRender()->SetCursor(&Cursor, Begin, y, FontSize, TEXTFLAG_RENDER);
 		Cursor.m_LineWidth = LineWidth;
