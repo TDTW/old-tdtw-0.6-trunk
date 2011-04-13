@@ -1109,6 +1109,60 @@ void CMenus::RenderColFeat(CUIRect MainView)
 	UiDoGetButtons(23, 26, Other);
 }
 
+void CMenus::RenderSettingsHudMod(CUIRect MainView)
+{
+	CUIRect Button;
+
+	MainView.HSplitTop(20.0f, &Button, &MainView);
+	Button.VSplitLeft(70.0f, &Button, 0);
+	if(DoButton_CheckBox(&g_Config.m_HudModHideAll, Localize("Hide all"), g_Config.m_HudModHideAll, &Button))
+		g_Config.m_HudModHideAll ^= 1;
+
+	if(g_Config.m_HudModHideAll)
+		return;
+		
+	MainView.HSplitTop(20.0f, &Button, &MainView);
+	Button.VSplitLeft(110.0f, &Button, 0);
+	Button.VMargin(15.0f, &Button);
+	if(DoButton_CheckBox(&g_Config.m_ClShowfps, Localize("Show fps"), g_Config.m_ClShowfps, &Button))
+		g_Config.m_ClShowfps ^= 1;
+			
+	const char *paLabels[] = {
+		Localize("Hide chat"),
+		Localize("Hide kill messages"),
+		Localize("Hide health and ammo"),
+		Localize("Hide game timer"),
+		Localize("Hide broadcast"),
+		Localize("Hide sudden death"),
+		Localize("Hide score hud"),
+		Localize("Hide warmup timer"),
+		Localize("Hide teambalance warning"),
+		Localize("Hide voting"),
+		Localize("Hide cursor"),
+		Localize("Hide spectator hud")};
+	int *paButton[] = {
+		&g_Config.m_HudModHideChat,
+		&g_Config.m_HudModHideKillMessages,
+		&g_Config.m_HudModHideHealthAndAmmo,
+		&g_Config.m_HudModHideGameTimer,
+		&g_Config.m_HudModHideBroadcast,
+		&g_Config.m_HudModHideSuddenDeath,
+		&g_Config.m_HudModHideScoreHud,
+		&g_Config.m_HudModHideWarmupTimer,
+		&g_Config.m_HudModHideTeambalanceWarning,
+		&g_Config.m_HudModHideVoting,
+		&g_Config.m_HudModHideCursor,
+		&g_Config.m_HudModHideSpectator};
+			
+	for(int s = 0; s < 12; s++)
+	{
+		MainView.HSplitTop(20.0f, &Button, &MainView);
+		Button.VMargin(15.0f, &Button);
+		if(DoButton_CheckBox(paButton[s], paLabels[s], *paButton[s], &Button))
+			*paButton[s] ^= 1;
+	}
+}
+
 void CMenus::RenderColHud(CUIRect MainView)
 {
 	CUIRect Button, Top, Center, Left, Right, Bottom, Label;	
@@ -1129,10 +1183,10 @@ void CMenus::RenderColHud(CUIRect MainView)
 		RenderTools()->DrawUIRect(&Left, vec4(1,1,1,0.25f), CUI::CORNER_BL, 10.0f);
 		Left.Margin(10.0f, &Left);
 	//#start left bar
-/* 		TextRender()->Text(0, Left.x, Left.y-5, 18, Localize("Hud"), -1);
+ 		TextRender()->Text(0, Left.x, Left.y-5, 18, Localize("Hud"), -1);
 		Left.HSplitTop(20.0f, 0, &Left); 
 		
-		RenderSettingsHudMod(Left);*/
+		RenderSettingsHudMod(Left);
 	//#end left bar
 		Right.VSplitLeft(10.0f, &Left, &Right);
 		
@@ -1264,7 +1318,7 @@ void CMenus::RenderColHud(CUIRect MainView)
 		//g_Config.m_ClNotificationWeapon		= 0;
 		g_Config.m_ClBulletWeaponBar		= 1;
 		
-/* 		g_Config.m_HudModHideAll 		= 0;
+ 		g_Config.m_HudModHideAll 		= 0;
 		g_Config.m_ClShowfps 			= 0;
 		g_Config.m_HudModHideChat		= 0;
 		g_Config.m_HudModHideKillMessages	= 0;
@@ -1276,7 +1330,8 @@ void CMenus::RenderColHud(CUIRect MainView)
 		g_Config.m_HudModHideWarmupTimer	= 0;
 		g_Config.m_HudModHideTeambalanceWarning	= 0;
 		g_Config.m_HudModHideVoting		= 0;
-		g_Config.m_HudModHideCursor		= 0;	 */
+		g_Config.m_HudModHideCursor		= 0;	
+		g_Config.m_HudModHideSpectator	= 0; 
 		
 		MainView.HSplitTop(0.0f, &Center, &Bottom);
 	}		

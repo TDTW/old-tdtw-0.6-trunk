@@ -22,7 +22,8 @@ void CBroadcast::OnRender()
 {
 	if(m_pClient->m_pScoreboard->Active() || m_pClient->m_pMotd->IsActive())
 		return;
-
+	if (g_Config.m_HudModHideAll || g_Config.m_HudModHideBroadcast) { return; }
+	
 	Graphics()->MapScreen(0, 0, 300*Graphics()->ScreenAspect(), 300);
 
 	if(time_get() < m_BroadcastTime)

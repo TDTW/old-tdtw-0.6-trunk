@@ -310,7 +310,8 @@ void CChat::AddLine(int ClientID, int Team, const char *pLine)
 }
 
 void CChat::OnRender()
-{
+{	
+	if (g_Config.m_HudModHideAll || g_Config.m_HudModHideChat) { return; }
 	Graphics()->MapScreen(0,0,300*Graphics()->ScreenAspect(),300);
 	float x = 10.0f;
 	float y = 300.0f-25.0f;
