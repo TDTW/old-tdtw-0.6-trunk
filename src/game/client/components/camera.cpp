@@ -46,7 +46,7 @@ void CCamera::OnRender()
 	if(!m_pClient->m_Snap.m_SpecInfo.m_Active && Client()->State() != IClient::STATE_DEMOPLAYBACK)	// check zoom
 		m_Zoom = 1.0f;
 
-	// update camera center		
+	// update camera center
 	if(m_pClient->m_Snap.m_SpecInfo.m_Active && !m_pClient->m_Snap.m_SpecInfo.m_UsePosition)
 	{
 		if(m_CamType != CAMTYPE_SPEC)
@@ -76,7 +76,7 @@ void CCamera::OnRender()
 
 			CameraOffset = normalize(m_pClient->m_pControls->m_MousePos)*OffsetAmount;
 		}
-		
+
 		if(m_pClient->m_Snap.m_SpecInfo.m_Active)
 			m_Center = m_pClient->m_Snap.m_SpecInfo.m_Position + CameraOffset;
 		else
