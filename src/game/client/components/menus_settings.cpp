@@ -508,7 +508,7 @@ void CMenus::UiDoGetButtons(int Start, int Stop, CUIRect View)
 }
 
 void CMenus::RenderSettingsControls(CUIRect MainView)
-{
+{	
 	// this is kinda slow, but whatever
 	for(int i = 0; i < g_KeyCount; i++)
 		gs_aKeys[i].m_KeyId = 0;
@@ -532,7 +532,7 @@ void CMenus::RenderSettingsControls(CUIRect MainView)
 
 	// movement settings
 	{
-		MovementSettings.HSplitTop(MainView.h/2-5.0f-10.0f, &MovementSettings, &WeaponSettings);
+		MovementSettings.HSplitTop(MainView.h/3+45.0f, &MovementSettings, &WeaponSettings);
 		RenderTools()->DrawUIRect(&MovementSettings, vec4(1,1,1,0.25f), CUI::CORNER_TL, 10.0f);
 		MovementSettings.Margin(10.0f, &MovementSettings);
 
@@ -549,7 +549,7 @@ void CMenus::RenderSettingsControls(CUIRect MainView)
 			//g_Config.m_InpMousesens = (int)(DoScrollbarH(&g_Config.m_InpMousesens, &Button, (g_Config.m_InpMousesens-5)/500.0f)*500.0f)+5;
 			g_Config.m_InpMousesens = DoCoolScrollbarH(&g_Config.m_InpMousesens, &Button, g_Config.m_InpMousesens ,5,500.0f);
 			//*key.key = ui_do_key_reader(key.key, &Button, *key.key);
-			MovementSettings.HSplitTop(20.0f, 0, &MovementSettings);
+			MovementSettings.HSplitTop(10.0f, 0, &MovementSettings);
 		}
 
 		UiDoGetButtons(0, 5, MovementSettings);
@@ -559,7 +559,8 @@ void CMenus::RenderSettingsControls(CUIRect MainView)
 	// weapon settings
 	{
 		WeaponSettings.HSplitTop(10.0f, 0, &WeaponSettings);
-		RenderTools()->DrawUIRect(&WeaponSettings, vec4(1,1,1,0.25f), CUI::CORNER_BL, 10.0f);
+		WeaponSettings.HSplitTop(MainView.h/3+55.0f, &WeaponSettings, &ResetButton);
+		RenderTools()->DrawUIRect(&WeaponSettings, vec4(1,1,1,0.25f), 0, 0.0f);
 		WeaponSettings.Margin(10.0f, &WeaponSettings);
 
 		TextRender()->Text(0, WeaponSettings.x, WeaponSettings.y, 14.0f*UI()->Scale(), Localize("Weapon"), -1);
@@ -567,22 +568,22 @@ void CMenus::RenderSettingsControls(CUIRect MainView)
 		WeaponSettings.HSplitTop(14.0f+5.0f+10.0f, 0, &WeaponSettings);
 		UiDoGetButtons(5, 12, WeaponSettings);
 	}
-	
+
 	// defaults
 	{
 		ResetButton.HSplitTop(10.0f, 0, &ResetButton);
-		RenderTools()->DrawUIRect(&ResetButton, vec4(1,1,1,0.25f), CUI::CORNER_ALL, 10.0f);
+		RenderTools()->DrawUIRect(&ResetButton, vec4(1,1,1,0.25f), CUI::CORNER_BL, 10.0f);
 		ResetButton.HMargin(10.0f, &ResetButton);
 		ResetButton.VMargin(30.0f, &ResetButton);
 		static int s_DefaultButton = 0;
 		if(DoButton_Menu((void*)&s_DefaultButton, Localize("Reset to defaults"), 0, &ResetButton))
 			m_pClient->m_pBinds->SetDefaults();
 	}
-	
+
 	// voting settings
 	{
 		VotingSettings.VSplitLeft(10.0f, 0, &VotingSettings);
-		VotingSettings.HSplitTop(MainView.h/4-5.0f-20.0f, &VotingSettings, &ChatSettings);
+		VotingSettings.HSplitTop(MainView.h/3-70.0f, &VotingSettings, &ChatSettings);
 		RenderTools()->DrawUIRect(&VotingSettings, vec4(1,1,1,0.25f), CUI::CORNER_TR, 10.0f);
 		VotingSettings.Margin(10.0f, &VotingSettings);
 
@@ -595,7 +596,7 @@ void CMenus::RenderSettingsControls(CUIRect MainView)
 	// chat settings
 	{
 		ChatSettings.HSplitTop(10.0f, 0, &ChatSettings);
-		ChatSettings.HSplitTop(MainView.h/4-10.0f+10.0f, &ChatSettings, &MiscSettings);
+		ChatSettings.HSplitTop(MainView.h/3-45.0f, &ChatSettings, &MiscSettings);
 		RenderTools()->DrawUIRect(&ChatSettings, vec4(1,1,1,0.25f), 0, 0.0f);
 		ChatSettings.Margin(10.0f, &ChatSettings);
 
@@ -608,7 +609,7 @@ void CMenus::RenderSettingsControls(CUIRect MainView)
 	// misc settings
 	{
 		MiscSettings.HSplitTop(10.0f, 0, &MiscSettings);
-		RenderTools()->DrawUIRect(&MiscSettings, vec4(1,1,1,0.25f), 0, 0.0f);
+		RenderTools()->DrawUIRect(&MiscSettings, vec4(1,1,1,0.25f), CUI::CORNER_BR, 10.0f);
 		MiscSettings.Margin(10.0f, &MiscSettings);
 
 		TextRender()->Text(0, MiscSettings.x, MiscSettings.y, 14.0f*UI()->Scale(), Localize("Miscellaneous"), -1);
@@ -616,15 +617,6 @@ void CMenus::RenderSettingsControls(CUIRect MainView)
 		MiscSettings.HSplitTop(14.0f+5.0f+10.0f, 0, &MiscSettings);
 		UiDoGetButtons(17, 25, MiscSettings);
 	}
-
-	// defaults
-	ResetButton.HSplitTop(10.0f, 0, &ResetButton);
-	RenderTools()->DrawUIRect(&ResetButton, vec4(1,1,1,0.25f), CUI::CORNER_BR, 10.0f);
-	ResetButton.HMargin(10.0f, &ResetButton);
-	ResetButton.VMargin(30.0f, &ResetButton);
-	static int s_DefaultButton = 0;
-	if(DoButton_Menu((void*)&s_DefaultButton, Localize("Reset to defaults"), 0, &ResetButton))
-		m_pClient->m_pBinds->SetDefaults();
 }
 
 void CMenus::RenderSettingsGraphics(CUIRect MainView)
