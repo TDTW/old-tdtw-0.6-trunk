@@ -15,7 +15,7 @@
 CLayerTiles::CLayerTiles(int w, int h)
 {
 	m_Type = LAYERTYPE_TILES;
-	m_pTypeName = "Tiles";
+	m_pTypeName = Localize("Tiles");
 	m_Width = w;
 	m_Height = h;
 	m_Image = -1;
@@ -402,11 +402,11 @@ int CLayerTiles::RenderProperties(CUIRect *pToolBox)
 	Color |= m_Color.a;
 
 	CProperty aProps[] = {
-		{"Width", m_Width, PROPTYPE_INT_SCROLL, 1, 1000000000},
-		{"Height", m_Height, PROPTYPE_INT_SCROLL, 1, 1000000000},
-		{"Shift", 0, PROPTYPE_SHIFT, 0, 0},
-		{"Image", m_Image, PROPTYPE_IMAGE, 0, 0},
-		{"Color", Color, PROPTYPE_COLOR, 0, 0},
+		{Localize("Width"), m_Width, PROPTYPE_INT_SCROLL, 1, 1000000000},
+		{Localize("Height"), m_Height, PROPTYPE_INT_SCROLL, 1, 1000000000},
+		{Localize("Shift"), 0, PROPTYPE_SHIFT, 0, 0},
+		{Localize("Image"), m_Image, PROPTYPE_IMAGE, 0, 0},
+		{Localize("Color"), Color, PROPTYPE_COLOR, 0, 0},
 		{0},
 	};
 

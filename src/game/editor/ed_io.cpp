@@ -7,6 +7,7 @@
 #include <engine/storage.h>
 #include <game/gamecore.h>
 #include "ed_editor.h"
+#include <game/localization.h>
 
 template<typename T>
 static int MakeVersion(int i, const T &v)
@@ -203,13 +204,13 @@ int CEditor::Save(const char *pFilename)
 int CEditorMap::Save(class IStorage *pStorage, const char *pFileName)
 {
 	char aBuf[256];
-	str_format(aBuf, sizeof(aBuf), "saving to '%s'...", pFileName);
-	m_pEditor->Console()->Print(IConsole::OUTPUT_LEVEL_STANDARD, "editor", aBuf);
+	str_format(aBuf, sizeof(aBuf), Localize("saving to '%s'..."), pFileName);
+	m_pEditor->Console()->Print(IConsole::OUTPUT_LEVEL_STANDARD, Localize("editor"), aBuf);
 	CDataFileWriter df;
 	if(!df.Open(pStorage, pFileName))
 	{
-		str_format(aBuf, sizeof(aBuf), "failed to open file '%s'...", pFileName);
-		m_pEditor->Console()->Print(IConsole::OUTPUT_LEVEL_STANDARD, "editor", aBuf);
+		str_format(aBuf, sizeof(aBuf),Localize("failed to open file '%s'..."), pFileName);
+		m_pEditor->Console()->Print(IConsole::OUTPUT_LEVEL_STANDARD, Localize("editor"), aBuf);
 		return 0;
 	}
 
@@ -273,7 +274,7 @@ int CEditorMap::Save(class IStorage *pStorage, const char *pFileName)
 
 			if(pGroup->m_lLayers[l]->m_Type == LAYERTYPE_TILES)
 			{
-				m_pEditor->Console()->Print(IConsole::OUTPUT_LEVEL_ADDINFO, "editor", "saving tiles layer");
+				m_pEditor->Console()->Print(IConsole::OUTPUT_LEVEL_ADDINFO, Localize("editor"), Localize("saving tiles layer"));
 				CLayerTiles *pLayer = (CLayerTiles *)pGroup->m_lLayers[l];
 				pLayer->PrepareForSave();
 
@@ -302,7 +303,7 @@ int CEditorMap::Save(class IStorage *pStorage, const char *pFileName)
 			}
 			else if(pGroup->m_lLayers[l]->m_Type == LAYERTYPE_QUADS)
 			{
-				m_pEditor->Console()->Print(IConsole::OUTPUT_LEVEL_ADDINFO, "editor", "saving quads layer");
+				m_pEditor->Console()->Print(IConsole::OUTPUT_LEVEL_ADDINFO, Localize("editor"), Localize("saving quads layer"));
 				CLayerQuads *pLayer = (CLayerQuads *)pGroup->m_lLayers[l];
 				if(pLayer->m_lQuads.size())
 				{
@@ -360,7 +361,7 @@ int CEditorMap::Save(class IStorage *pStorage, const char *pFileName)
 
 	// finish the data file
 	df.Finish();
-	m_pEditor->Console()->Print(IConsole::OUTPUT_LEVEL_ADDINFO, "editor", "saving done");
+	m_pEditor->Console()->Print(IConsole::OUTPUT_LEVEL_ADDINFO, Localize("editor"), Localize("saving done"));
 
 	// send rcon.. if we can
 	if(m_pEditor->Client()->RconAuthed())

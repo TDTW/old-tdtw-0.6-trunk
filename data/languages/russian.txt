@@ -233,7 +233,7 @@ External
 == Внешние
 
 FSAA samples
-== Сэмплов FSAA
+== Сэмплы FSAA
 
 Favorite
 == Избранный
@@ -275,7 +275,7 @@ Game type
 == Тип игры
 
 Game types:
-== Тип игры:
+== Типы игры:
 
 General
 == Основные
@@ -305,7 +305,7 @@ High Detail
 == Высокая детализация
 
 Hook
-== Веревка
+== Цепь
 
 Host address
 == Адрес сервера
@@ -665,7 +665,7 @@ Standard map
 == Стандартная карта
 
 Sudden Death
-== Быстрая смерть
+== Решающее очко
 
 Switch between images and layers managment.
 == Переключиться между управлением слоями и изображениями
@@ -793,19 +793,17 @@ ZO
 [ctrl+p] Toggles proof borders. These borders represent what a player maximum can see.
 == [ctrl+p] Показать или скрыть границы, в пределах которых игрок может видеть карту
 
-##### needs translation #####
-
 %i minute left
-== %i минута
+== осталась %i минута
 
 %i minutes left
-== %i минут
+== осталось %i минут
 
 %i second left
-== %i секунда
+== осталась %i секунда
 
 %i seconds left
-== %i секунд
+== осталось %i секунд
 
 Alpha value of the envelope
 == Прозрачность кривой
@@ -907,7 +905,7 @@ Quads
 == Квады
 
 REC
-== 
+== Запись
 
 Record demo
 == Запись демо
