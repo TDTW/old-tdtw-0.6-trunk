@@ -58,9 +58,6 @@ MACRO_CONFIG_STR(ClFontfile, cl_fontfile, 255, "comic.ttf", CFGFLAG_CLIENT|CFGFL
 MACRO_CONFIG_INT(ZoomMax, zoom_max, 160, 110, 500, CFGFLAG_CLIENT|CFGFLAG_SAVETDTW, "Zoom maximum")
 MACRO_CONFIG_INT(ZoomMin, zoom_min, 40, 20, 90, CFGFLAG_CLIENT|CFGFLAG_SAVETDTW, "Zoom minimum")
 
-MACRO_CONFIG_INT(ReconnectBanTimeout, reconnect_ban_timeout, 10, 1, 120, CFGFLAG_CLIENT|CFGFLAG_SAVETDTW, "How many seconds to wait before reconnecting (when banned)")
-MACRO_CONFIG_INT(ReconnectFullTimeout, reconnect_full_timeout, 3, 1, 120, CFGFLAG_CLIENT|CFGFLAG_SAVETDTW, "How many seconds to wait before reconnecting (when server is full)")
-
 MACRO_CONFIG_INT(AntiPing, cl_antiping, 0, 0, 2, CFGFLAG_CLIENT|CFGFLAG_SAVETDTW, "Antiping")
 MACRO_CONFIG_INT(AntiPingGrenade, cl_antiping_grenade, 0, 0, 1, CFGFLAG_CLIENT|CFGFLAG_SAVETDTW, "Antiping")
 

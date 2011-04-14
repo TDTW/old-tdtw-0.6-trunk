@@ -206,7 +206,6 @@ class CMenus : public CComponent
 	static int DemolistFetchCallback(const char *pName, int IsDir, int StorageType, void *pUser);
 
 	int m_FriendlistSelectedIndex;
-	int64 _my_rtime;
 	
 	int DoButton_ColSettingsTab(const void *pID, const char *pText, int Checked, const CUIRect *pRect);
 	
