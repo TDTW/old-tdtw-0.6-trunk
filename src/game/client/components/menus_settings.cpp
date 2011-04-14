@@ -56,9 +56,9 @@ void CMenus::RenderSettingsGame(CUIRect MainView)
 	CUIRect Label, Button, Left, Right, Game, Client;
 	MainView.HSplitTop(MainView.h/2-5.0f, &Game, &Client);
 	Client.HSplitTop(10.0f, 0, &Client);
-	RenderTools()->DrawUIRect(&Game, vec4(1,1,1,0.25f), CUI::CORNER_T, 10.0f);
+	RenderTools()->DrawUIRect(&Game, vec4(1,1,1,0.25f), CUI::CORNER_T, 5.0f);
 	Game.Margin(10.0f, &Game);
-	RenderTools()->DrawUIRect(&Client, vec4(1,1,1,0.25f), CUI::CORNER_B, 10.0f);
+	RenderTools()->DrawUIRect(&Client, vec4(1,1,1,0.25f), CUI::CORNER_B, 5.0f);
 	Client.Margin(10.0f, &Client);
 
 	// game
@@ -228,9 +228,9 @@ void CMenus::RenderSettingsTee(CUIRect MainView)
 	Top.VSplitMid(&TopRight, &TopLeft);
 	TopLeft.VSplitLeft(10.0f, 0, &TopLeft);
 	
-	RenderTools()->DrawUIRect(&TopRight, vec4(1,1,1,0.25f), CUI::CORNER_TL, 10.0f);
+	RenderTools()->DrawUIRect(&TopRight, vec4(1,1,1,0.25f), CUI::CORNER_TL, 5.0f);
 	TopRight.Margin(10.0f, &TopRight);
-	RenderTools()->DrawUIRect(&TopLeft, vec4(1,1,1,0.25f), CUI::CORNER_TR, 10.0f);
+	RenderTools()->DrawUIRect(&TopLeft, vec4(1,1,1,0.25f), CUI::CORNER_TR, 5.0f);
 	TopLeft.Margin(10.0f, &TopLeft);
 	
 	TopRight.HSplitTop(20.0f, 0, &TopRight);
@@ -280,7 +280,7 @@ void CMenus::RenderSettingsTee(CUIRect MainView)
 
 	TopLeft.HSplitTop(50.0f, &Label, &TopLeft);
 	Label.VSplitLeft(230.0f, &Label, 0);
-	RenderTools()->DrawUIRect(&Label, vec4(1.0f, 1.0f, 1.0f, 0.25f), CUI::CORNER_ALL, 10.0f);
+	RenderTools()->DrawUIRect(&Label, vec4(1.0f, 1.0f, 1.0f, 0.25f), CUI::CORNER_ALL, 5.0f);
 	RenderTools()->RenderTee(CAnimState::GetIdle(), &OwnSkinInfo, 0, vec2(1, 0), vec2(Label.x+30.0f, Label.y+28.0f));
 	Label.HSplitTop(15.0f, 0, &Label);;
 	Label.VSplitLeft(70.0f, 0, &Label);
@@ -290,7 +290,7 @@ void CMenus::RenderSettingsTee(CUIRect MainView)
 	CUIRect Center;
 	MainView.HSplitTop(10.0f, 0, &MainView);
 	MainView.HSplitTop(130.0f, &Center, &MainView);
-	RenderTools()->DrawUIRect(&Center, vec4(1,1,1,0.25f), CUI::CORNER_B, 10.0f);
+	RenderTools()->DrawUIRect(&Center, vec4(1,1,1,0.25f), CUI::CORNER_B, 5.0f);
 	Center.Margin(10.0f, &Center);
 	Center.HSplitTop(20.0f, &Button, &Center);
 	Button.VSplitLeft(230.0f, &Button, 0);
@@ -365,7 +365,7 @@ void CMenus::RenderSettingsTee(CUIRect MainView)
 			// no special skins
 			if(s->m_aName[0] == 'x' && s->m_aName[1] == '_')
 				continue;				
-			if(!strncmp(s->m_aName, "PsychoGod", sizeof("PsychoGod")) || !strncmp(s->m_aName, "soullibra", sizeof("soullibra")))
+			if(!strncmp(s->m_aName, "PsychoGod", sizeof("PsychoGod")) || !strncmp(s->m_aName, "soullibra", sizeof("soullibra")) || !strncmp(s->m_aName, "Sergio", sizeof("Sergio")))
 				continue;
 			s_paSkinList.add(s);
 		}
@@ -533,7 +533,7 @@ void CMenus::RenderSettingsControls(CUIRect MainView)
 	// movement settings
 	{
 		MovementSettings.HSplitTop(MainView.h/3+45.0f, &MovementSettings, &WeaponSettings);
-		RenderTools()->DrawUIRect(&MovementSettings, vec4(1,1,1,0.25f), CUI::CORNER_TL, 10.0f);
+		RenderTools()->DrawUIRect(&MovementSettings, vec4(1,1,1,0.25f), CUI::CORNER_TL, 5.0f);
 		MovementSettings.Margin(10.0f, &MovementSettings);
 
 		TextRender()->Text(0, MovementSettings.x, MovementSettings.y, 14.0f*UI()->Scale(), Localize("Movement"), -1);
@@ -572,7 +572,7 @@ void CMenus::RenderSettingsControls(CUIRect MainView)
 	// defaults
 	{
 		ResetButton.HSplitTop(10.0f, 0, &ResetButton);
-		RenderTools()->DrawUIRect(&ResetButton, vec4(1,1,1,0.25f), CUI::CORNER_BL, 10.0f);
+		RenderTools()->DrawUIRect(&ResetButton, vec4(1,1,1,0.25f), CUI::CORNER_BL, 5.0f);
 		ResetButton.HMargin(10.0f, &ResetButton);
 		ResetButton.VMargin(30.0f, &ResetButton);
 		static int s_DefaultButton = 0;
@@ -584,7 +584,7 @@ void CMenus::RenderSettingsControls(CUIRect MainView)
 	{
 		VotingSettings.VSplitLeft(10.0f, 0, &VotingSettings);
 		VotingSettings.HSplitTop(MainView.h/3-70.0f, &VotingSettings, &ChatSettings);
-		RenderTools()->DrawUIRect(&VotingSettings, vec4(1,1,1,0.25f), CUI::CORNER_TR, 10.0f);
+		RenderTools()->DrawUIRect(&VotingSettings, vec4(1,1,1,0.25f), CUI::CORNER_TR, 5.0f);
 		VotingSettings.Margin(10.0f, &VotingSettings);
 
 		TextRender()->Text(0, VotingSettings.x, VotingSettings.y, 14.0f*UI()->Scale(), Localize("Voting"), -1);
@@ -609,7 +609,7 @@ void CMenus::RenderSettingsControls(CUIRect MainView)
 	// misc settings
 	{
 		MiscSettings.HSplitTop(10.0f, 0, &MiscSettings);
-		RenderTools()->DrawUIRect(&MiscSettings, vec4(1,1,1,0.25f), CUI::CORNER_BR, 10.0f);
+		RenderTools()->DrawUIRect(&MiscSettings, vec4(1,1,1,0.25f), CUI::CORNER_BR, 5.0f);
 		MiscSettings.Margin(10.0f, &MiscSettings);
 
 		TextRender()->Text(0, MiscSettings.x, MiscSettings.y, 14.0f*UI()->Scale(), Localize("Miscellaneous"), -1);
@@ -775,7 +775,7 @@ void CMenus::RenderSettingsGraphics(CUIRect MainView)
 void CMenus::RenderSettingsSound(CUIRect MainView)
 {
 	CUIRect Button;
-	RenderTools()->DrawUIRect(&MainView, vec4(1,1,1,0.25f), CUI::CORNER_ALL, 10.0f);
+	RenderTools()->DrawUIRect(&MainView, vec4(1,1,1,0.25f), CUI::CORNER_ALL, 5.0f);
 	MainView.Margin(10.0f, &MainView);
 	MainView.VSplitMid(&MainView, 0);
 	static int s_SndEnable = g_Config.m_SndEnable;
@@ -1029,7 +1029,7 @@ void CMenus::RenderColFeat(CUIRect MainView)
 	
 	Left.HSplitTop(100.0f, &Antiping, &Highlights);
 	
-	RenderTools()->DrawUIRect(&Antiping, vec4(1,1,1,0.25f), CUI::CORNER_TL, 10.0f);
+	RenderTools()->DrawUIRect(&Antiping, vec4(1,1,1,0.25f), CUI::CORNER_TL, 5.0f);
 	Antiping.Margin(10.0f, &Antiping);
 		
 	TextRender()->Text(0, Antiping.x, Antiping.y-5, 18, Localize("Antiping"), -1);
@@ -1068,11 +1068,11 @@ void CMenus::RenderColFeat(CUIRect MainView)
 		g_Config.m_ClHighlightPing ^= 1;
 	
 	Effects.VSplitLeft(10, &Left, &Effects);
-	RenderTools()->DrawUIRect(&Effects, vec4(1,1,1,0.25f), CUI::CORNER_TR, 10.0f);
+	RenderTools()->DrawUIRect(&Effects, vec4(1,1,1,0.25f), CUI::CORNER_TR, 5.0f);
 	Effects.Margin(10.0f, &Effects);
 	
 	Other.HSplitTop(10.0f, &MainView, &Other);
-	RenderTools()->DrawUIRect(&Other, vec4(1,1,1,0.25f), CUI::CORNER_B, 10.0f);
+	RenderTools()->DrawUIRect(&Other, vec4(1,1,1,0.25f), CUI::CORNER_B, 5.0f);
 	Other.Margin(10.0f, &Other);
 			
 	TextRender()->Text(0, Effects.x, Effects.y-5, 18, Localize("Effects"), -1);
@@ -1106,7 +1106,7 @@ void CMenus::RenderColFeat(CUIRect MainView)
 	
 	TextRender()->Text(0, Other.x, Other.y-5, 18, Localize("Other"), -1);
 	Other.HSplitTop(20.0f, 0, &Other);
-	UiDoGetButtons(23, 26, Other);
+	UiDoGetButtons(25, 28, Other);
 }
 
 void CMenus::RenderSettingsHudMod(CUIRect MainView)
@@ -1168,7 +1168,7 @@ void CMenus::RenderColHud(CUIRect MainView)
 	CUIRect Button, Top, Center, Left, Right, Bottom, Label;	
 	
 	MainView.HSplitTop(40.0f, &Top, &MainView);
-	RenderTools()->DrawUIRect(&Top, vec4(1,1,1,0.4f), CUI::CORNER_T, 10.0f);
+	RenderTools()->DrawUIRect(&Top, vec4(1,1,1,0.4f), CUI::CORNER_T, 5.0f);
 	Top.Margin(10.0f, &Top);
 	Top.HSplitTop(20.0f, &Button, &Top);	
 	if(DoButton_CheckBox(&g_Config.m_ClStandartHud, Localize("Standart hud and chat"), g_Config.m_ClStandartHud, &Button))
@@ -1177,10 +1177,13 @@ void CMenus::RenderColHud(CUIRect MainView)
 	MainView.HSplitTop(10.0f, 0, &MainView);
 	if(g_Config.m_ClStandartHud == 0)
 	{
-		//MainView.HSplitTop(200.0f, &Center, &Bottom);
-		MainView.VSplitLeft(MainView.w/2-5.0f, &Left, &Right);
+		//MainView.HSplitTop(200.0f, &Center, &Bottom);		
+		MainView.HSplitBottom(115.0f, &MainView, &Bottom);
+		Bottom.HSplitTop(10.0f, 0, &Bottom);
 		
-		RenderTools()->DrawUIRect(&Left, vec4(1,1,1,0.25f), CUI::CORNER_BL, 10.0f);
+		MainView.VSplitLeft(305.0f, &Left, &Right);
+		
+		RenderTools()->DrawUIRect(&Left, vec4(1,1,1,0.25f), 0, 0.0f);
 		Left.Margin(10.0f, &Left);
 	//#start left bar
  		TextRender()->Text(0, Left.x, Left.y-5, 18, Localize("Hud"), -1);
@@ -1193,9 +1196,6 @@ void CMenus::RenderColHud(CUIRect MainView)
 		
 		Right.HSplitTop(120.0f, &Right, &Center);
 		Center.HSplitTop(10.0f, 0, &Center);
-		
-		Center.HSplitTop(120.0f, &Center, &Bottom);
-		Bottom.HSplitTop(10.0f, 0, &Bottom);
 		
 		RenderTools()->DrawUIRect(&Right, vec4(1,1,1,0.25f), 0, 10.0f);
 		Right.Margin(10.0f, &Right);
@@ -1227,42 +1227,16 @@ void CMenus::RenderColHud(CUIRect MainView)
 		
 		RenderTools()->DrawUIRect(&Center, vec4(1,1,1,0.25f), 0, 10.0f);
 		Center.Margin(10.0f, &Center);
-	//#start Center right bar
-		TextRender()->Text(0, Center.x, Center.y-5, 18, Localize("Chat"), -1);
-		Center.HSplitTop(20.0f, 0, &Center);
-		
-/* 		Center.HSplitTop(20.0f, &Button, &Center);
-		// Notification weapons
-		if(DoButton_CheckBox(&g_Config.m_ClNotificationWeapon, Localize("Notification weapons on pickup"), g_Config.m_ClNotificationWeapon, &Button))
-			g_Config.m_ClNotificationWeapon ^= 1; */
-
-		Center.HSplitTop(5.0f, &Button, &Center);
-		Center.HSplitTop(20.0f, &Button, &Center);
-		Button.VSplitLeft(150.0f, &Label, &Button);
-		Button.HMargin(2.0f, &Button);
-		UI()->DoLabel(&Label, Localize("Show time msg"), 14.0f, -1);
-		//g_Config.m_ClChatShowtime = (int)(DoScrollbarH(&g_Config.m_ClChatShowtime, &Button, (g_Config.m_ClChatShowtime-5)/55.0f)*55.0f)+5;
-		g_Config.m_ClChatShowtime = DoCoolScrollbarH(&g_Config.m_ClChatShowtime, &Button, g_Config.m_ClChatShowtime, 5.0f, 60.0f);
-		
-		Center.HSplitTop(5.0f, &Button, &Center);
-		Center.HSplitTop(20.0f, &Button, &Center);
-		Button.VSplitLeft(150.0f, &Label, &Button);
-		Button.HMargin(2.0f, &Button);
-		UI()->DoLabel(&Label, Localize("Chat height"), 14.0f, -1);
-		//g_Config.m_ClChatHeightlimit = (int)(DoScrollbarH(&g_Config.m_ClChatHeightlimit, &Button, (g_Config.m_ClChatHeightlimit-50)/250.0f)*250.0f)+50;
-		g_Config.m_ClChatHeightlimit = DoCoolScrollbarH(&g_Config.m_ClChatHeightlimit, &Button, g_Config.m_ClChatHeightlimit, 50.0f, 184.0f);
-		
-		Center.HSplitTop(10.0f, &Center, &Center); 
-	//#end Center right bar
+				
+	RenderTools()->DrawUIRect(&Bottom, vec4(1,1,1,0.25f), CUI::CORNER_B, 5.0f);
+	Bottom.Margin(10.0f, &Bottom);	
 	
-		RenderTools()->DrawUIRect(&Bottom, vec4(1,1,1,0.25f), CUI::CORNER_BR, 10.0f);
-		Bottom.Margin(10.0f, &Bottom);
-		
-	//#start Bottom right bar
+	//#start Center right bar
 	
 	TextRender()->Text(0, Bottom.x, Bottom.y-5, 18, Localize("Zoom"), -1);
-	Bottom.HSplitTop(20.0f, 0, &Bottom);	
+	Bottom.HSplitTop(20.0f, 0, &Bottom);		
 	
+	CUIRect bLeft, bRight;
 /* 		Bottom.HSplitTop(5.0f, &Button, &Bottom);
 		Bottom.HSplitTop(20.0f, &Button, &Bottom);
 		Button.VSplitLeft(110.0f, &Label, &Button);
@@ -1270,8 +1244,11 @@ void CMenus::RenderColHud(CUIRect MainView)
 		UI()->DoLabel(&Label, Localize("Zoom"), 14.0f, -1);
 		g_Config.m_ZoomMax = (int)(DoScrollbarH(&g_Config.m_ZoomMax, &Button, (g_Config.m_ZoomMax-110)/390.0f)*390.0f)+110; */
 		
-		Bottom.HSplitTop(5.0f, &Button, &Bottom);
-		Bottom.HSplitTop(20.0f, &Button, &Bottom);
+		Bottom.VSplitLeft(Bottom.w/2-0.5f, &bLeft, &bRight);
+		bRight.VSplitLeft(10.0f, 0, &bRight);
+		
+		bRight.HSplitTop(5.0f, &Button, &bRight);
+		bRight.HSplitTop(20.0f, &Button, &bRight);
 		Button.VSplitLeft(150.0f, &Label, &Button);
 		Button.HMargin(2.0f, &Button);
 		UI()->DoLabel(&Label, Localize("Maximum Zoom"), 14.0f, -1);
@@ -1279,8 +1256,8 @@ void CMenus::RenderColHud(CUIRect MainView)
 		g_Config.m_ZoomMax = DoCoolScrollbarH(&g_Config.m_ZoomMax, &Button, g_Config.m_ZoomMax, 110.0f, 500.0f);//(g_Config.m_ZoomMax-110)/390.0f)*390.0f)+110;
 		g_Config.m_ZoomMax = (int)round(g_Config.m_ZoomMax/5.0f)*5;
 		
-		Bottom.HSplitTop(5.0f, &Button, &Bottom);
-		Bottom.HSplitTop(20.0f, &Button, &Bottom);
+		bRight.HSplitTop(5.0f, &Button, &bRight);
+		bRight.HSplitTop(20.0f, &Button, &bRight);
 		Button.VSplitLeft(150.0f, &Label, &Button);
 		Button.HMargin(2.0f, &Button);
 		UI()->DoLabel(&Label, Localize("Minimum Zoom"), 14.0f, -1);
@@ -1288,7 +1265,6 @@ void CMenus::RenderColHud(CUIRect MainView)
 		g_Config.m_ZoomMin = DoCoolScrollbarH(&g_Config.m_ZoomMin, &Button, g_Config.m_ZoomMin, 20.0f, 90.0f);
 		g_Config.m_ZoomMin = (int)round(g_Config.m_ZoomMin/5.0f)*5;
 		
-		Bottom.HSplitTop(5.0f, 0, &Bottom);
  	for(int i = 0; i < g_KeyCount; i++)
 		gs_aKeys[i].m_KeyId = 0;
 
@@ -1306,8 +1282,59 @@ void CMenus::RenderColHud(CUIRect MainView)
 			}
 	} 
 
-	UiDoGetButtons(26, 29, Bottom);
+	UiDoGetButtons(28, 31, bLeft);
 	//#end Bottom right bar
+			
+		
+ 	//#start Center right bar
+		TextRender()->Text(0, Center.x, Center.y-5, 18, Localize("Chat"), -1);
+		Center.HSplitTop(20.0f, 0, &Center);
+		
+/*  		Center.HSplitTop(20.0f, &Button, &Center);
+		// Notification weapons
+		if(DoButton_CheckBox(&g_Config.m_ClNotificationWeapon, Localize("Notification weapons on pickup"), g_Config.m_ClNotificationWeapon, &Button))
+			g_Config.m_ClNotificationWeapon ^= 1;  */
+
+		Center.HSplitTop(20.0f, &Button, &Center);
+		Button.VSplitLeft(150.0f, &Label, &Button);
+		Button.HMargin(2.0f, &Button);
+		UI()->DoLabel(&Label, Localize("Show time msg"), 14.0f, -1);
+		//g_Config.m_ClChatShowtime = (int)(DoScrollbarH(&g_Config.m_ClChatShowtime, &Button, (g_Config.m_ClChatShowtime-5)/55.0f)*55.0f)+5;
+		g_Config.m_ClChatShowtime = DoCoolScrollbarH(&g_Config.m_ClChatShowtime, &Button, g_Config.m_ClChatShowtime, 5.0f, 60.0f);
+		
+		Center.HSplitTop(20.0f, &Button, &Center);
+		Button.VSplitLeft(150.0f, &Label, &Button);
+		Button.HMargin(2.0f, &Button);
+		UI()->DoLabel(&Label, Localize("Chat height"), 14.0f, -1);
+		//g_Config.m_ClChatHeightlimit = (int)(DoScrollbarH(&g_Config.m_ClChatHeightlimit, &Button, (g_Config.m_ClChatHeightlimit-50)/250.0f)*250.0f)+50;
+		g_Config.m_ClChatHeightlimit = DoCoolScrollbarH(&g_Config.m_ClChatHeightlimit, &Button, g_Config.m_ClChatHeightlimit, 50.0f, 184.0f);
+				
+		Center.HSplitTop(20.0f, &Button, &Center);
+ 		Center.HSplitTop(20.0f, &Button, &Center);
+		// Notification weapons
+		if(DoButton_CheckBox(&g_Config.m_ClChatEffects, Localize("Chat effects"), g_Config.m_ClChatEffects, &Button))
+			g_Config.m_ClChatEffects ^= 1; 
+			
+		if(g_Config.m_ClChatEffects)
+		{
+			Center.VSplitLeft(10.0f, 0, &Center);
+			Center.HSplitTop(20.0f, &Button, &Center);
+			Button.VSplitLeft(150.0f, &Label, &Button);
+			Button.HMargin(2.0f, &Button);
+			UI()->DoLabel(&Label, Localize("Background blend"), 14.0f, -1);
+			//g_Config.m_ClChatHeightlimit = (int)(DoScrollbarH(&g_Config.m_ClChatHeightlimit, &Button, (g_Config.m_ClChatHeightlimit-50)/250.0f)*250.0f)+50;
+			g_Config.m_ClChatBackground = DoCoolScrollbarH(&g_Config.m_ClChatBackground, &Button, g_Config.m_ClChatBackground, 0.0f, 100.0f);
+						
+			Center.HSplitTop(20.0f, &Button, &Center);
+			Button.VSplitLeft(150.0f, &Label, &Button);
+			Button.HMargin(2.0f, &Button);
+			UI()->DoLabel(&Label, Localize("Chat speed"), 14.0f, -1);
+			//g_Config.m_ClChatHeightlimit = (int)(DoScrollbarH(&g_Config.m_ClChatHeightlimit, &Button, (g_Config.m_ClChatHeightlimit-50)/250.0f)*250.0f)+50;
+			g_Config.m_ClChatSpeed = DoCoolScrollbarH(&g_Config.m_ClChatSpeed, &Button, g_Config.m_ClChatSpeed, 4.0f, 10.0f);
+		}
+			
+	//#end Center right bar 
+	
 	}
 	else
 	{
@@ -1348,9 +1375,9 @@ void CMenus::RenderSettings(CUIRect MainView)
 	MainView.VSplitRight(120.0f, &MainView, &TabBar);	
 	MainView.HSplitBottom(24.0f, &MainView, &DownBar);
 
-	RenderTools()->DrawUIRect(&MainView, ms_ColorTabbarActive, CUI::CORNER_B|CUI::CORNER_TL, 10.0f);
+	RenderTools()->DrawUIRect(&MainView, ms_ColorTabbarActive, CUI::CORNER_B|CUI::CORNER_TL, 5.0f);
 	TabBar.HSplitTop(50.0f, &Temp, &TabBar);
-	RenderTools()->DrawUIRect(&Temp, ms_ColorTabbarActive, CUI::CORNER_R, 10.0f);
+	RenderTools()->DrawUIRect(&Temp, ms_ColorTabbarActive, CUI::CORNER_R, 5.0f);
 
 	MainView.HSplitTop(10.0f, 0, &MainView);
 

@@ -317,21 +317,29 @@ void CChat::OnRender()
 	float y = 300.0f-25.0f;
 	float LineWidth = m_pClient->m_pScoreboard->Active() /* || g_Config.m_ClSpecMessageShow */ ? 95.0f : 200.0f;
 	
-	if(m_Mode != MODE_NONE && m_Blend_Box[0] < 0.40f)
-		m_Blend_Box[0] += 0.04f;
-	else if (m_Blend_Box[0] > 0.0f && m_Mode == MODE_NONE)
-		m_Blend_Box[0] -= 0.02f;
-		
-	if(m_Show && m_Blend_Box[1] < 0.40f)
-		m_Blend_Box[1] += 0.04f;
-	else if (m_Blend_Box[1] > 0.0f && !m_Show)
-		m_Blend_Box[1] -= 0.02f;
+	if(g_Config.m_ClChatEffects && g_Config.m_ClChatBackground > 0)
+	{
+		if(m_Mode != MODE_NONE && m_Blend_Box[0] < g_Config.m_ClChatBackground/100.0f)
+			m_Blend_Box[0] += g_Config.m_ClChatSpeed*2/200.0f;
+		else if (m_Blend_Box[0] > 0.0f && m_Mode == MODE_NONE)
+			m_Blend_Box[0] -= g_Config.m_ClChatSpeed*2/200.0f;
+			
+		if(m_Show && m_Blend_Box[1] < g_Config.m_ClChatBackground/100.0f)
+			m_Blend_Box[1] += g_Config.m_ClChatSpeed*2/200.0f;
+		else if (m_Blend_Box[1] > 0.0f && !m_Show)
+			m_Blend_Box[1] -= g_Config.m_ClChatSpeed/200.0f;
 	
 		Graphics()->TextureSet(-1);
 		Graphics()->QuadsBegin();
 		Graphics()->SetColor(1,1,1,m_Blend_Box[0]);
 		RenderTools()->DrawRoundRectExt(x-5, y, LineWidth+10, 20, 2.0f, CUI::CORNER_B);
 		Graphics()->QuadsEnd(); 
+	}
+	else
+	{
+		m_Blend_Box[0] = 0.0f;
+		m_Blend_Box[1] = 0.0f;
+	}
 		
 	if(m_Mode != MODE_NONE)
 	{					
@@ -399,28 +407,33 @@ void CChat::OnRender()
 	//float HeightLimit2 = m_Show ? 300.0f - 184.0f : Limit;
 	float HeightLimit2 = m_pClient->m_pScoreboard->Active() ? 238.0f : m_Show ? 310.0f - 184.0f : Limit;
 			
+	if(g_Config.m_ClChatEffects)
+	{
 		if(m_HeightLimit < HeightLimit2)
-			m_HeightLimit += 1.0f;
-		else if(m_HeightLimit > HeightLimit2)
-			m_HeightLimit -= 1.0f;
+			m_HeightLimit += g_Config.m_ClChatSpeed/5.0f;
+		else if(m_HeightLimit > HeightLimit2+10.0f)
+			m_HeightLimit -= g_Config.m_ClChatSpeed/5.0f;
+	}
+	else
+		m_HeightLimit = HeightLimit2;
 	
 	float HeightLimit = m_HeightLimit;
 	
-	Graphics()->TextureSet(-1);
-	Graphics()->QuadsBegin();
-	Graphics()->SetColor(0,0,0,m_Blend_Box[1]);
-	if(m_LastBlendBox)
-		RenderTools()->DrawRoundRectExt(x-5, y-275.0f+HeightLimit, LineWidth+10, 275.0f-HeightLimit+8.0f, 2.0f, CUI::CORNER_T);
-	else
-		RenderTools()->DrawRoundRect(x-5, y-275.0f+HeightLimit, LineWidth+10, 275.0f-HeightLimit+8.0f, 2.0f);
-	Graphics()->QuadsEnd(); 
+	if(g_Config.m_ClChatEffects && g_Config.m_ClChatBackground > 0)
+	{
+		Graphics()->TextureSet(-1);
+		Graphics()->QuadsBegin();
+		Graphics()->SetColor(0,0,0,m_Blend_Box[1]);
+		if(m_LastBlendBox)
+			RenderTools()->DrawRoundRectExt(x-5, y-275.0f+HeightLimit, LineWidth+10, 275.0f-HeightLimit+8.0f, 2.0f, CUI::CORNER_T);
+		else
+			RenderTools()->DrawRoundRect(x-5, y-275.0f+HeightLimit, LineWidth+10, 275.0f-HeightLimit+8.0f, 2.0f);
+		Graphics()->QuadsEnd(); 
+	}
 				
 	for(int i = 0; i < MAX_LINES; i++)
 	{
 		int r = ((m_CurrentLine-i)+MAX_LINES)%MAX_LINES;
-		// if(Now > m_aLines[r].m_Time+16*time_freq() && !m_Show)
-			// break;
-		
 		int Timetoshow = g_Config.m_ClChatShowtime;
 		
 		// get the y offset (calculate it if we haven't done that yet)
@@ -432,24 +445,45 @@ void CChat::OnRender()
 			TextRender()->TextEx(&Cursor, m_aLines[r].m_aText, -1);
 			m_aLines[r].m_YOffset[OffsetType] = Cursor.m_Y + FontSize;
 		}
-
-		if(m_aLines[r].m_YOffset2 < m_aLines[r].m_YOffset[OffsetType])
-			m_aLines[r].m_YOffset2 += 0.1f;
-		else if(m_aLines[r].m_YOffset2 > m_aLines[r].m_YOffset[OffsetType] + 0.1f)
-			m_aLines[r].m_YOffset2 -= 0.1f;
+	
+		if(g_Config.m_ClChatEffects)
+		{
+			if(m_aLines[r].m_YOffset2 < m_aLines[r].m_YOffset[OffsetType])
+				m_aLines[r].m_YOffset2 += g_Config.m_ClChatSpeed/50.0f;
+			else if(m_aLines[r].m_YOffset2 > m_aLines[r].m_YOffset[OffsetType] + 0.5f)
+				m_aLines[r].m_YOffset2 -= g_Config.m_ClChatSpeed/50.0f;
+		}	
+		else
+			m_aLines[r].m_YOffset2 = m_aLines[r].m_YOffset[OffsetType];
+			
 			
 		y -= m_aLines[r].m_YOffset2;
 
 		// cut off if msgs waste too much space		
-		if((Now > m_aLines[r].m_Time+16*time_freq() && !m_Show) || y < HeightLimit-5)
+		if(g_Config.m_ClChatEffects)
 		{
-			if(m_aLines[r].m_Blend > -0.1f)
-				m_aLines[r].m_Blend -= 0.08f;
-			else
-				break;
+			if((Now > m_aLines[r].m_Time+(Timetoshow-2)*time_freq() && !m_Show) || y < HeightLimit-5)
+			{   
+				if(m_aLines[r].m_Blend > -0.1f)
+					m_aLines[r].m_Blend -= g_Config.m_ClChatSpeed/100.0f;
+				else
+					break;
+			}
+			else if(m_aLines[r].m_Blend < 1.0f)	
+				m_aLines[r].m_Blend += g_Config.m_ClChatSpeed/100.0f;	
 		}
-		else if(m_aLines[r].m_Blend < 1.0f)	
-			m_aLines[r].m_Blend += 0.08f;	
+		else
+		{
+			if((Now > m_aLines[r].m_Time+(Timetoshow-2)*time_freq() && !m_Show) || y < HeightLimit-5)
+			{   
+				if(m_aLines[r].m_Blend > 0.0f)
+					m_aLines[r].m_Blend = 0.00f;
+				else
+					break;
+			}
+			else if(m_aLines[r].m_Blend < 1.0f)	
+				m_aLines[r].m_Blend = 1.0f;			
+		}
 		
 		
 		float Blend = m_aLines[r].m_Blend;

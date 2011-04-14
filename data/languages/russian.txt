@@ -1275,6 +1275,15 @@ Show ingame HUD
 Use team colors for name plates
 == Использовать цвета команд в отобр. ников
 
+Chat effects
+== Эффекты чата
+
+Background blend
+== Прозрачность фона
+
+Chat speed
+== Скорость чата
+
 Client
 == Клиент
 

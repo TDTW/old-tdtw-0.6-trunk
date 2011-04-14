@@ -70,6 +70,9 @@ MACRO_CONFIG_INT(ClHudShowWeapon, cl_hud_show_weapon, 1, 0, 1, CFGFLAG_CLIENT|CF
 
 MACRO_CONFIG_INT(ClChatShowtime, cl_chat_showtime, 15, 5, 60, CFGFLAG_CLIENT|CFGFLAG_SAVETDTW, "Time to show message")
 MACRO_CONFIG_INT(ClChatHeightlimit, cl_chat_heightlimit, 80, 50, 184, CFGFLAG_CLIENT|CFGFLAG_SAVETDTW, "Chat height limit")
+MACRO_CONFIG_INT(ClChatEffects, cl_chat_effects, 1, 0, 1, CFGFLAG_CLIENT|CFGFLAG_SAVETDTW, "Show chat effects")
+MACRO_CONFIG_INT(ClChatBackground, cl_chat_background, 40, 0, 100, CFGFLAG_CLIENT|CFGFLAG_SAVETDTW, "Show chat background")
+MACRO_CONFIG_INT(ClChatSpeed, cl_chat_background, 5, 4, 10, CFGFLAG_CLIENT|CFGFLAG_SAVETDTW, "Speed of chat")
 
 MACRO_CONFIG_INT(ClEffectsFlagtrail, cl_effects_flagtrail, 1, 0, 1, CFGFLAG_CLIENT|CFGFLAG_SAVETDTW, "FlagTrail")
 MACRO_CONFIG_INT(ClEffectsWeapontrail, cl_effects_weapontrail, 1, 0, 1, CFGFLAG_CLIENT|CFGFLAG_SAVETDTW, "WeaponTrail")
