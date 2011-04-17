@@ -17,7 +17,6 @@
 #include "voting.h"
 #include "binds.h"
 
-//test
 CHud::CHud()
 {
 	// won't work if zero
