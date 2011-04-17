@@ -146,7 +146,13 @@ int CMenus::DoButton_ColSettingsTab(const void *pID, const char *pText, int Chec
 		RenderTools()->DrawUIRect(pRect, ms_ColorTabbarActive, CUI::CORNER_B, 10.0f);
 	else
 		RenderTools()->DrawUIRect(pRect, ms_ColorTabbarInactive, CUI::CORNER_B, 10.0f);
-	UI()->DoLabel(pRect, pText, pRect->h*ms_FontmodHeight, 0);
+	
+	CUIRect Temp;
+	pRect->HMargin(2.0f, &Temp);
+	TextRender()->TextColor(1.0f, 1.0f, 1.0f, Checked?1.0f:0.5f);
+	UI()->DoLabel(&Temp, pText, Temp.h*ms_FontmodHeight, 0);
+	
+	TextRender()->TextColor(1.0f, 1.0f, 1.0f, 1.0f);
 	return UI()->DoButtonLogic(pID, pText, Checked, pRect);
 }
 
@@ -215,7 +221,10 @@ int CMenus::DoButton_MenuTab(const void *pID, const char *pText, int Checked, co
 		RenderTools()->DrawUIRect(pRect, ms_ColorTabbarInactive, Corners, 10.0f);
 	CUIRect Temp;
 	pRect->HMargin(2.0f, &Temp);
+	TextRender()->TextColor(1.0f, 1.0f, 1.0f, Checked?1.0f:0.5f);
 	UI()->DoLabel(&Temp, pText, Temp.h*ms_FontmodHeight, 0);
+	
+	TextRender()->TextColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 	return UI()->DoButtonLogic(pID, pText, Checked, pRect);
 }

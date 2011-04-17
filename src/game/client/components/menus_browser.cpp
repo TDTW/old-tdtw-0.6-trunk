@@ -763,7 +763,7 @@ void CMenus::RenderServerbrowserFriends(CUIRect View)
 	// header
 	ServerFriends.HSplitTop(ms_ListheaderHeight, &FilterHeader, &ServerFriends);
 	RenderTools()->DrawUIRect(&FilterHeader, vec4(1,1,1,0.25f), CUI::CORNER_T, 4.0f);
-	RenderTools()->DrawUIRect(&ServerFriends, vec4(0,0,0,0.15f), 0, 4.0f);
+	RenderTools()->DrawUIRect(&ServerFriends, vec4(0,0,0,0.15f), CUI::CORNER_B, 4.0f);
 	UI()->DoLabelScaled(&FilterHeader, Localize("Friends"), FontSize+2.0f, 0);
 	CUIRect Button, List;
 
@@ -859,7 +859,7 @@ void CMenus::RenderServerbrowser(CUIRect MainView)
 	// create server list, status box, tab bar and tool box area
 	MainView.VSplitRight(205.0f, &ServerList, &ToolBox);
 	ServerList.HSplitBottom(70.0f, &ServerList, &StatusBox);
-	StatusBox.VSplitRight(100.0f, &StatusBox, &TabBar);
+	//StatusBox.VSplitRight(100.0f, &StatusBox, &TabBar);
 	ServerList.VSplitRight(5.0f, &ServerList, 0);
 
 	// server list
@@ -870,7 +870,7 @@ void CMenus::RenderServerbrowser(CUIRect MainView)
 	int ToolboxPage = g_Config.m_UiToolboxPage;
 
 	// tab bar
-	{
+/* 	{
 		CUIRect TabButton0, TabButton1, TabButton2;
 		TabBar.HSplitTop(5.0f, 0, &TabBar);
 		TabBar.HSplitTop(20.0f, &TabButton0, &TabBar);
@@ -898,11 +898,38 @@ void CMenus::RenderServerbrowser(CUIRect MainView)
 		ms_ColorTabbarActive = Active;
 		ms_ColorTabbarInactive = InActive;
 		g_Config.m_UiToolboxPage = ToolboxPage;
-	}
+	} */
 
 	// tool box
 	{
-		RenderTools()->DrawUIRect(&ToolBox, vec4(0.0f, 0.0f, 0.0f, 0.15f), CUI::CORNER_T, 4.0f);
+		CUIRect TabButton0, TabButton1, TabButton2, Buttons;
+		ToolBox.HSplitTop(24.0f, &Buttons, &ToolBox);
+		Buttons.VSplitLeft(5.0f, 0, &Buttons);
+		Buttons.VSplitRight(5.0f, &Buttons, 0);
+		Buttons.VSplitLeft(Buttons.w/3, &TabButton0, &Buttons);
+		Buttons.VSplitLeft(Buttons.w/3, &TabButton1, &TabButton2);
+		vec4 Active = ms_ColorTabbarActive;
+		vec4 InActive = ms_ColorTabbarInactive;
+		ms_ColorTabbarActive = vec4(0.0f, 0.0f, 0.0f, 0.3f);
+		ms_ColorTabbarInactive = vec4(0.0f, 0.0f, 0.0f, 0.15f);
+
+		static int s_FiltersTab = 0;
+		if (DoButton_MenuTab(&s_FiltersTab, Localize("Filter"), ToolboxPage==0, &TabButton0, CUI::CORNER_TL))
+			ToolboxPage = 0;
+
+		static int s_InfoTab = 0;
+		if (DoButton_MenuTab(&s_InfoTab, Localize("Info"), ToolboxPage==1, &TabButton1, 0))
+			ToolboxPage = 1;
+
+		static int s_FriendsTab = 0;
+		if (DoButton_MenuTab(&s_FriendsTab, Localize("Friends"), ToolboxPage==2, &TabButton2, CUI::CORNER_TR))
+			ToolboxPage = 2;
+
+		ms_ColorTabbarActive = Active;
+		ms_ColorTabbarInactive = InActive;
+		g_Config.m_UiToolboxPage = ToolboxPage;
+	
+		RenderTools()->DrawUIRect(&ToolBox, vec4(0.0f, 0.0f, 0.0f, 0.15f), CUI::CORNER_ALL, 4.0f);
 
 
 		if(ToolboxPage == 0)
@@ -961,6 +988,16 @@ void CMenus::RenderServerbrowser(CUIRect MainView)
 		{
 			Client()->Connect(g_Config.m_UiServerAddress);
 			m_EnterPressed = false;
+		}
+		
+		ButtonArea.HSplitTop(5.0f, 0, &ButtonArea);		
+		ButtonArea.HSplitTop(20.0f, &Button, &ButtonArea);
+		Button.VMargin(12.0f, &Button);
+		
+		static int s_FriendButton = 0;
+		if(DoButton_MenuTab(&s_FriendButton, Localize("Show friends"), g_Config.m_BrFilterFriends, &Button, CUI::CORNER_ALL))
+		{
+			g_Config.m_BrFilterFriends ^= 1;
 		}
 
 		// address info
