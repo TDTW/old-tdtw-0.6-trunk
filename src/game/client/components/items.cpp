@@ -251,15 +251,17 @@ void CItems::RenderFlag(const CNetObj_Flag *pPrev, const CNetObj_Flag *pCurrent,
 			Pos = m_pClient->m_LocalCharacterPos;
 	}
 	
-	if(pCurrent->m_Team == 0) // red team
+	if(pCurrent->m_Team == TEAM_RED) // red team
 	{
-		if(g_Config.m_ClEffectsFlagtrail)
-			m_pClient->m_pEffects->PowerupShine(Pos, vec2(32,32),vec4(0.89f,0.16f,0.21f,1));
+		if(g_Config.m_ClEffectsFlagtrail && pCurGameData)
+			if(pCurGameData->m_FlagCarrierRed == FLAG_ATSTAND || pCurGameData->m_FlagCarrierRed == FLAG_MISSING)
+				m_pClient->m_pEffects->PowerupShine(Pos, vec2(32,32),vec4(0.89f,0.16f,0.21f,1));
 	}
 	else
 	{
-		if(g_Config.m_ClEffectsFlagtrail)
-			m_pClient->m_pEffects->PowerupShine(Pos, vec2(32,32),vec4(0.098f,0.10f,0.89f,1));
+		if(g_Config.m_ClEffectsFlagtrail && pCurGameData)
+			if(pCurGameData->m_FlagCarrierBlue == FLAG_ATSTAND || pCurGameData->m_FlagCarrierBlue == FLAG_MISSING)
+				m_pClient->m_pEffects->PowerupShine(Pos, vec2(32,32),vec4(0.098f,0.10f,0.89f,1));
 	}
 
 	IGraphics::CQuadItem QuadItem(Pos.x, Pos.y-Size*0.75f, Size, Size*2);
