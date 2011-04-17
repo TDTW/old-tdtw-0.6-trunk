@@ -221,7 +221,7 @@ int CMenus::DoButton_MenuTab(const void *pID, const char *pText, int Checked, co
 		RenderTools()->DrawUIRect(pRect, ms_ColorTabbarInactive, Corners, 10.0f);
 	CUIRect Temp;
 	pRect->HMargin(2.0f, &Temp);
-	TextRender()->TextColor(1.0f, 1.0f, 1.0f, Checked?1.0f:0.5f);
+	TextRender()->TextColor(1.0f, 1.0f, 1.0f, Checked?1.0f:0.7f);
 	UI()->DoLabel(&Temp, pText, Temp.h*ms_FontmodHeight, 0);
 	
 	TextRender()->TextColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -240,7 +240,7 @@ int CMenus::DoButton_GridHeader(const void *pID, const char *pText, int Checked,
 	return UI()->DoButtonLogic(pID, pText, Checked, pRect);
 }
 
-int CMenus::DoButton_CheckBox_Common(const void *pID, const char *pText, const char *pBoxText, const CUIRect *pRect)
+/* int CMenus::DoButton_CheckBox_Common(const void *pID, const char *pText, const char *pBoxText, const CUIRect *pRect)
 //void CMenus::ui_draw_checkbox_common(const void *id, const char *text, const char *boxtext, const CUIRect *r, const void *extra)
 {
 	CUIRect c = *pRect;
@@ -256,11 +256,38 @@ int CMenus::DoButton_CheckBox_Common(const void *pID, const char *pText, const c
 	UI()->DoLabel(&c, pBoxText, pRect->h*ms_FontmodHeight*0.6f, 0);
 	UI()->DoLabel(&t, pText, pRect->h*ms_FontmodHeight*0.8f, -1);
 	return UI()->DoButtonLogic(pID, pText, 0, pRect);
-}
+} */
 
+int CMenus::DoButton_CheckBox_Common(const void *pID, const char *pText, const char *pBoxText, int Checked, const CUIRect *pRect)
+//void CMenus::ui_draw_checkbox_common(const void *id, const char *text, const char *boxtext, const CUIRect *r, const void *extra)
+{
+	CUIRect c = *pRect;
+	CUIRect t = *pRect;
+	c.w = c.h;
+	t.x += c.w;
+	t.w -= c.w;
+	t.VSplitLeft(5.0f, 0, &t);
+	
+	if(Checked)
+	{
+		Graphics()->TextureSet(g_pData->m_aImages[IMAGE_GUIOK].m_Id);
+		Graphics()->QuadsBegin();
+		Graphics()->SetColor(1,1,1,1);
+		IGraphics::CQuadItem QuadItem(c.x, c.y, 22, 22);
+		Graphics()->QuadsDrawTL(&QuadItem, 1);
+		Graphics()->QuadsEnd();
+	}
+	
+	c.Margin(2.0f, &c);	
+	RenderTools()->DrawUIRect(&c, vec4(1,1,1,0.25f)*ButtonColorMul(pID), CUI::CORNER_ALL, 3.0f);
+	c.y += 2;
+	UI()->DoLabel(&c, pBoxText, pRect->h*ms_FontmodHeight*0.6f, 0);
+	UI()->DoLabel(&t, pText, pRect->h*ms_FontmodHeight*0.8f, -1);
+	return UI()->DoButtonLogic(pID, pText, 0, pRect);
+} 
 int CMenus::DoButton_CheckBox(const void *pID, const char *pText, int Checked, const CUIRect *pRect)
 {
-	return DoButton_CheckBox_Common(pID, pText, Checked?"X":"", pRect);
+	return DoButton_CheckBox_Common(pID, pText, "", Checked, pRect);
 }
 
 
@@ -268,7 +295,7 @@ int CMenus::DoButton_CheckBox_Number(const void *pID, const char *pText, int Che
 {
 	char aBuf[16];
 	str_format(aBuf, sizeof(aBuf), "%d", Checked);
-	return DoButton_CheckBox_Common(pID, pText, aBuf, pRect);
+	return DoButton_CheckBox_Common(pID, pText, aBuf, 0, pRect);
 }
 
 int CMenus::DoEditBox(void *pID, const CUIRect *pRect, char *pStr, unsigned StrSize, float FontSize, float *Offset, bool Hidden, int Corners)
