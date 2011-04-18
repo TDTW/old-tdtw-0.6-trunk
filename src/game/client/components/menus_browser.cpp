@@ -907,7 +907,7 @@ void CMenus::RenderServerbrowser(CUIRect MainView)
 		Buttons.VSplitLeft(5.0f, 0, &Buttons);
 		Buttons.VSplitRight(5.0f, &Buttons, 0);
 		Buttons.VSplitLeft(Buttons.w/3, &TabButton0, &Buttons);
-		Buttons.VSplitLeft(Buttons.w/3, &TabButton1, &TabButton2);
+		Buttons.VSplitLeft(Buttons.w/3+20, &TabButton1, &TabButton2);
 		vec4 Active = ms_ColorTabbarActive;
 		vec4 InActive = ms_ColorTabbarInactive;
 		ms_ColorTabbarActive = vec4(0.0f, 0.0f, 0.0f, 0.3f);
