@@ -20,6 +20,7 @@ class CCamera : public CComponent
 public:
 	vec2 m_Center;
 	float m_Zoom;
+	float m_TempZoom;
 
 	CCamera();
 	virtual void OnRender();
