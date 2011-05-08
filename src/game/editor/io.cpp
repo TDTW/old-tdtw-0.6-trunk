@@ -6,7 +6,7 @@
 #include <engine/serverbrowser.h>
 #include <engine/storage.h>
 #include <game/gamecore.h>
-#include "ed_editor.h"
+#include "editor.h"
 #include <game/localization.h>
 
 template<typename T>

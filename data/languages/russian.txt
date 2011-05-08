@@ -475,6 +475,9 @@ Pistol
 Play
 == Просмотр
 
+Play background music
+== Воспроизвести фоновую музыку
+
 Player
 == Игрок
 
@@ -482,7 +485,7 @@ Players
 == Игроки
 
 Please balance teams!
-== Сбалансируйте команды!
+== Пожалуйста cбалансируйте команды!
 
 Pos. Env
 == Поз. крив.
@@ -648,6 +651,15 @@ Sound volume
 
 Spectate
 == Наблюдать
+
+Spectate next
+== Наблюдать следующего
+
+Spectate previous
+== Наблюдать предыдущего
+
+Spectator mode
+== Наблюдатель
 
 Spectators
 == Наблюдатели
@@ -973,6 +985,7 @@ no limit
 MapHack
 == MapHack
 
+Demofile: %s
 Use MapHack
 == Использовать мапхак
 
@@ -1093,11 +1106,8 @@ Features
 Play background music
 == Играть фоновую музыку
 
-Spectate next
+Strict gametype filter
 == Следить за след.
-
-Spectate previous
-== Следить за пред.
 
 Antiping
 == Антипинг
