@@ -19,6 +19,8 @@ class CChat : public CComponent
 	{
 		int64 m_Time;
 		float m_YOffset[2];
+		float m_YOffset2;
+		float m_Blend;
 		int m_ClientID;
 		int m_Team;
 		int m_NameColor;
@@ -48,6 +50,9 @@ class CChat : public CComponent
 	int m_PlaceholderOffset;
 	int m_PlaceholderLength;
 	char *m_pHistoryEntry;
+	float m_HeightLimit;
+	float m_Blend_Box[2];
+	int m_LastBlendBox;
 	TStaticRingBuffer<char, 64*1024, CRingBufferBase::FLAG_RECYCLE> m_History;
 
 	static void ConSay(IConsole::IResult *pResult, void *pUserData);

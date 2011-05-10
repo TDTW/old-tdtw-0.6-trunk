@@ -187,7 +187,8 @@ void CGameClient::OnConsoleInit()
 	// add the some console commands
 	Console()->Register("team", "i", CFGFLAG_CLIENT, ConTeam, this, "Switch team");
 	Console()->Register("kill", "", CFGFLAG_CLIENT, ConKill, this, "Kill yourself");
-
+	Console()->Register("dynamic_camera_toggle", "", CFGFLAG_CLIENT, ConDynCameraToggle, this, "Toggle dynamic camera");
+	
 	// register server dummy commands for tab completion
 	Console()->Register("tune", "si", CFGFLAG_SERVER, 0, 0, "Tune variable to value");
 	Console()->Register("tune_reset", "", CFGFLAG_SERVER, 0, 0, "Reset tuning");
@@ -233,6 +234,11 @@ void CGameClient::OnConsoleInit()
 void CGameClient::OnInit()
 {
 	int64 Start = time_get();
+	
+	// Antiping
+	m_Average_Prediction_Offset = -1;
+	m_Prediction_Offset_Summ = 0;
+	m_Prediction_Offset_Count = 0;
 
 	// set the language
 	g_Localization.Load(g_Config.m_ClLanguagefile, Storage(), Console());
@@ -242,18 +248,36 @@ void CGameClient::OnInit()
 	for(int i = 0; i < NUM_NETOBJTYPES; i++)
 		Client()->SnapSetStaticsize(i, m_NetObjHandler.GetObjSize(i));
 
-	// load default font
+	// load font	
 	static CFont *pDefaultFont = 0;
+	char aFontPath[512];
 	char aFilename[512];
-	IOHANDLE File = Storage()->OpenFile("fonts/DejaVuSans.ttf", IOFLAG_READ, IStorage::TYPE_ALL, aFilename, sizeof(aFilename));
+	str_format(aFontPath, sizeof(aFontPath), "fonts/%s", g_Config.m_ClFontfile);
+	IOHANDLE File = Storage()->OpenFile(aFontPath, IOFLAG_READ, IStorage::TYPE_ALL, aFilename, sizeof(aFilename));
 	if(File)
 	{
 		io_close(File);
 		pDefaultFont = TextRender()->LoadFont(aFilename);
 		TextRender()->SetDefaultFont(pDefaultFont);
 	}
+	else
+	{
+		// in case the config is broken
+		IOHANDLE File = Storage()->OpenFile("fonts/DejaVuSans.ttf", IOFLAG_READ, IStorage::TYPE_ALL, aFilename, sizeof(aFilename));
+		if(File)
+		{
+			io_close(File);
+			pDefaultFont = TextRender()->LoadFont(aFilename);
+			TextRender()->SetDefaultFont(pDefaultFont);
+			str_copy(g_Config.m_ClFontfile, "DejaVuSans.ttf", sizeof(g_Config.m_ClFontfile));
+		}
+	}
 	if(!pDefaultFont)
-		Console()->Print(IConsole::OUTPUT_LEVEL_STANDARD, "gameclient", "failed to load font. filename='fonts/DejaVuSans.ttf'");
+	{
+		char aBuf[256];
+		str_format(aBuf, sizeof(aBuf), "failed to load font. filename='%s'", g_Config.m_ClFontfile);
+		Console()->Print(IConsole::OUTPUT_LEVEL_STANDARD, "gameclient", aBuf);
+	}
 
 	// init all components
 	for(int i = m_All.m_Num-1; i >= 0; --i)
@@ -1097,6 +1121,23 @@ void CGameClient::ConKill(IConsole::IResult *pResult, void *pUserData)
 {
 	((CGameClient*)pUserData)->SendKill(-1);
 }
+
+void CGameClient::ConDynCameraToggle(IConsole::IResult *pResult, void *pUserData)
+{
+	if(g_Config.m_ClMouseDeadzone == 300 && g_Config.m_ClMouseFollowfactor == 60 && g_Config.m_ClMouseMaxDistance == 800)
+	{
+		g_Config.m_ClMouseDeadzone = 0;
+		g_Config.m_ClMouseMaxDistance = 400;
+		g_Config.m_ClMouseFollowfactor = 0;
+	}
+	else
+	{
+		g_Config.m_ClMouseDeadzone = 300;
+		g_Config.m_ClMouseMaxDistance = 800;
+		g_Config.m_ClMouseFollowfactor = 60;
+	} /*TODO: Changeable variables here*/
+}
+
 
 void CGameClient::ConchainSpecialInfoupdate(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData)
 {

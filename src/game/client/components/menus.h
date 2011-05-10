@@ -43,7 +43,7 @@ class CMenus : public CComponent
 	int DoButton_Menu(const void *pID, const char *pText, int Checked, const CUIRect *pRect);
 	int DoButton_MenuTab(const void *pID, const char *pText, int Checked, const CUIRect *pRect, int Corners);
 
-	int DoButton_CheckBox_Common(const void *pID, const char *pText, const char *pBoxText, const CUIRect *pRect);
+	int DoButton_CheckBox_Common(const void *pID, const char *pText, const char *pBoxText, int Checked, const CUIRect *pRect);
 	int DoButton_CheckBox(const void *pID, const char *pText, int Checked, const CUIRect *pRect);
 	int DoButton_CheckBox_Number(const void *pID, const char *pText, int Checked, const CUIRect *pRect);
 
@@ -68,6 +68,7 @@ class CMenus : public CComponent
 
 	float DoScrollbarV(const void *pID, const CUIRect *pRect, float Current);
 	float DoScrollbarH(const void *pID, const CUIRect *pRect, float Current);
+	int DoCoolScrollbarH(const void *pID, const CUIRect *pRect, int Real, float Min, float Max);
 	void DoButton_KeySelect(const void *pID, const char *pText, int Checked, const CUIRect *pRect);
 	int DoKeyReader(void *pID, const CUIRect *pRect, int Key);
 
@@ -205,7 +206,9 @@ class CMenus : public CComponent
 	static int DemolistFetchCallback(const char *pName, int IsDir, int StorageType, void *pUser);
 
 	int m_FriendlistSelectedIndex;
-
+	
+	int DoButton_ColSettingsTab(const void *pID, const char *pText, int Checked, const CUIRect *pRect);
+	
 	// found in menus.cpp
 	int Render();
 	//void render_background();
@@ -235,15 +238,20 @@ class CMenus : public CComponent
 	static void ConchainServerbrowserUpdate(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData);
 
 	// found in menus_settings.cpp
+	void RenderFontSelection(CUIRect MainView);
 	void RenderLanguageSelection(CUIRect MainView);
 	void RenderSettingsGeneral(CUIRect MainView);
-	void RenderSettingsPlayer(CUIRect MainView);
+	void RenderSettingsGame(CUIRect MainView);
+	void RenderSettingsHudMod(CUIRect MainView);
 	void RenderSettingsTee(CUIRect MainView);
 	void RenderSettingsControls(CUIRect MainView);
 	void RenderSettingsGraphics(CUIRect MainView);
 	void RenderSettingsSound(CUIRect MainView);
+	void RenderSettingsCountry(CUIRect View);
 	void RenderSettings(CUIRect MainView);
-
+	void RenderColFeat(CUIRect MainView);
+	void RenderColHud(CUIRect MainView);
+	
 	void SetActive(bool Active);
 public:
 	void RenderBackground();

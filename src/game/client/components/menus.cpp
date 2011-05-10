@@ -68,8 +68,92 @@ CMenus::CMenus()
 
 	str_copy(m_aCurrentDemoFolder, "demos", sizeof(m_aCurrentDemoFolder));
 	m_aCallvoteReason[0] = 0;
-
+	
 	m_FriendlistSelectedIndex = -1;
+}
+
+int CMenus::DoCoolScrollbarH(const void *pID, const CUIRect *pRect, int Real, float Min, float Max)
+{
+	CUIRect Handle;
+	static float OffsetX;
+	pRect->VSplitLeft(33, &Handle, 0);
+	float Current = (Real - Min)/(Max - Min);
+	//(g_Config.m_ZoomMax-110)/390.0f)*390.0f)+110;
+
+	Handle.x += (pRect->w-Handle.w)*Current;
+
+	// logic
+    float ReturnValue = Current;
+    int Inside = UI()->MouseInside(&Handle);
+
+	if(UI()->ActiveItem() == pID)
+	{
+		if(!UI()->MouseButton(0))
+			UI()->SetActiveItem(0);
+		
+		float Min = pRect->x;
+		float Max = pRect->w-Handle.w;
+		float Cur = UI()->MouseX()-OffsetX;
+		ReturnValue = (Cur-Min)/Max;
+		if(ReturnValue < 0.0f) ReturnValue = 0.0f;
+		if(ReturnValue > 1.0f) ReturnValue = 1.0f;
+		
+		CUIRect Number = Handle;
+		//pRect->VSplitLeft(UI()->MouseX()+10, &Number, 0);
+		Number.HSplitTop(-Handle.h, &Number, 0); 
+		char aBuf[128];
+		str_format(aBuf, sizeof(aBuf), "%d", Real);
+		    	
+		float tw = TextRender()->TextWidth(0, 14, aBuf, -1);
+    	TextRender()->Text(0, Number.x + Number.w/2-tw/2, Number.y-Handle.h, 14, aBuf, -1);
+		//TextRender()->Text(0, Number.x+8-strlen(aBuf)*2, Number.y-Handle.h, 14, aBuf, -1);
+		//UI()->DoLabel(&Number, aBuf, 14.0f, 0);
+		//RenderTools()->DrawUIRect(&Number, vec4(1,1,1,0.25f), 0, 0);
+	}
+	else if(UI()->HotItem() == pID)
+	{
+		if(UI()->MouseButton(0))
+		{
+			UI()->SetActiveItem(pID);
+			OffsetX = UI()->MouseX()-Handle.x;
+		}
+	}
+	
+	if(Inside)
+		UI()->SetHotItem(pID);
+
+	// render
+	CUIRect Rail;
+	pRect->HMargin(5.0f, &Rail);
+	RenderTools()->DrawUIRect(&Rail, vec4(1,1,1,0.25f), 0, 0.0f);
+
+	CUIRect Slider = Handle;
+	Slider.h = Rail.y-Slider.y;
+	RenderTools()->DrawUIRect(&Slider, vec4(1,1,1,0.25f), CUI::CORNER_T, 2.5f);
+	Slider.y = Rail.y+Rail.h;
+	RenderTools()->DrawUIRect(&Slider, vec4(1,1,1,0.25f), CUI::CORNER_B, 2.5f);
+
+	Slider = Handle;
+	Slider.Margin(5.0f, &Slider);
+	RenderTools()->DrawUIRect(&Slider, vec4(1,1,1,0.25f)*ButtonColorMul(pID), CUI::CORNER_ALL, 2.5f);
+	ReturnValue = ReturnValue*(Max-Min) + Min;
+    return (int)ReturnValue;
+}
+
+int CMenus::DoButton_ColSettingsTab(const void *pID, const char *pText, int Checked, const CUIRect *pRect)
+{
+	if(Checked)
+		RenderTools()->DrawUIRect(pRect, ms_ColorTabbarActive, CUI::CORNER_B, 10.0f);
+	else
+		RenderTools()->DrawUIRect(pRect, ms_ColorTabbarInactive, CUI::CORNER_B, 10.0f);
+	
+	CUIRect Temp;
+	pRect->HMargin(2.0f, &Temp);
+	TextRender()->TextColor(1.0f, 1.0f, 1.0f, Checked?1.0f:0.5f);
+	UI()->DoLabel(&Temp, pText, Temp.h*ms_FontmodHeight, 0);
+	
+	TextRender()->TextColor(1.0f, 1.0f, 1.0f, 1.0f);
+	return UI()->DoButtonLogic(pID, pText, Checked, pRect);
 }
 
 vec4 CMenus::ButtonColorMul(const void *pID)
@@ -137,7 +221,10 @@ int CMenus::DoButton_MenuTab(const void *pID, const char *pText, int Checked, co
 		RenderTools()->DrawUIRect(pRect, ms_ColorTabbarInactive, Corners, 10.0f);
 	CUIRect Temp;
 	pRect->HMargin(2.0f, &Temp);
+	TextRender()->TextColor(1.0f, 1.0f, 1.0f, Checked?1.0f:0.7f);
 	UI()->DoLabel(&Temp, pText, Temp.h*ms_FontmodHeight, 0);
+	
+	TextRender()->TextColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 	return UI()->DoButtonLogic(pID, pText, Checked, pRect);
 }
@@ -153,7 +240,7 @@ int CMenus::DoButton_GridHeader(const void *pID, const char *pText, int Checked,
 	return UI()->DoButtonLogic(pID, pText, Checked, pRect);
 }
 
-int CMenus::DoButton_CheckBox_Common(const void *pID, const char *pText, const char *pBoxText, const CUIRect *pRect)
+/* int CMenus::DoButton_CheckBox_Common(const void *pID, const char *pText, const char *pBoxText, const CUIRect *pRect)
 //void CMenus::ui_draw_checkbox_common(const void *id, const char *text, const char *boxtext, const CUIRect *r, const void *extra)
 {
 	CUIRect c = *pRect;
@@ -169,11 +256,38 @@ int CMenus::DoButton_CheckBox_Common(const void *pID, const char *pText, const c
 	UI()->DoLabel(&c, pBoxText, pRect->h*ms_FontmodHeight*0.6f, 0);
 	UI()->DoLabel(&t, pText, pRect->h*ms_FontmodHeight*0.8f, -1);
 	return UI()->DoButtonLogic(pID, pText, 0, pRect);
-}
+} */
 
+int CMenus::DoButton_CheckBox_Common(const void *pID, const char *pText, const char *pBoxText, int Checked, const CUIRect *pRect)
+//void CMenus::ui_draw_checkbox_common(const void *id, const char *text, const char *boxtext, const CUIRect *r, const void *extra)
+{
+	CUIRect c = *pRect;
+	CUIRect t = *pRect;
+	c.w = c.h;
+	t.x += c.w;
+	t.w -= c.w;
+	t.VSplitLeft(5.0f, 0, &t);
+	
+	if(Checked)
+	{
+		Graphics()->TextureSet(g_pData->m_aImages[IMAGE_GUIOK].m_Id);
+		Graphics()->QuadsBegin();
+		Graphics()->SetColor(1,1,1,1);
+		IGraphics::CQuadItem QuadItem(c.x, c.y, 22, 22);
+		Graphics()->QuadsDrawTL(&QuadItem, 1);
+		Graphics()->QuadsEnd();
+	}
+	
+	c.Margin(2.0f, &c);	
+	RenderTools()->DrawUIRect(&c, vec4(1,1,1,0.25f)*ButtonColorMul(pID), CUI::CORNER_ALL, 3.0f);
+	c.y += 2;
+	UI()->DoLabel(&c, pBoxText, pRect->h*ms_FontmodHeight*0.6f, 0);
+	UI()->DoLabel(&t, pText, pRect->h*ms_FontmodHeight*0.8f, -1);
+	return UI()->DoButtonLogic(pID, pText, 0, pRect);
+} 
 int CMenus::DoButton_CheckBox(const void *pID, const char *pText, int Checked, const CUIRect *pRect)
 {
-	return DoButton_CheckBox_Common(pID, pText, Checked?"X":"", pRect);
+	return DoButton_CheckBox_Common(pID, pText, "", Checked, pRect);
 }
 
 
@@ -181,7 +295,7 @@ int CMenus::DoButton_CheckBox_Number(const void *pID, const char *pText, int Che
 {
 	char aBuf[16];
 	str_format(aBuf, sizeof(aBuf), "%d", Checked);
-	return DoButton_CheckBox_Common(pID, pText, aBuf, pRect);
+	return DoButton_CheckBox_Common(pID, pText, aBuf, 0, pRect);
 }
 
 int CMenus::DoEditBox(void *pID, const CUIRect *pRect, char *pStr, unsigned StrSize, float FontSize, float *Offset, bool Hidden, int Corners)
@@ -871,7 +985,8 @@ int CMenus::Render()
 		{
 			pTitle = Localize("Disconnected");
 			pExtraText = Client()->ErrorString();
-			pButtonText = Localize("Ok");
+			pButtonText = Localize("Ok");			
+
 			ExtraAlign = -1;
 		}
 		else if(m_Popup == POPUP_PURE)
@@ -916,7 +1031,7 @@ int CMenus::Render()
 		{
 			pTitle = Localize("Quit");
 			pExtraText = Localize("Are you sure that you want to quit?");
-			ExtraAlign = -1;
+			ExtraAlign = 0;
 		}
 		else if(m_Popup == POPUP_FIRST_LAUNCH)
 		{
@@ -1245,6 +1360,7 @@ int CMenus::Render()
 		}
 	}
 
+
 	return 0;
 }
 
@@ -1467,7 +1583,7 @@ void CMenus::OnRender()
 		char aBuf[512];
 		str_format(aBuf, sizeof(aBuf), "%p %p %p", UI()->HotItem(), UI()->ActiveItem(), UI()->LastActiveItem());
 		CTextCursor Cursor;
-		TextRender()->SetCursor(&Cursor, 10, 10, 10, TEXTFLAG_RENDER);
+		TextRender()->SetCursor(&Cursor, 10, Screen.h-20, 10, TEXTFLAG_RENDER);
 		TextRender()->TextEx(&Cursor, aBuf, -1);
 	}
 
