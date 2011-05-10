@@ -2423,6 +2423,7 @@ int main(int argc, const char **argv) // ignore_convention
 
 	// execute config file
 	pConsole->ExecuteFile("settings.cfg");
+	pConsole->ExecuteFile("tdtw.cfg");
 
 	// execute autoexec file
 	pConsole->ExecuteFile("autoexec.cfg");
@@ -2442,6 +2443,7 @@ int main(int argc, const char **argv) // ignore_convention
 
 	// write down the config and quit
 	pConfig->Save();
-
+	pConfig->SaveTDTW();
+	
 	return 0;
 }

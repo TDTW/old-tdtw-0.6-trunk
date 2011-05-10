@@ -40,6 +40,7 @@ void CControls::OnRelease()
 
 void CControls::OnPlayerDeath()
 {
+	for (int i = 0; i < 5; i++) m_pClient->m_AmmoCount[i] = -2;
 	m_LastData.m_WantedWeapon = m_InputData.m_WantedWeapon = 0;
 }
 
@@ -98,12 +99,13 @@ void CControls::OnConsoleInit()
 
 void CControls::OnMessage(int Msg, void *pRawMsg)
 {
-	if(Msg == NETMSGTYPE_SV_WEAPONPICKUP)
-	{
-		CNetMsg_Sv_WeaponPickup *pMsg = (CNetMsg_Sv_WeaponPickup *)pRawMsg;
-		if(g_Config.m_ClAutoswitchWeapons)
-			m_InputData.m_WantedWeapon = pMsg->m_Weapon+1;
-	}
+    if(Msg == NETMSGTYPE_SV_WEAPONPICKUP)
+    {
+    	CNetMsg_Sv_WeaponPickup *pMsg = (CNetMsg_Sv_WeaponPickup *)pRawMsg;
+        if(g_Config.m_ClAutoswitchWeapons)
+        	m_InputData.m_WantedWeapon = pMsg->m_Weapon+1;
+		m_pClient->m_AmmoCount[pMsg->m_Weapon] = 10;
+    }
 }
 
 int CControls::SnapInput(int *pData)
