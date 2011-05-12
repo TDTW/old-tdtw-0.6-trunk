@@ -126,6 +126,10 @@ void CMenus::RenderSettingsGame(CUIRect MainView)
 			Right.HSplitTop(20.0f, &Button, &Right);
 			if(DoButton_CheckBox(&g_Config.m_ClNameplatesTeamcolors, Localize("Use team colors for name plates"), g_Config.m_ClNameplatesTeamcolors, &Button))
 				g_Config.m_ClNameplatesTeamcolors ^= 1;
+			
+			Right.HSplitTop(20.0f, &Button, &Right);
+			if(DoButton_CheckBox(&g_Config.m_ClClanplates, Localize("Use clan plates"), g_Config.m_ClClanplates, &Button))
+				g_Config.m_ClClanplates ^= 1;
 		}
 	}
 
