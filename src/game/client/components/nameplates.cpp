@@ -22,7 +22,7 @@ void CNamePlates::RenderNameplate(
 
 
 	float NameFontSize = 18.0f + 20.0f * g_Config.m_ClNameplatesSize / 100.0f;
-	float ClanFontSize = NameFontSize * g_Config.m_ClClanplatesScale / 100.0f;
+	float ClanFontSize = NameFontSize * 0.7f;
 	// render name plate
 	if(!pPlayerInfo->m_Local)
 	{
