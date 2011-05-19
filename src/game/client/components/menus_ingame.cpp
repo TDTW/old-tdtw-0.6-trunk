@@ -418,6 +418,48 @@ void CMenus::RenderServerControlKick(CUIRect MainView, bool FilterSpectators)
 	m_CallvoteSelectedPlayer = Selected != -1 ? aPlayerIDs[Selected] : -1;
 }
 
+void CMenus::RenderIngameServerbrowser(CUIRect MainView)
+{
+	CUIRect Top, Button, Temp3;	
+	int NewPage = 1;
+	MainView.HSplitTop(20.0f, &Top, &MainView);
+	RenderTools()->DrawUIRect(&Top, ms_ColorTabbarActive, CUI::CORNER_T, 10.0f);
+	MainView.HSplitTop(20.0f, &Top, &MainView);
+	
+	
+	float Temp = Top.w/3-20;
+	Top.VSplitLeft(Temp, &Button, &Top);
+	Top.VSplitLeft(20.0f, &Temp3, &Top);
+	RenderTools()->DrawUIRect(&Temp3, ms_ColorTabbarInactive, CUI::CORNER_T, 0.0f);
+	static int s_InternetButton=0;
+	m_ActivePage2 = g_Config.m_UiPage2;
+	if(DoButton_MenuTab(&s_InternetButton, Localize("Internet"), m_ActivePage2==PAGE_INTERNET, &Button, 0))
+	{
+		ServerBrowser()->Refresh(IServerBrowser::TYPE_INTERNET);
+		g_Config.m_UiPage2 = PAGE_INTERNET;
+	}	
+	
+	Top.VSplitLeft(Temp, &Button, &Top);
+	Top.VSplitLeft(20.0f, &Temp3, &Top);
+	RenderTools()->DrawUIRect(&Temp3, ms_ColorTabbarInactive, CUI::CORNER_T, 0.0f);
+	static int s_LanButton=0;
+	if(DoButton_MenuTab(&s_LanButton, Localize("LAN"), m_ActivePage2==PAGE_LAN, &Button, 0))
+	{
+		ServerBrowser()->Refresh(IServerBrowser::TYPE_LAN);
+		g_Config.m_UiPage2 = PAGE_LAN;
+	}
+	
+	Top.VSplitLeft(Temp+20, &Button, &Top);
+	static int s_FavoriteButton=0;
+	if(DoButton_MenuTab(&s_FavoriteButton, Localize("Favorites"), m_ActivePage2==PAGE_FAVORITES, &Button, 0))
+	{
+		ServerBrowser()->Refresh(IServerBrowser::TYPE_FAVORITES);
+		g_Config.m_UiPage2 = PAGE_FAVORITES;
+	}
+	
+	RenderServerbrowser(MainView);
+}
+
 void CMenus::RenderServerControl(CUIRect MainView)
 {
 	static int s_ControlPage = 0;

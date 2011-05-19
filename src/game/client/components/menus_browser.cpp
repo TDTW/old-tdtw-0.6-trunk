@@ -492,7 +492,7 @@ void CMenus::RenderServerbrowserFilters(CUIRect View)
 {
 	CUIRect ServerFilter = View, FilterHeader;
 	const float FontSize = 12.0f;
-	ServerFilter.HSplitBottom(42.5f, &ServerFilter, 0);
+	//ServerFilter.HSplitBottom(42.5f, &ServerFilter, 0);
 
 	// server filter
 	ServerFilter.HSplitTop(ms_ListheaderHeight, &FilterHeader, &ServerFilter);
@@ -671,7 +671,7 @@ void CMenus::RenderServerbrowserServerDetail(CUIRect View)
 	}
 
 	// server scoreboard
-	ServerScoreBoard.HSplitBottom(20.0f, &ServerScoreBoard, 0x0);
+	//ServerScoreBoard.HSplitBottom(20.0f, &ServerScoreBoard, 0x0);
 	ServerScoreBoard.HSplitTop(ms_ListheaderHeight, &ServerHeader, &ServerScoreBoard);
 	RenderTools()->DrawUIRect(&ServerHeader, vec4(1,1,1,0.25f), CUI::CORNER_T, 4.0f);
 	RenderTools()->DrawUIRect(&ServerScoreBoard, vec4(0,0,0,0.15f), CUI::CORNER_B, 4.0f);
@@ -683,13 +683,19 @@ void CMenus::RenderServerbrowserServerDetail(CUIRect View)
 		for (int i = 0; i < pSelectedServer->m_NumClients; i++)
 		{
 			CUIRect Name, Clan, Score, Flag;
-			ServerScoreBoard.HSplitTop(25.0f, &Name, &ServerScoreBoard);
+			if(Client()->State() == IClient::STATE_OFFLINE)
+				ServerScoreBoard.HSplitTop(25.0f, &Name, &ServerScoreBoard);
+			else
+				ServerScoreBoard.HSplitTop(22.5f, &Name, &ServerScoreBoard);
 			RenderTools()->DrawUIRect(&Name, vec4(1,1,1,(i%2+1)*0.05f), CUI::CORNER_ALL, 4.0f);
 			Name.VSplitLeft(5.0f, 0, &Name);
 			Name.VSplitLeft(30.0f, &Score, &Name);
 			Name.VSplitRight(34.0f, &Name, &Flag);
 			Flag.HMargin(4.0f, &Flag);
-			Name.HSplitTop(11.0f, &Name, &Clan);
+			if(Client()->State() == IClient::STATE_OFFLINE)
+				Name.HSplitTop(11.0f, &Name, &Clan);
+			else
+				Name.HSplitTop(9.5f, &Name, &Clan);
 
 			// score
 			if(pSelectedServer->m_aClients[i].m_Player)
@@ -702,7 +708,10 @@ void CMenus::RenderServerbrowserServerDetail(CUIRect View)
 			}
 
 			// name
-			TextRender()->SetCursor(&Cursor, Name.x, Name.y, FontSize-2, TEXTFLAG_RENDER|TEXTFLAG_STOP_AT_END);
+			if(Client()->State() == IClient::STATE_OFFLINE)
+				TextRender()->SetCursor(&Cursor, Name.x, Name.y, FontSize-2, TEXTFLAG_RENDER|TEXTFLAG_STOP_AT_END);
+			else
+				TextRender()->SetCursor(&Cursor, Name.x, Name.y, FontSize-2.5f, TEXTFLAG_RENDER|TEXTFLAG_STOP_AT_END);
 			Cursor.m_LineWidth = Name.w;
 			const char *pName = pSelectedServer->m_aClients[i].m_aName;
 			if(g_Config.m_BrFilterString[0])
@@ -723,8 +732,11 @@ void CMenus::RenderServerbrowserServerDetail(CUIRect View)
 			else
 				TextRender()->TextEx(&Cursor, pName, -1);
 
-			// clan
-			TextRender()->SetCursor(&Cursor, Clan.x, Clan.y, FontSize-2, TEXTFLAG_RENDER|TEXTFLAG_STOP_AT_END);
+			// clan			
+			if(Client()->State() == IClient::STATE_OFFLINE)
+				TextRender()->SetCursor(&Cursor, Clan.x, Clan.y, FontSize-2, TEXTFLAG_RENDER|TEXTFLAG_STOP_AT_END);
+			else
+				TextRender()->SetCursor(&Cursor, Clan.x, Clan.y, FontSize-2.5f, TEXTFLAG_RENDER|TEXTFLAG_STOP_AT_END);
 			Cursor.m_LineWidth = Clan.w;
 			const char *pClan = pSelectedServer->m_aClients[i].m_aClan;
 			if(g_Config.m_BrFilterString[0])
@@ -856,7 +868,12 @@ void CMenus::RenderServerbrowser(CUIRect MainView)
 	CUIRect ServerList, ToolBox, StatusBox, TabBar;
 
 	// background
-	RenderTools()->DrawUIRect(&MainView, ms_ColorTabbarActive, CUI::CORNER_ALL, 10.0f);
+	
+	if(Client()->State() == IClient::STATE_OFFLINE)
+		RenderTools()->DrawUIRect(&MainView, ms_ColorTabbarActive, CUI::CORNER_ALL, 10.0f);
+	else
+		RenderTools()->DrawUIRect(&MainView, ms_ColorTabbarActive, CUI::CORNER_B, 10.0f);
+	
 	MainView.Margin(10.0f, &MainView);
 
 	// create server list, status box, tab bar and tool box area
@@ -959,7 +976,7 @@ void CMenus::RenderServerbrowser(CUIRect MainView)
 		else
 		{
 			str_format(aBuf, sizeof(aBuf), Localize("Current version: %s"), GAME_VERSION);
-			str_append(aBuf, " (TDTW)", sizeof(aBuf));
+			//str_append(aBuf, " (TDTW)", sizeof(aBuf));
 		}
 		UI()->DoLabelScaled(&Button, aBuf, 14.0f, -1);
 		TextRender()->TextColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -974,12 +991,24 @@ void CMenus::RenderServerbrowser(CUIRect MainView)
 		static int s_RefreshButton = 0;
 		if(DoButton_Menu(&s_RefreshButton, Localize("Refresh"), 0, &Button))
 		{
-			if(g_Config.m_UiPage == PAGE_INTERNET)
-				ServerBrowser()->Refresh(IServerBrowser::TYPE_INTERNET);
-			else if(g_Config.m_UiPage == PAGE_LAN)
-				ServerBrowser()->Refresh(IServerBrowser::TYPE_LAN);
-			else if(g_Config.m_UiPage == PAGE_FAVORITES)
-				ServerBrowser()->Refresh(IServerBrowser::TYPE_FAVORITES);
+			if(Client()->State() == IClient::STATE_OFFLINE)
+			{
+				if(g_Config.m_UiPage == PAGE_INTERNET)
+					ServerBrowser()->Refresh(IServerBrowser::TYPE_INTERNET);
+				else if(g_Config.m_UiPage == PAGE_LAN)
+					ServerBrowser()->Refresh(IServerBrowser::TYPE_LAN);
+				else if(g_Config.m_UiPage == PAGE_FAVORITES)
+					ServerBrowser()->Refresh(IServerBrowser::TYPE_FAVORITES);
+			}
+			else
+			{				
+				if(g_Config.m_UiPage2 == PAGE_INTERNET)
+					ServerBrowser()->Refresh(IServerBrowser::TYPE_INTERNET);
+				else if(g_Config.m_UiPage2 == PAGE_LAN)
+					ServerBrowser()->Refresh(IServerBrowser::TYPE_LAN);
+				else if(g_Config.m_UiPage2 == PAGE_FAVORITES)
+					ServerBrowser()->Refresh(IServerBrowser::TYPE_FAVORITES);
+			}					
 		}
 
 		ButtonArea.HSplitTop(5.0f, 0, &ButtonArea);

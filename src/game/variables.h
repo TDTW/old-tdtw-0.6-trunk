@@ -43,7 +43,7 @@ MACRO_CONFIG_INT(PlayerColorBody, player_color_body, 65408, 0, 0xFFFFFF, CFGFLAG
 MACRO_CONFIG_INT(PlayerColorFeet, player_color_feet, 65408, 0, 0xFFFFFF, CFGFLAG_CLIENT|CFGFLAG_SAVE, "Player feet color")
 MACRO_CONFIG_STR(PlayerSkin, player_skin, 24, "default", CFGFLAG_CLIENT|CFGFLAG_SAVE, "Player skin")
 
-MACRO_CONFIG_INT(UiPage, ui_page, 5, 0, 10, CFGFLAG_CLIENT|CFGFLAG_SAVE, "Interface page")
+MACRO_CONFIG_INT(UiPage, ui_page, 5, 0, 11, CFGFLAG_CLIENT|CFGFLAG_SAVE, "Interface page")
 MACRO_CONFIG_INT(UiToolboxPage, ui_toolbox_page, 0, 0, 2, CFGFLAG_CLIENT|CFGFLAG_SAVE, "Toolbox page")
 MACRO_CONFIG_STR(UiServerAddress, ui_server_address, 64, "localhost:8303", CFGFLAG_CLIENT|CFGFLAG_SAVE, "Interface server address")
 MACRO_CONFIG_INT(UiScale, ui_scale, 100, 50, 150, CFGFLAG_CLIENT|CFGFLAG_SAVE, "Interface scale")
@@ -95,6 +95,9 @@ MACRO_CONFIG_INT(HudModHideVoting, hudmod_hide_voting, 0, 0, 1, CFGFLAG_SAVETDTW
 MACRO_CONFIG_INT(HudModHideCursor, hudmod_hide_cursor, 0, 0, 1, CFGFLAG_SAVETDTW|CFGFLAG_CLIENT, "Hide cursor")
 MACRO_CONFIG_INT(HudModHideBroadcast, hudmod_hide_broadcast, 0, 0, 1, CFGFLAG_SAVETDTW|CFGFLAG_CLIENT, "Hide broadcast")
 MACRO_CONFIG_INT(HudModHideSpectator, hudmod_hide_spectator, 0, 0, 1, CFGFLAG_SAVETDTW|CFGFLAG_CLIENT, "Hide spectator")
+
+MACRO_CONFIG_INT(UiPage2, ui_page2, 6, 0, 11, CFGFLAG_SAVETDTW|CFGFLAG_CLIENT, "Interface page2")
+
 // server
 MACRO_CONFIG_INT(SvWarmup, sv_warmup, 0, 0, 0, CFGFLAG_SERVER, "Number of seconds to do warmup before round starts")
 MACRO_CONFIG_STR(SvMotd, sv_motd, 900, "", CFGFLAG_SERVER, "Message of the day to display for the clients")
