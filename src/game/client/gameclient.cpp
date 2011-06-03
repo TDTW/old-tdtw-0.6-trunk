@@ -598,7 +598,10 @@ void CGameClient::OnEnterGame() {}
 void CGameClient::OnGameOver()
 {
 	if(Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	{
 		Client()->AutoScreenshot_Start();
+//		g_GameClient.m_pScoreboard->ScoreToChat();	// _my_score2chat
+	}
 }
 
 void CGameClient::OnStartGame()
