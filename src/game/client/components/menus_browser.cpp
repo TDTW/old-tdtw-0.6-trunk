@@ -774,16 +774,16 @@ void CMenus::RenderServerbrowserFriends(CUIRect View)
 	const float FontSize = 12.0f;
 
 	// header
-	ServerFriends.HSplitTop(ms_ListheaderHeight, &FilterHeader, &ServerFriends);
-	RenderTools()->DrawUIRect(&FilterHeader, vec4(1,1,1,0.25f), CUI::CORNER_T, 4.0f);
-	RenderTools()->DrawUIRect(&ServerFriends, vec4(0,0,0,0.15f), CUI::CORNER_B, 4.0f);
-	UI()->DoLabelScaled(&FilterHeader, Localize("Friends"), FontSize+2.0f, 0);
+	//ServerFriends.HSplitTop(ms_ListheaderHeight, &FilterHeader, &ServerFriends);
+	//RenderTools()->DrawUIRect(&FilterHeader, vec4(1,1,1,0.25f), CUI::CORNER_T, 4.0f);
+	//RenderTools()->DrawUIRect(&ServerFriends, vec4(0,0,0,0.15f), CUI::CORNER_B, 4.0f);
 	CUIRect Button, List;
 
-	ServerFriends.VSplitLeft(5.0f, 0, &ServerFriends);
-	ServerFriends.Margin(3.0f, &ServerFriends);
-	ServerFriends.VMargin(5.0f, &ServerFriends);
+	//ServerFriends.VSplitLeft(5.0f, 0, &ServerFriends);
+	//ServerFriends.Margin(3.0f, &ServerFriends);
+	//ServerFriends.VMargin(5.0f, &ServerFriends);
 	ServerFriends.HSplitBottom(100.0f, &List, &ServerFriends);
+	UI()->DoLabelScaled(&List, Localize("Friends"), FontSize+2.0f, 0);
 
 	// friends list(remove friend)
 	static int s_FriendList = 0;
@@ -982,11 +982,10 @@ void CMenus::RenderServerbrowser(CUIRect MainView)
 		TextRender()->TextColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 		// button area
-		StatusBox.VSplitRight(80.0f, &StatusBox, 0);
 		StatusBox.VSplitRight(170.0f, &StatusBox, &ButtonArea);
-		ButtonArea.VSplitRight(150.0f, 0, &ButtonArea);
+		StatusBox.VSplitRight(150.0f, &StatusBox, 0);
+		ButtonArea.VSplitRight(5.0f, &ButtonArea, 0);
 		ButtonArea.HSplitTop(20.0f, &Button, &ButtonArea);
-		Button.VMargin(2.0f, &Button);
 
 		static int s_RefreshButton = 0;
 		if(DoButton_Menu(&s_RefreshButton, Localize("Refresh"), 0, &Button))
@@ -1013,7 +1012,6 @@ void CMenus::RenderServerbrowser(CUIRect MainView)
 
 		ButtonArea.HSplitTop(5.0f, 0, &ButtonArea);
 		ButtonArea.HSplitTop(20.0f, &Button, &ButtonArea);
-		Button.VMargin(2.0f, &Button);
 
 		static int s_JoinButton = 0;
 		if(DoButton_Menu(&s_JoinButton, Localize("Connect"), 0, &Button) || (m_EnterPressed && ((UI()->LastActiveItem() != &s_aName) && (UI()->LastActiveItem() != &s_aClan))))
@@ -1024,7 +1022,6 @@ void CMenus::RenderServerbrowser(CUIRect MainView)
 		
 		ButtonArea.HSplitTop(5.0f, 0, &ButtonArea);		
 		ButtonArea.HSplitTop(20.0f, &Button, &ButtonArea);
-		Button.VMargin(12.0f, &Button);
 		
 		static int s_FriendButton = 0;
 		if(DoButton_MenuTab(&s_FriendButton, Localize("Show friends"), g_Config.m_BrFilterFriends, &Button, CUI::CORNER_ALL))

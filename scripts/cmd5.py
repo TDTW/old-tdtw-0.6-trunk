@@ -28,8 +28,8 @@ f = "".encode()
 for filename in sys.argv[1:]:
 	f += cstrip([l.strip() for l in open(filename, "rb")])
 
-hash = hashlib.md5(f).hexdigest().lower()[16:]
+#hash = hashlib.md5(f).hexdigest().lower()[16:]
 #TODO 0.7: improve nethash creation
-if hash == "6e28a475de43adfd":
+#if hash == "5c1e637ffddf3a37":
 	hash = "626fce9a778df4d4"
 print('#define GAME_NETVERSION_HASH "%s"' % hash)
