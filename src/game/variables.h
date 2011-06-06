@@ -96,6 +96,9 @@ MACRO_CONFIG_INT(HudModHideCursor, hudmod_hide_cursor, 0, 0, 1, CFGFLAG_SAVETDTW
 MACRO_CONFIG_INT(HudModHideBroadcast, hudmod_hide_broadcast, 0, 0, 1, CFGFLAG_SAVETDTW|CFGFLAG_CLIENT, "Hide broadcast")
 MACRO_CONFIG_INT(HudModHideSpectator, hudmod_hide_spectator, 0, 0, 1, CFGFLAG_SAVETDTW|CFGFLAG_CLIENT, "Hide spectator")
 
+MACRO_CONFIG_INT(ReconnectBanTimeout, reconnect_ban_timeout, 10, 1, 120, CFGFLAG_CLIENT|CFGFLAG_SAVETDTW, "How many seconds to wait before reconnecting (when banned)")	// _my_reconnect
+MACRO_CONFIG_INT(ReconnectFullTimeout, reconnect_full_timeout, 3, 1, 120, CFGFLAG_CLIENT|CFGFLAG_SAVETDTW, "How many seconds to wait before reconnecting (when server is full)")	// _my_reconnect
+
 MACRO_CONFIG_INT(UiPage2, ui_page2, 6, 0, 11, CFGFLAG_SAVETDTW|CFGFLAG_CLIENT, "Interface page2")
 
 // server

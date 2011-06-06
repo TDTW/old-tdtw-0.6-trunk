@@ -212,6 +212,7 @@ class CMenus : public CComponent
 	int DoButton_ColSettingsTab(const void *pID, const char *pText, int Checked, const CUIRect *pRect);
 	
 	// found in menus.cpp
+	int64 _my_rtime;	// _my_reconnect
 	int Render();
 	//void render_background();
 	//void render_loading(float percent);
