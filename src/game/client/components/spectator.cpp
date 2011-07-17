@@ -141,6 +141,7 @@ bool CSpectator::OnMouseMove(float x, float y)
 	if(!m_Active)
 		return false;
 
+	UI()->ConvertMouseMove(&x, &y);
 	m_SelectorMouse += vec2(x,y);
 	return true;
 }
@@ -181,6 +182,13 @@ void CSpectator::OnRender()
 	}
 	else 
 		Loading = false;
+
+	if(!m_pClient->m_Snap.m_SpecInfo.m_Active)
+	{
+		m_Active = false;
+		m_WasActive = false;
+		return;
+	}
 
 	m_WasActive = true;
 	m_SelectedSpectatorID = NO_SELECTION;
