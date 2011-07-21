@@ -212,7 +212,7 @@ void CSpectator::OnRender()
 	Height += 20*3.0f*Graphics()->ScreenAspect()+10;
 	
 	Screen.HSplitTop(Screen.h/2, &TopMenu, &BottomMenu);
-	TopMenu.Margin(5, &TopMenu);
+	TopMenu.HSplitBottom(5, &TopMenu, 0);
 	//TopMenu.VMargin(15*3.0f*Graphics()->ScreenAspect(), &TopMenu);
 	
 	// RenderTools()->DrawUIRect(&Screen, ms_ColorTabbarActive, CUI::CORNER_ALL, 10.0f);
@@ -223,7 +223,7 @@ void CSpectator::OnRender()
 		CUIRect Left, Middle, Right;
 		CUIRect Button, Button2;
 		
-		int Temp = TopMenu.w/7;
+		int Temp = TopMenu.w/8;
 		TopMenu.VSplitLeft(Temp, &Button, &TopMenu);
 		TopMenu.VSplitRight(Temp, &TopMenu, &Button2);	
 		Button.VSplitRight(5, &Button, 0);
@@ -238,10 +238,10 @@ void CSpectator::OnRender()
 		Left.VMargin(5, &Left);
 		Right.VMargin(5, &Right);
 		
-		Right.HSplitTop(25, 0, &Right);
+		//Right.HSplitTop(25, 0, &Right);
 		//Right.VSplitRight(Right.w/3, &Right, 0);
-		Left.HSplitBottom(Left.w, 0, &Left);
-		Right.HSplitBottom(Right.w, 0, &Right);
+		Left.HSplitTop(10, 0, &Left);
+		Right.HSplitTop(10, 0, &Right);
 		
 		if(Loading)
 		{
@@ -430,10 +430,18 @@ void CSpectator::OnRender()
 	BottomMenu.HSplitTop(TempHeight+5.0f, &BottomMenu1, &BottomMenu2);
 	BottomMenu2.HSplitTop(5.0f, 0, &BottomMenu2);
 	BottomMenu2.HSplitTop(TempHeight, &BottomMenu2, 0);
-	if(Count < 8)	
-		BottomMenu1.VMargin((TempHeight+5.0f)*(8-(Count)%8)/2, &BottomMenu1);
+	
+	int MaxCount = floor((BottomMenu1.w+5.0f) / TempWidth);
+	
+	if(Count > 8)
+	{
+		BottomMenu1.VMargin((BottomMenu1.w-((TempHeight+5.0f)*8))/2, &BottomMenu1);
+		BottomMenu2.VMargin((BottomMenu2.w-((TempHeight+5.0f)*(Count%8)))/2, &BottomMenu2);
+	}
 	else
-		BottomMenu2.VMargin((TempHeight+5.0f)*(8-(Count)%8)/2, &BottomMenu2);
+	{
+		BottomMenu1.VMargin((BottomMenu1.w-((TempHeight+5.0f)*Count))/2, &BottomMenu1);
+	}
 	
 	Count = 0;
 	for(int j = 0; j < 16; j++)
