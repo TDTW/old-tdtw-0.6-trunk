@@ -1,35 +1,16 @@
-
 ##### translated strings #####
 
-%d Bytes
-== %d байт
-
 %d of %d servers, %d players
-== %d из %d серверов, %d игроков
+== %d/%d серверов, %d игроков
 
 %d%% loaded
 == %d%% загружено
 
 %ds left
-== осталось %d сек.
+== осталось %d сек
 
-%i minute left
-== Осталась %i минута!
-
-%i minutes left
-== Осталось %i минут!
-
-%i second left
-== Осталась %i секунда!
-
-%i seconds left
-== Осталось %i секунд!
-
-%s wins!
-== %s победил!
-
--Page %d-
-== -Страница %d-
+%s Right click for context menu.
+== %s Нажми правую кнопку мыши для контекстного меню.
 
 Abort
 == Отмена
@@ -37,38 +18,53 @@ Abort
 Add
 == Добавить
 
-Add Friend
-== Добавить друга
+Add Image
+== Добавить изображение
+
+Add Quad
+== Добавить квад
+
+Add group
+== Добавить группу
+
+Add quads layer
+== Добавить слой квадов
+
+Add tile layer
+== Добавить слой тайлов
 
 Address
 == Адрес
+
+Adds a new group
+== Добавить новую группу
+
+Adds a new quad
+== Добавить новый квад
 
 All
 == Все
 
 Alpha
-== Прозрачн.
+== Прозрачн...
 
 Always show name plates
 == Всегда показывать ники игроков
 
-Are you sure that you want to delete the demo?
-== Вы уверены, что хотите удалить демо?
+Anim
+== Аним.
+
+Append
+== Вставить
+
+Append map
+== Вставить карту в текущую
 
 Are you sure that you want to quit?
 == Вы действительно желаете выйти?
 
-Are you sure that you want to remove the player from your friends list?
-== Вы уверены, что хотите удалить игрока из друзей?
-
 As this is the first time you launch the game, please enter your nick name below. It's recommended that you check the settings to adjust them to your liking before joining a server.
 == Так как это ваш первый запуск игры, пожалуйста, введите свой ник в поле ниже. Также рекоммендуется проверить настройки игры и поменять некоторые из них перед тем, как начать играть.
-
-Automatically record demos
-== Автоматически записывать демо
-
-Automatically take game over screenshot
-== Делать снимок результатов игры
 
 Blue team
 == Синие
@@ -79,29 +75,44 @@ Blue team wins!
 Body
 == Тело
 
+Border
+== Создать края
+
+CCW
+== CCW
+
+CW
+== CW
+
 Call vote
 == Голосовать
 
-Change settings
-== Изменить настройки
+Cancel
+== Отмена
 
 Chat
 == Чат
 
-Clan
-== Клан
-
-Client
-== Клиент
+Clear collision
+== Очистить коллизии
 
 Close
-== Выход
+== Закрыть
+
+Color Env
+== Цвет. крив.
+
+Color TO
+== Цвет. TO
+
+Color+
+== Цвет+
 
 Compatible version
-== Совместимая версия
+== Совместимая версия.
 
 Connect
-== Подключиться
+== Подкл.
 
 Connecting to
 == Подключение к
@@ -112,20 +123,26 @@ Connection Problems...
 Console
 == Консоль
 
+Constructs collision from this layer
+== Создать коллизии из этого слоя
+
 Controls
 == Управление
 
-Count players only
-== Считать только игроков
+Creates a new color envelope
+== Создать новую кривую цвета
 
-Country
-== Флаг вашей страны
+Creates a new map
+== Создать новую карту
 
-Crc:
-== Crc:
+Creates a new pos envelope
+== Создать новую кривую позиции
 
-Created:
-== Создан:
+Creates a new quad layer
+== Создать новый слой квадов
+
+Creates a new tile layer
+== Создать новый слой тайлов
 
 Current
 == Текущий
@@ -136,20 +153,32 @@ Current version: %s
 Custom colors
 == Свои цвета
 
+Decrease
+== Уменьшить
+
+Decrease animation speed
+== Уменьшить скорость анимации
+
 Delete
 == Удалить
 
-Delete demo
-== Удалить демо
+Delete group
+== Удалить группу
 
-Demo details
-== Детали демо
+Delete layer
+== Удалить слой
 
-Demofile: %s
-== Демо: %s
+Deletes the current quad
+== Удалить текущий квад
+
+Deletes the layer
+== Удалить слой
 
 Demos
 == Демо
+
+Detail
+== Детальный
 
 Disconnect
 == Отключить
@@ -158,7 +187,7 @@ Disconnected
 == Отключено
 
 Display Modes
-== Разрешение экрана
+== Режимы дисплея
 
 Downloading map
 == Скачивание карты
@@ -169,11 +198,23 @@ Draw!
 Dynamic Camera
 == Динамическая камера
 
+Embed
+== Встроить
+
+Embedded
+== Встроенные
+
+Embeds the image into the map file.
+== Встроить изображение в саму карту
+
 Emoticon
-== Эмоции
+== Эмоция
 
 Enter
 == Вход
+
+Envelopes
+== Кривые
 
 Error
 == Ошибка
@@ -181,8 +222,17 @@ Error
 Error loading demo
 == ошибка при загрузке демо
 
+Exit
+== Выход
+
+Exits from the editor
+== Выход из редактора
+
+External
+== Внешние
+
 FSAA samples
-== Сэмплов FSAA
+== Сэмплы FSAA
 
 Favorite
 == Избранный
@@ -193,23 +243,20 @@ Favorites
 Feet
 == Ноги
 
+File
+== Файл
+
+Filename:
+== Имя файла:
+
 Filter
 == Фильтр
 
 Fire
 == Выстрел
 
-Folder
-== Папка
-
 Force vote
 == Форсировать
-
-Free-View
-== Свободный обзор
-
-Friends
-== Друзья
 
 Fullscreen
 == Полноэкранный режим
@@ -227,7 +274,7 @@ Game type
 == Тип игры
 
 Game types:
-== Тип игры:
+== Типы игры:
 
 General
 == Основные
@@ -236,19 +283,28 @@ Graphics
 == Графика
 
 Grenade
-== Гранатомёт
+== Граната
+
+Group
+== Группа
+
+HD
+== HD
 
 Hammer
-== Молот
+== Молоток
 
 Has people playing
-== Не пустой сервер
+== Сервер не пустой
+
+Height
+== Высота
 
 High Detail
 == Высокая детализация
 
 Hook
-== Крюк
+== Цепь
 
 Host address
 == Адрес сервера
@@ -256,14 +312,23 @@ Host address
 Hue
 == Оттенок
 
+Image
+== Изображение
+
+Images
+== Изображения
+
+Increase
+== Увеличить
+
+Increase animation speed
+== Увеличить скорость анимации
+
 Info
 == Инфо
 
 Internet
 == Интернет
-
-Invalid Demo
-== Недопустимое демо
 
 Join blue
 == За синих
@@ -277,20 +342,32 @@ Join red
 Jump
 == Прыжок
 
-Kick player
-== Забанить игрока
+Kick
+== Выкинуть
 
 LAN
-== LAN
+== Локалка
 
 Language
 == Язык
 
-Length:
-== Длина
+Layers
+== Слои
+
+Left mouse button to move. Hold shift to move pivot. Hold ctrl to rotate.
+== Левая кнопка мыши для перемещения. Зажмите Shift для перемещения опоры. Зажмите Ctrl для поворота.
+
+Left mouse button to move. Hold shift to move the texture.
+== Левая кнопка мыши для перемещения. Зажмите Shift для перемещения текстуры.
 
 Lht.
 == Яркость
+
+Load
+== Загрузить
+
+Load a new image to use in the map
+== Загрузить новое изображение для использования его в карте
 
 Loading
 == Загрузка
@@ -298,17 +375,14 @@ Loading
 MOTD
 == MOTD
 
+Make collision
+== Создать коллизии
+
+Make external
+== Сделать внешним
+
 Map
 == Карта
-
-Map:
-== Карта:
-
-Max Screenshots
-== Максимальное количество снимков
-
-Max demos
-== Максимальное количество демо
 
 Maximum ping:
 == Макс. пинг:
@@ -320,13 +394,10 @@ Mouse sens.
 == Чувств. мыши
 
 Move left
-== Шаг влево
-
-Move player to spectators
-== Сделать наблюдателем
+== Влево
 
 Move right
-== Шаг вправо
+== Вправо
 
 Movement
 == Перемещение
@@ -337,17 +408,17 @@ Mute when not active
 Name
 == Имя
 
-Name plates size
-== Размер
+Name:
+== Имя:
 
-Netversion:
-== Версия:
-
-New name:
-== Новое имя
+New
+== Новый
 
 News
 == Новости
+
+Next Envelope
+== Следуюая кривая
 
 Next weapon
 == След. оружие
@@ -365,22 +436,34 @@ No servers found
 == Сервера не найдены
 
 No servers match your filter criteria
-== Нет серверов, подходящих под ваш фильтр
+== Нет серверов, отвечающих вашим критериям...
+
+None
+== Ничего
+
+Normal animation speed
+== Нормальная скорость анимации
 
 Ok
-== ОК
+== Ок
 
 Open
 == Открыть
 
-Parent Folder
-== Родительский каталог
+Opens a map and adds everything from that map to the current one
+== Открыть карту и добавить из нее все в текущую
+
+Opens a map for editing
+== Открыть карту для редактирования
+
+Order
+== Порядок
 
 Password
 == Пароль
 
 Password incorrect
-== Пароль
+== Неверный пароль
 
 Ping
 == Пинг
@@ -392,25 +475,37 @@ Play
 == Просмотр
 
 Play background music
-== Играть фоновую музыку
+== Воспроизвести фоновую музыку
 
 Player
 == Игрок
-
-Player country:
-== Страна:
-
-Player options
-== Опции игрока
 
 Players
 == Игроки
 
 Please balance teams!
-== Сбалансируйте команды!
+== Пожалуйста cбалансируйте команды!
+
+Pos. Env
+== Поз. крив.
+
+Pos. TO
+== Поз. TO
+
+Pos.+
+== Поз.+
+
+Press right mouse button to create a new point
+== Нажмите правую кнопку мыши для создания новой точки
 
 Prev. weapon
 == Пред. оружие
+
+Previous Envelope
+== Предыдущая кривая
+
+Proof
+== Границы
 
 Quality Textures
 == Качественные текстуры
@@ -421,23 +516,17 @@ Quick search:
 Quit
 == Выход
 
-Quit anyway?
-== Выйти?
-
-REC %3d:%02d
-== REC %3d:%02d
-
 Reason:
 == Причина:
-
-Record demo
-== Записать демо
 
 Red team
 == Красные
 
 Red team wins!
 == Красные победили!
+
+Refocus
+== Вернуть фокус
 
 Refresh
 == Обновить
@@ -451,14 +540,23 @@ Remote console
 Remove
 == Удалить
 
-Remove friend
-== Удалить друга
+Removes collision from this layer
+== Удалить коллизии из этого слоя
 
-Rename
-== Переименов.
+Removes the image from the map
+== Удалить изображение из карты
 
-Rename demo
-== Переименовать демо
+Removes the image from the map file.
+== Удалить изображение из файла с картой
+
+Replace
+== Заменить
+
+Replace Image
+== Заменить изображение
+
+Replaces the image with a new one
+== Заменить это изображение другим
 
 Reset filter
 == Сбросить фильтры
@@ -467,7 +565,7 @@ Reset to defaults
 == Сбросить настройки
 
 Rifle
-== Бластер
+== Лазер
 
 Round
 == Раунд
@@ -476,7 +574,22 @@ Sample rate
 == Частота
 
 Sat.
-== Контраст
+== Контраст.
+
+Save
+== Сохранить
+
+Save As
+== Сохранить как
+
+Save map
+== Сохранить карту
+
+Saves the current map
+== Сохранить текущую карту
+
+Saves the current map under a new name
+== Сохранить текущую карту под новым названием
 
 Score
 == Очки
@@ -488,19 +601,22 @@ Score limit
 == Лимит очков
 
 Scoreboard
-== Табло
+== Ход игры
 
 Screenshot
-== Снимок
+== Скриншот
 
-Server address:
-== Адрес сервера
+Select group. Right click for properties.
+== Выберите группу. Правый клик открывает свойства.
+
+Select image
+== Выберите изображение
+
+Select layer. Right click for properties.
+== Выберите слой. Правый клик открывает свойства.
 
 Server details
 == Детали сервера
-
-Server filter
-== Фильтр серверов
 
 Server info
 == Информация
@@ -517,29 +633,17 @@ Shotgun
 Show chat
 == Показать чат
 
-Show friends only
-== Только с друзьями
-
-Show ingame HUD
-== Показывать внутриигровой HUD
-
 Show name plates
 == Показывать ники игроков
 
 Show only supported
-== Показывать только поддерживаемые разрешения экрана
-
-Size:
-== Размер:
+== Только поддерживаемые режимы
 
 Skins
 == Скины
 
 Sound
 == Звук
-
-Sound error
-== Звуковая ошибка
 
 Sound volume
 == Громкость звука
@@ -548,10 +652,10 @@ Spectate
 == Наблюдать
 
 Spectate next
-== Наблюдать след.
+== Наблюдать следующего
 
 Spectate previous
-== Наблюдать пред.
+== Наблюдать предыдущего
 
 Spectator mode
 == Наблюдатель
@@ -559,20 +663,26 @@ Spectator mode
 Spectators
 == Наблюдатели
 
+Square
+== Квадрат
+
+Squares the current quad
+== Преобразовать текущий квад в квадрат
+
 Standard gametype
 == Стандартный тип игры
 
 Standard map
 == Стандартная карта
 
-Stop record
-== Стоп
-
-Strict gametype filter
-== Строгий фильтр режим.
-
 Sudden Death
-== Быстрая смерть
+== Решающее очко
+
+Switch between images and layers managment.
+== Переключиться между управлением слоями и изображениями
+
+Switch curve type
+== Изменить тип кривой
 
 Switch weapon on pickup
 == Переключать оружие при подборе
@@ -589,59 +699,44 @@ Teeworlds %s is out! Download it at www.teeworlds.com!
 Texture Compression
 == Сжатие текстур
 
-The audio device couldn't be initialised.
-== Аудио устройство не может быть инициализировано
-
 The server is running a non-standard tuning on a pure game type.
 == Сервер запущен с нестандартными настройками на стандартном типе игры.
 
-There's an unsaved map in the editor, you might want to save it before you quit the game.
-== Есть несохранённая карта в редакторе, Вы можете сохранить её перед тем, как выйти.
-
 Time limit
-== Лимит времени
+== Лимит
 
-Time limit: %d min
-== Лимит времени: %d
+Toggle group visibility
+== Переключить видимость группы
+
+Toggle layer visibility
+== Переключить видимость слоя
+
+Toggles the envelope editor.
+== Показать или скрыть редактор кривых
 
 Try again
-== ОК
+== Попробовать снова
 
 Type
 == Тип
 
-Type:
-== Тип:
-
 UI Color
 == Цвет интерфейса
 
-Unable to delete the demo
-== Невозможно удалить демо
+Use left mouse button to drag and create a brush.
+== Используйте левую кнопку мыши для перемещения и создания кисти
 
-Unable to rename the demo
-== Невозможно переименовать демо
+Use left mouse button to paint with the brush. Right button clears the brush.
+== Используйте левую кнопку мыши для рисования кистью. Правая кнопка мыши очищает кисть.
 
 Use sounds
 == Использовать звуки
-
-Use team colors for name plates
-== Командные цвета для ников игроков
 
 V-Sync
 == Вертикальная синхронизация
 
 Version
 == Версия
-
-Version:
-== Версия:
-
-Vote command:
-== Комманда голосования:
-
-Vote description:
-== Описание голосования:
 
 Vote no
 == Против
@@ -661,6 +756,9 @@ Weapon
 Welcome to Teeworlds
 == Добро пожаловать в Teeworlds!
 
+Width
+== Ширина
+
 Yes
 == Да
 
@@ -670,10 +768,604 @@ You must restart the game for all settings to take effect.
 Your skin
 == Ваш скин
 
+ZI
+== Z+
+
+ZO
+== Z-
+
+[M] Flip brush vertical
+== [M] Зеркалировать кисть по вертикали
+
+[N] Flip brush horizontal
+== [N] Зеркалировать кисть по горизонтали
+
+[NumPad*] Zoom to normal and remove editor offset
+== [NumPad*] Установить нормальное увеличение и убрать смещение редактора
+
+[NumPad+] Zoom in
+== [ClavierNum+] Увеличить
+
+[NumPad-] Zoom out
+== [ClavierNum-] Уменьшить
+
+[R] Rotates the brush counter clockwise
+== [R] Повернуть кисть против часовой стрелки
+
+[T] Rotates the brush clockwise
+== [T] Повернуть кисть по часовой стрелке
+
+[ctrl+h] Toggle High Detail
+== [ctrl+h] Переключить высокую детализацию
+
+[ctrl+m] Toggle animation
+== [ctrl+m] Переключить анимацию
+
+[ctrl+p] Toggles proof borders. These borders represent what a player maximum can see.
+== [ctrl+p] Показать или скрыть границы, в пределах которых игрок может видеть карту
+
+%i minute left
+== осталась %i минута
+
+%i minutes left
+== осталось %i минут
+
+%i second left
+== осталась %i секунда
+
+%i seconds left
+== осталось %i секунд
+
+Alpha value of the envelope
+== Прозрачность кривой
+
+Are you sure that you want to delete the demo?
+== Вы действительно хотите удалить демо?
+
+Aspect ratio
+== Соотношение сторон
+
+Automatically record demos
+== Автоматически записывать демо
+
+Automatically take game over screenshot
+== Делать скриншот в конце игры
+
+Blue value of the envelope
+== Значение синего у кривой
+
+Clip H
+== Высота обрезаемой области
+
+Clip W
+== Ширина обрезаемой области
+
+Clip X
+== Позиция слева у обрезаемой области
+
+Clip Y
+== Позиция сверху у обрезаемой области
+
+Color
+== Цвет
+
+Delete demo
+== Удалить демо
+
+Delete this envelope
+== Удалить данную кривую
+
+Down
+== Вниз
+
+Enable/disable group for saving
+== Включить/Выключить группу для сохранения
+
+Enable/disable layer for saving
+== Включить/Выключить слой для сохранения
+
+File: %s
+== Файл: %s
+
+Folder
+== Папка
+
+Green value of the envelope
+== Значение зеленого у кривой
+
+Invalid Demo
+== Неправильное демо
+
+Left
+== Влево
+
+Left mouse to drag. Hold ctrl to be more precise. Hold shift to alter time point aswell. Right click to delete.
+== Левая клавиша для перемещения. Зажмите Ctrl для большей точности. Зажмите Shift для изменения момента времени. Правый клик для удаления.
+
+Load map
+== Загрузить карту
+
+Max Screenshots
+== Макс. Скриншотов
+
+Max demos
+== Макс. Демо
+
+Name plates size
+== Размер ников игроков
+
+New folder
+== Новая папка
+
+Para X
+== Пара. X
+
+Para Y
+== Пара. Y
+
+Parent Folder
+== Главная папка
+
+Pos X
+== Поз. X
+
+Pos Y
+== Поз. Y
+
+Quads
+== Квады
+
+REC
+== Запись
+
+Record demo
+== Запись демо
+
+Red value of the envelope
+== Значение красного у кривой
+
+Resizes the current Quad based on the aspect ratio of the image
+== Изменить размер квада под размер изображения
+
+Right
+== Вправо
+
+Rotation of the brush in degrees. Use left mouse button to drag and change the value. Hold shift to be more precise.
+== Поворот кисти в градусах. Левая клавиша для перемещения и изменения значения. Зажмите Shift для большей точности.
+
+Rotation of the envelope
+== Поворот кривой
+
+Shift
+== Смещение
+
+Sound error
+== Ошибка звука
+
+Stop record
+== Стоп записи
+
+The audio device couldn't be initialised.
+== Аудио устройство не может быть инициализированно
+
+Tiles
+== Тайлы
+
+Time limit: %d min
+== Лимит времени: %d мин
+
+Unable to delete the demo
+== Невозможно удалить демо
+
+Up
+== Вверх
+
+Use Clipping
+== Обрезать
+
+Use left mouse button to drag and change the color value. Hold shift to be more precise.
+== Левая клавиша для перемещения и изменения цвета. Зажмите Shift для большей точности.
+
+Use left mouse button to drag and change the value. Hold shift to be more precise.
+== Левая клавиша для перемещения и изменения значения. Зажмите Shift для большей точности.
+
+X-axis of the envelope
+== Горизонталь кривой
+
+Y-axis of the envelope
+== Вертикаль кривой
+
+[HOME] Restore map focus
+== [HOME] Восстановить фокусировку карты
+
 no limit
-== Без лимита
+== нет лимита
 
-##### needs translation #####
+####TDTW####
 
-##### old translations #####
+TDTW
+== TDTW
+
+MapHack
+== МапХак
+
+Demofile: %s
+Use MapHack
+== Использовать МапХак
+
+Toggle MapHack
+== Включить МапХак
+
+GameLayer Opacity
+== Прозрачность игрового слоя
+
+Background color
+== Цвет фона
+
+Red
+== Красный
+
+Green
+== Зеленый
+
+Blue
+== Синий
+
+%s\n\n Reconnect in %d sec
+== %s\n\n Переподключение через %d сек
+
+Hide all
+== Убрать все
+
+Show fps
+== Показать FPS
+
+Hide chat
+== Убрать чат
+
+Hide kill messages
+== Убрать сообщения об убийствах
+
+Hide health and ammo
+== Убрать здоровье и броню
+
+Hide game timer
+== Убрать таймер в игре
+
+Hide sudden death
+== Убрать сообщение о внезапной смерти
+
+Hide score hud
+== Убрать табло
+
+Hide warmup timer
+== Убрать таймер разминки
+
+Hide teambalance warning
+== Убрать предупреждение о балансе команд
+
+Hide broadcast
+== Убрать сообщения broadcast'а
+
+Hide voting
+== Убрать голосование
+
+Hide cursor
+== Убрать курсор
+
+Hide spectator hud
+== Убрать интерфейс наблюдателя
+
+Fonts
+== Шрифты
+
+Friends
+== Друзья
+
+Friends
+== Друзья
+
+Search friends
+== Найдены друзья
+
+Add friend:
+== Добав. друга:
+
+add
+== доб.
+
+Standart hud and chat
+== Стандартный чат и интерфейс
+
+Health, armor, and weapon bar
+== Панель здоровья, брони и оружия
+
+New weapon bar
+== Новая панель оружия
+
+Show weapon bar
+== Показывать панель оружия
+
+Show num of bullets
+== Показывать кол-во патронов
+
+Highlight weapon bar
+== Подсветка панели оружия
+
+Show ammo bar
+== Показать панель патронов
+
+Notification weapons on pickup
+== Оповещение о поднятии оружия
+
+Show time msg
+== Время отобр. сообщ.
+
+Chat height
+== Ширина чата
+
+Features
+== Особен.
+
+Play background music
+== Играть фоновую музыку
+
+Strict gametype filter
+== Следить за след.
+
+Antiping
+== Антипинг
+
+Antiping only grenade
+== Антипинг только гранат
+
+Effects
+== Эффекты
+
+FlagTrail
+== След флага
+
+WeaponTrail
+== След от гранаты
+
+Highlights in browser
+== Подсветка в браузере
+
+Highlight for gametypes
+== Подсветка для режимов
+
+Highlight for number of players
+== Подсветка кол-ва игроков
+
+Highlight for ping
+== Подсветка пинга
+
+Other
+== Другое
+
+Dyn camera toggle
+== Вкл динам. камеру
+
+Searching for friends...
+== Поиск друзей...
+
+No friends connected
+== Друзья не найдены
+
+friends found
+== друзей найд.
+
+Friends list
+== Список друзей
+
+%d%% searching
+== %d%% поиск
+
+Zoom
+== Зум
+
+Maximum Zoom
+== Макс. Зум
+
+Minimum Zoom
+== Мин. Зум
+
+Zoom In
+== Приблизить
+
+Zoom Out
+== Отдалить
+
+Zoom Reset
+== Сбросить Зум
+
+Start recording
+== Начать запись
+
+Stop recording
+== Остановить запись
+
+Hud
+== Интерфейс
+
+No friends added yet...
+== Друзей ещё не добавлено
+
+%i of %d servers
+== %i из %d серверов
+
+Friends details
+== Детали друзей
+
+Players list   %i/%i
+== Список игроков   %i/%i
+
+Players list
+== Список игроков
+
+Friends - 
+== Друзья - 
+
+Search friends - 
+== Друзья в поиске - 
+
+Adding Friend
+== Добавление друзей
+
+List of players (%d)
+== Список игроков (%d)
+
+There is none to add
+== Нет никого для добавления
+
+All Friends
+== Все друзья
+
+List of friends (%d)
+== Список друзей (%d)
+
+No friends added yet
+== Нет добавленых друзей
+
+%i friends
+== %i друзей
+
+Game over with score  %d : %d
+== Игра окончена со счетом %d : %d
+
+Mini Scoreboard
+== Мини табло
+
+Red team (%d)
+== Красные
+
+Blue team (%d)
+== Синие
+
+Spectators (%d)
+== Наблюдатели
+
+Players (%d)
+== Игроки (%d)
+
+Add Friend
+== Добавить друга
+
+ADD
+== Добавить
+
+CLEAR
+== Отчистить
+
+YES
+== Да
+
+NO
+== Нет
+
+Do you really want to add %s to your friends?
+== Вы серьезно хотите добавить %s в друзья?
+
+Do you really want to vote for kick %s?
+== Вы серьезно хотите голосовать за кик %s?
+
+Count players only
+== Считать только игроков
+
+Show friends
+== Показать друзей
+
+Clan:
+== Клан:
+
+Clan
+== Клан
+
+Show ingame HUD
+== Показать внутриигровой интерфейс
+
+Use team colors for name plates
+== Использовать цвета команд в отобр. ников
+
+Chat effects
+== Эффекты чата
+
+Background blend
+== Прозрачность фона
+
+Chat speed
+== Скорость чата
+
+Client
+== Клиент
+
+Country
+== Страна
+
+Spectator mode
+== Режим наблюдателя
+
+Player country:
+== Игрок из страны:
+
+Player options
+== Настройки игрока
+
+Change settings
+== Изменить настрйоки
+
+Kick player
+== Кикнуть игрока
+
+Move player to spectators
+== Переместить игрока в наблюдатели
+
+Vote description:
+== Описание голосования:
+
+Vote command:
+== Команда голосования:
+
+The server is running a non-standard tuning on a pure game type.
+== Этот сервер работает на нестандартных настройках стандартного типа игры
+
+There's an unsaved map in the editor, you might want to save it before you quit the game
+== В редакторе есть несохранённая карта
+
+Quit anyway?
+== Всё равно выйти?
+
+REC %3d:%02d
+== Записано %3d:%02d
+
+Crc:
+== Crc-сумма:
+
+Created:
+== Создан:
+
+Are you sure that you want to remove the player from your friends list?
+== Вы действительно хотите удалить этого игрока из списка друзей?
+
+Server address:
+== Адрес сервера:
+
+Server filter
+== Фильтр серверов
+
+Remove friend
+== Удалить друга
+
+Rename
+== Переименовать
+
+Free-View
+== Свободный обзор
+
+Browser
+== сервера
+
+Use clan plates
+== Показывать названия кланов
+#####translations #####
 
