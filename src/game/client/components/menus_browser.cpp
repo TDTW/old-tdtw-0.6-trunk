@@ -333,7 +333,7 @@ void CMenus::RenderServerbrowserServerList(CUIRect View)
 			}
 			else if(ID == COL_FRIEND_HEART)
 			{
-				if(g_Config.m_BrFilterFriends)
+				if(g_Config.m_BrFilterFriends || pItem->m_FriendState != IFriends::FRIEND_NO)
 					DoButton_Icon(IMAGE_BROWSEICONS, SPRITE_BROWSE_HEART, &Button);
 			}
 			else if(ID == COL_NAME)
@@ -387,16 +387,10 @@ void CMenus::RenderServerbrowserServerList(CUIRect View)
 			else if(ID == COL_PLAYERS)
 			{
 				float perc = 0.0f;
-				if(g_Config.m_BrFilterSpectators)
-				{
-					str_format(aTemp, sizeof(aTemp), "%i/%i", pItem->m_NumPlayers, pItem->m_MaxPlayers);
-					perc = pItem->m_NumPlayers * 100.0f / pItem->m_MaxPlayers;
-				}
-				else
-				{
-					str_format(aTemp, sizeof(aTemp), "%i/%i", pItem->m_NumClients, pItem->m_MaxClients);
-					perc = pItem->m_NumPlayers * 100.0f / pItem->m_MaxClients;
-				}
+
+				str_format(aTemp, sizeof(aTemp), "%i/%i", pItem->m_NumClients, pItem->m_MaxClients);
+				perc = pItem->m_NumPlayers * 100.0f / pItem->m_MaxClients;
+
 				if(g_Config.m_ClHighlightPlayer == 1)
 				{
 					if (perc <= 15.0f)
