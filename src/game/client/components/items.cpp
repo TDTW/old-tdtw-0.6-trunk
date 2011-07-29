@@ -2,6 +2,7 @@
 /* If you are missing that file, acquire a complete release at teeworlds.com.                */
 #include <engine/graphics.h>
 #include <engine/demo.h>
+#include <engine/shared/config.h>
 #include <game/generated/protocol.h>
 #include <game/generated/client_data.h>
 
@@ -15,6 +16,7 @@
 #include <game/client/components/effects.h>
 
 #include "items.h"
+#include "skins.h"
 
 void CItems::OnReset()
 {
@@ -292,8 +294,8 @@ void CItems::RenderLaser(const struct CNetObj_Laser *pCurrent)
 	//vec4 outer_color(0.65f,0.85f,1.0f,1.0f);
 
 	// do outline
-	vec4 OuterColor(0.075f, 0.075f, 0.25f, 1.0f);
-	Graphics()->SetColor(OuterColor.r, OuterColor.g, OuterColor.b, 1.0f);
+	vec3 Rgb = m_pClient->m_pSkins->GetColorV3(g_Config.m_ClLaserColorOuter);
+	Graphics()->SetColor(Rgb.r, Rgb.g, Rgb.b, 1.0f); // outline
 	Out = vec2(Dir.y, -Dir.x) * (7.0f*Ia);
 
 	IGraphics::CFreeformItem Freeform(
@@ -304,9 +306,9 @@ void CItems::RenderLaser(const struct CNetObj_Laser *pCurrent)
 	Graphics()->QuadsDrawFreeform(&Freeform, 1);
 
 	// do inner
-	vec4 InnerColor(0.5f, 0.5f, 1.0f, 1.0f);
 	Out = vec2(Dir.y, -Dir.x) * (5.0f*Ia);
-	Graphics()->SetColor(InnerColor.r, InnerColor.g, InnerColor.b, 1.0f); // center
+	Rgb = m_pClient->m_pSkins->GetColorV3(g_Config.m_ClLaserColorInner);
+	Graphics()->SetColor(Rgb.r, Rgb.g, Rgb.b, 1.0f); // center
 
 	Freeform = IGraphics::CFreeformItem(
 			From.x-Out.x, From.y-Out.y,
@@ -326,10 +328,10 @@ void CItems::RenderLaser(const struct CNetObj_Laser *pCurrent)
 		int Sprites[] = {SPRITE_PART_SPLAT01, SPRITE_PART_SPLAT02, SPRITE_PART_SPLAT03};
 		RenderTools()->SelectSprite(Sprites[Client()->GameTick()%3]);
 		Graphics()->QuadsSetRotation(Client()->GameTick());
-		Graphics()->SetColor(OuterColor.r, OuterColor.g, OuterColor.b, 1.0f);
+		Graphics()->SetColor(Rgb.r, Rgb.g, Rgb.b, 1.0f);
 		IGraphics::CQuadItem QuadItem(Pos.x, Pos.y, 24, 24);
 		Graphics()->QuadsDraw(&QuadItem, 1);
-		Graphics()->SetColor(InnerColor.r, InnerColor.g, InnerColor.b, 1.0f);
+		Graphics()->SetColor(Rgb.r, Rgb.g, Rgb.b, 1.0f);
 		QuadItem = IGraphics::CQuadItem(Pos.x, Pos.y, 20, 20);
 		Graphics()->QuadsDraw(&QuadItem, 1);
 		Graphics()->QuadsEnd();

@@ -227,6 +227,11 @@ void CMenus::RenderServerbrowserServerList(CUIRect View)
 	{
 		int ItemIndex = i;
 		const CServerInfo *pItem = ServerBrowser()->SortedGet(ItemIndex);
+		// don't add invalid info to the server browser list
+		if(pItem->m_NumClients < 0 || pItem->m_NumClients > MAX_CLIENTS || pItem->m_MaxClients < 0 || pItem->m_MaxClients > MAX_CLIENTS ||
+			pItem->m_NumPlayers < 0 || pItem->m_NumPlayers > pItem->m_NumClients || pItem->m_MaxPlayers < 0 || pItem->m_MaxPlayers > pItem->m_MaxClients)
+			continue;
+			
 		NumPlayers += pItem->m_NumPlayers;
 		CUIRect Row;
 		CUIRect SelectHitBox;
@@ -388,23 +393,15 @@ void CMenus::RenderServerbrowserServerList(CUIRect View)
 			{
 				float perc = 0.0f;
 
-				str_format(aTemp, sizeof(aTemp), "%i/%i", pItem->m_NumClients, pItem->m_MaxClients);
-				perc = pItem->m_NumPlayers * 100.0f / pItem->m_MaxClients;
-
+ 				str_format(aTemp, sizeof(aTemp), "%i/%i", pItem->m_NumClients, pItem->m_MaxClients);
+				perc = pItem->m_NumClients * 100.0f / pItem->m_MaxClients;  
+				
 				if(g_Config.m_ClHighlightPlayer == 1)
 				{
-					if (perc <= 15.0f)
-						TextRender()->TextColor(0.5f,1,0.5f,1);
-					else if (perc <= 25.0f)
-						TextRender()->TextColor(0.65f,1.0f,0.65f,1);
-					else if (perc <= 45.0f)
-						TextRender()->TextColor(0.75f,1.0f,0.65f,1);
-					else if (perc <= 65.0f)
-						TextRender()->TextColor(0.95f,0.95f,0.65f,1);
-					else if (perc <= 85.0f)
-						TextRender()->TextColor(0.95f,0.65f,0.65f,1);
-					else if (perc <= 100.0f)
-						TextRender()->TextColor(0.95f,0.25f,0.25f,1);
+					if (perc >= 0.0f && perc <= 50.0f)
+						TextRender()->TextColor(perc*2/50.0f,1.0f,0.2f,1);
+					else if(perc > 50.0f)
+						TextRender()->TextColor(1.0f,1.0f-perc/2/100.0f,0.2f,1);
 					else
 						TextRender()->TextColor(1,1,1,1);		
 				}

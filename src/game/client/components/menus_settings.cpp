@@ -1061,7 +1061,7 @@ void CMenus::RenderFontSelection(CUIRect MainView)
 
 void CMenus::RenderColFeat(CUIRect MainView)
 {
-	CUIRect Button, Antiping, Effects, Other, Highlights, Left;
+	CUIRect Button, Antiping, Effects, LaserCol, Other, Highlights, Left;
 	MainView.HSplitTop(250.0f, &MainView, &Other);
 	MainView.VSplitLeft(MainView.w/2-5.0f, &Left, &Effects);
 	
@@ -1106,6 +1106,7 @@ void CMenus::RenderColFeat(CUIRect MainView)
 		g_Config.m_ClHighlightPing ^= 1;
 	
 	Effects.VSplitLeft(10, &Left, &Effects);
+	Effects.HSplitTop(100.0f, &Effects, &LaserCol);
 	RenderTools()->DrawUIRect(&Effects, vec4(1,1,1,0.25f), CUI::CORNER_TR, 5.0f);
 	Effects.Margin(10.0f, &Effects);
 	
@@ -1122,7 +1123,149 @@ void CMenus::RenderColFeat(CUIRect MainView)
 	Effects.HSplitTop(20.0f, &Button, &Effects);	
 	if(DoButton_CheckBox(&g_Config.m_ClEffectsWeapontrail, Localize("WeaponTrail"), g_Config.m_ClEffectsWeapontrail, &Button))
 		g_Config.m_ClEffectsWeapontrail ^= 1;	
+	
+	LaserCol.HSplitTop(10.0f, 0, &LaserCol);	
+	RenderTools()->DrawUIRect(&LaserCol, vec4(1,1,1,0.25f), CUI::CORNER_TR, 5.0f);
+	LaserCol.Margin(10.0f, &LaserCol);	
+	TextRender()->Text(0, LaserCol.x, LaserCol.y-5, 18, Localize("Laser color"), -1);
+	LaserCol.HSplitTop(20.0f, 0, &LaserCol);
+	
+	// laser color
+	{
+		CUIRect Laser, Label, OutLine;
+		LaserCol.HSplitTop(95.0f, 0, &Laser);
+		Laser.VSplitLeft(40.0f, 0, &Laser);
+		LaserCol.VSplitLeft(10.0f, 0, &LaserCol);
+		LaserCol.VSplitLeft(LaserCol.w/2, &LaserCol, &OutLine);
+
+		int *pColor;
+		pColor = &g_Config.m_ClLaserColorInner;
+		int *pColor2;
+		pColor2 = &g_Config.m_ClLaserColorOuter;
+
+		const char *pParts[] = {
+			Localize("Inner color"),
+			Localize("Outline color")};
+		const char *paLabels[] = {
+			Localize("Hue"),
+			Localize("Sat."),
+			Localize("Lht.")};
+		static int s_aColorSlider[3] = {0};
+		static int s_aColorSlider2[3] = {0};
+
+		LaserCol.HSplitTop(15.0f, &Label, &LaserCol);
+		UI()->DoLabelScaled(&Label, pParts[0], 14.0f, -1);
+		LaserCol.VSplitLeft(10.0f, 0, &LaserCol);
+		LaserCol.HSplitTop(2.5f, 0, &LaserCol);
+
+		int PrevColor = *pColor;
+		int Color = 0;
+		for(int s = 0; s < 3; s++)
+		{
+			LaserCol.HSplitTop(20.0f, &Label, &LaserCol);
+			Label.VSplitLeft(40.0f, &Label, &Button);
+			Button.HMargin(2.0f, &Button);
+
+			float k = ((PrevColor>>((2-s)*8))&0xff)  / 255.0f;
+			k = DoScrollbarH(&s_aColorSlider[s], &Button, k);
+			Color <<= 8;
+			Color += clamp((int)(k*255), 0, 255);
+			UI()->DoLabelScaled(&Label, paLabels[s], 14.0f, -1);
+		}
 		
+		*pColor = Color;
+
+		OutLine.HSplitTop(15.0f, &Label, &OutLine);
+		UI()->DoLabelScaled(&Label, pParts[1], 14.0f, -1);
+		OutLine.VSplitLeft(10.0f, 0, &OutLine);
+		OutLine.HSplitTop(2.5f, 0, &OutLine);
+
+		int PrevColor2 = *pColor2;
+		int Color2 = 0;
+		for(int s = 0; s < 3; s++)
+		{
+			OutLine.HSplitTop(20.0f, &Label, &OutLine);
+			Label.VSplitLeft(40.0f, &Label, &Button);
+			Button.HMargin(2.0f, &Button);
+
+			float k = ((PrevColor2>>((2-s)*8))&0xff)  / 255.0f;
+			k = DoScrollbarH(&s_aColorSlider2[s], &Button, k);
+			Color2 <<= 8;
+			Color2 += clamp((int)(k*255), 0, 255);
+			UI()->DoLabelScaled(&Label, paLabels[s], 14.0f, -1);
+		}
+
+		*pColor2 = Color2;
+
+		// darw laser
+		vec2 From = vec2(Laser.x, Laser.y);
+		vec2 Pos = vec2(Laser.x+Laser.w-10.0f, Laser.y);
+
+		Graphics()->TextureSet(-1);
+		Graphics()->QuadsBegin();
+
+		// do outline
+		vec3 RgbOut = m_pClient->m_pSkins->GetColorV3(g_Config.m_ClLaserColorOuter);
+		Graphics()->SetColor(RgbOut.r, RgbOut.g, RgbOut.b, 1.0f); // outline
+		vec2 Out = vec2(0.0f, -1.0f) * (3.15f);
+
+		IGraphics::CFreeformItem Freeform(
+				From.x-Out.x, From.y-Out.y,
+				From.x+Out.x, From.y+Out.y,
+				Pos.x-Out.x, Pos.y-Out.y,
+				Pos.x+Out.x, Pos.y+Out.y);
+		Graphics()->QuadsDrawFreeform(&Freeform, 1);
+
+		// do inner	
+		Out = vec2(0.0f, -1.0f) * (2.25f);
+		vec3 RgbInner = m_pClient->m_pSkins->GetColorV3(g_Config.m_ClLaserColorInner);
+		Graphics()->SetColor(RgbInner.r, RgbInner.g, RgbInner.b, 1.0f); // center
+
+		Freeform = IGraphics::CFreeformItem(
+				From.x-Out.x, From.y-Out.y,
+				From.x+Out.x, From.y+Out.y,
+				Pos.x-Out.x, Pos.y-Out.y,
+				Pos.x+Out.x, Pos.y+Out.y);
+		Graphics()->QuadsDrawFreeform(&Freeform, 1);
+	
+		Graphics()->QuadsEnd();
+		
+		// render head
+		Graphics()->TextureSet(g_pData->m_aImages[IMAGE_PARTICLES].m_Id);
+		Graphics()->QuadsBegin();
+
+		RenderTools()->SelectSprite(SPRITE_PART_SPLAT01);
+		Graphics()->SetColor(RgbOut.r, RgbOut.g, RgbOut.b, 1.0f);
+		IGraphics::CQuadItem QuadItem(Pos.x, Pos.y, 24, 24);
+		Graphics()->QuadsDraw(&QuadItem, 1);
+		Graphics()->SetColor(RgbInner.r, RgbInner.g, RgbInner.b, 1.0f);
+		QuadItem = IGraphics::CQuadItem(Pos.x, Pos.y, 20, 20);
+		Graphics()->QuadsDraw(&QuadItem, 1);
+
+		Graphics()->QuadsEnd();
+
+		// draw laser weapon
+		Graphics()->TextureSet(g_pData->m_aImages[IMAGE_GAME].m_Id);
+		Graphics()->QuadsBegin();
+
+		RenderTools()->SelectSprite(SPRITE_WEAPON_RIFLE_BODY);
+		RenderTools()->DrawSprite(Laser.x, Laser.y, 60.0f);
+
+		Graphics()->QuadsEnd();
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+	
 	
 		// this is kinda slow, but whatever
 	for(int i = 0; i < g_KeyCount; i++)

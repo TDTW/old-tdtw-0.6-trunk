@@ -83,6 +83,9 @@ MACRO_CONFIG_INT(ClHighlightGametypes, cl_highlight_gametypes, 1, 0, 1, CFGFLAG_
 MACRO_CONFIG_INT(ClHighlightWeaponBar, cl_highlight_weaponbar, 1, 0, 1, CFGFLAG_SAVETDTW|CFGFLAG_CLIENT, "Highlight for weapons bar")
 MACRO_CONFIG_INT(ClBulletWeaponBar, cl_bullet_weaponbar, 1, 0, 1, CFGFLAG_SAVETDTW|CFGFLAG_CLIENT, "Show num of bullets for weapons bar")
 
+MACRO_CONFIG_INT(ClLaserColorInner, cl_laser_color_inner, 11665217, 0, 16777215, CFGFLAG_CLIENT|CFGFLAG_SAVE, "Laser color inner")
+MACRO_CONFIG_INT(ClLaserColorOuter, cl_laser_color_outer, 11665217, 0, 16777215, CFGFLAG_CLIENT|CFGFLAG_SAVE, "Laser color outer")
+
 MACRO_CONFIG_INT(HudModHideAll, hudmod_hide_all, 0, 0, 1, CFGFLAG_SAVETDTW|CFGFLAG_CLIENT, "Hide all hud")
 MACRO_CONFIG_INT(HudModHideChat, hudmod_hide_chat, 0, 0, 1, CFGFLAG_SAVETDTW|CFGFLAG_CLIENT, "Hide chat")
 MACRO_CONFIG_INT(HudModHideKillMessages, hudmod_hide_kill_messages, 0, 0, 1, CFGFLAG_SAVETDTW|CFGFLAG_CLIENT, "Hide kill messages")
@@ -101,6 +104,7 @@ MACRO_CONFIG_INT(ReconnectBanTimeout, reconnect_ban_timeout, 10, 1, 120, CFGFLAG
 MACRO_CONFIG_INT(ReconnectFullTimeout, reconnect_full_timeout, 3, 1, 120, CFGFLAG_CLIENT|CFGFLAG_SAVETDTW, "How many seconds to wait before reconnecting (when server is full)")	// _my_reconnect
 
 MACRO_CONFIG_INT(UiPage2, ui_page2, 6, 0, 11, CFGFLAG_SAVETDTW|CFGFLAG_CLIENT, "Interface page2")
+
 
 // server
 MACRO_CONFIG_INT(SvWarmup, sv_warmup, 0, 0, 0, CFGFLAG_SERVER, "Number of seconds to do warmup before round starts")
