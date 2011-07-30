@@ -539,20 +539,27 @@ void CMenus::RenderSettingsControls(CUIRect MainView)
 
 		TextRender()->Text(0, MovementSettings.x, MovementSettings.y, 14.0f*UI()->Scale(), Localize("Movement"), -1);
 
-		MovementSettings.HSplitTop(14.0f+5.0f+10.0f, 0, &MovementSettings);
+		MovementSettings.HSplitTop(14.0f+10.0f, 0, &MovementSettings);
 
 		{
 			CUIRect Button, Label;
 			MovementSettings.HSplitTop(20.0f, &Button, &MovementSettings);
 			Button.VSplitLeft(135.0f, &Label, &Button);
-			UI()->DoLabel(&Label, Localize("Mouse sens."), 14.0f*UI()->Scale(), -1);
+			UI()->DoLabel(&Label, Localize("Ingame mouse sens."), 14.0f*UI()->Scale(), -1);
 			Button.HMargin(2.0f, &Button);
-			//g_Config.m_InpMousesens = (int)(DoScrollbarH(&g_Config.m_InpMousesens, &Button, (g_Config.m_InpMousesens-5)/500.0f)*500.0f)+5;
 			g_Config.m_InpMousesens = DoCoolScrollbarH(&g_Config.m_InpMousesens, &Button, g_Config.m_InpMousesens ,5,500.0f);
-			//*key.key = ui_do_key_reader(key.key, &Button, *key.key);
-			MovementSettings.HSplitTop(10.0f, 0, &MovementSettings);
+			MovementSettings.HSplitTop(2.0f, 0, &MovementSettings);
 		}
-
+        
+		{
+			CUIRect Button, Label;
+			MovementSettings.HSplitTop(20.0f, &Button, &MovementSettings);
+			Button.VSplitLeft(135.0f, &Label, &Button);
+			UI()->DoLabel(&Label, Localize("Menu mouse sens."), 14.0f*UI()->Scale(), -1);
+			Button.HMargin(2.0f, &Button);
+			g_Config.m_UiMousesens = DoCoolScrollbarH(&g_Config.m_UiMousesens, &Button, g_Config.m_UiMousesens ,5,500.0f);
+			MovementSettings.HSplitTop(2.0f, 0, &MovementSettings);
+		}
 		UiDoGetButtons(0, 5, MovementSettings);
 
 	}

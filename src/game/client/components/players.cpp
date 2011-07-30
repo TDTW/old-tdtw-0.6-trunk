@@ -530,8 +530,8 @@ void CPlayers::RenderPlayer(
 		CTeeRenderInfo shadow = RenderInfo;
 		float color_body_mix = (shadow.m_ColorBody.r + shadow.m_ColorBody.g + shadow.m_ColorBody.b) / 2.5f;
 		float color_feet_mix = (shadow.m_ColorFeet.r + shadow.m_ColorFeet.g + shadow.m_ColorFeet.b) / 2.5f;
-		shadow.m_ColorBody.a = 0.25f;
-		shadow.m_ColorFeet.a = 0.25f;
+		shadow.m_ColorBody.a = 0.85f;
+		shadow.m_ColorFeet.a = 0.85f;
 		shadow.m_ColorBody.r = color_body_mix;
 		shadow.m_ColorBody.g = color_body_mix;
 		shadow.m_ColorBody.b = color_body_mix;
