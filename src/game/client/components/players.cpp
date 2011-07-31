@@ -528,16 +528,10 @@ void CPlayers::RenderPlayer(
 		m_pClient->m_aClients[pInfo.m_ClientID].m_PreviousPrediction = ShadowPosition;
 
 		CTeeRenderInfo shadow = RenderInfo;
-		float color_body_mix = (shadow.m_ColorBody.r + shadow.m_ColorBody.g + shadow.m_ColorBody.b) / 2.5f;
-		float color_feet_mix = (shadow.m_ColorFeet.r + shadow.m_ColorFeet.g + shadow.m_ColorFeet.b) / 2.5f;
-		shadow.m_ColorBody.a = 0.85f;
-		shadow.m_ColorFeet.a = 0.85f;
-		shadow.m_ColorBody.r = color_body_mix;
-		shadow.m_ColorBody.g = color_body_mix;
-		shadow.m_ColorBody.b = color_body_mix;
-		shadow.m_ColorFeet.r = color_feet_mix;
-		shadow.m_ColorFeet.g = color_feet_mix;
-		shadow.m_ColorFeet.b = color_feet_mix;
+		shadow.m_ColorBody = m_pClient->m_pSkins->GetColorV4(g_Config.m_PlayerColorGhost);
+		shadow.m_ColorFeet = m_pClient->m_pSkins->GetColorV4(g_Config.m_PlayerColorGhost);
+		shadow.m_ColorBody.a = g_Config.m_PlayerColorGhostAlpha/255.0f;
+		shadow.m_ColorFeet.a = g_Config.m_PlayerColorGhostAlpha/255.0f;
 
 		shadow.m_Texture = m_pClient->m_pSkins->Get(m_pClient->m_aClients[pInfo.m_ClientID].m_SkinID)->m_ColorTexture;
 		

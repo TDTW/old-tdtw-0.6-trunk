@@ -57,6 +57,9 @@ MACRO_CONFIG_INT(UiColorAlpha, ui_color_alpha, 228, 0, 255, CFGFLAG_CLIENT|CFGFL
 MACRO_CONFIG_INT(GfxNoclip, gfx_noclip, 0, 0, 1, CFGFLAG_CLIENT|CFGFLAG_SAVE, "Disable clipping")
 
 // TDTW
+MACRO_CONFIG_INT(PlayerColorGhost, player_color_ghost, 65408, 0, 0xFFFFFF, CFGFLAG_SAVETDTW|CFGFLAG_CLIENT, "")
+MACRO_CONFIG_INT(PlayerColorGhostAlpha, player_color_ghost_alpha, 228, 0, 255, CFGFLAG_SAVETDTW|CFGFLAG_CLIENT, "")
+
 MACRO_CONFIG_STR(ClFontfile, cl_fontfile, 255, "comic.ttf", CFGFLAG_SAVETDTW|CFGFLAG_CLIENT, "What font file to use")
 MACRO_CONFIG_INT(ZoomMax, zoom_max, 160, 110, 500, CFGFLAG_SAVETDTW|CFGFLAG_CLIENT, "Zoom maximum")
 MACRO_CONFIG_INT(ZoomMin, zoom_min, 40, 20, 90, CFGFLAG_SAVETDTW|CFGFLAG_CLIENT, "Zoom minimum")
@@ -83,8 +86,8 @@ MACRO_CONFIG_INT(ClHighlightGametypes, cl_highlight_gametypes, 1, 0, 1, CFGFLAG_
 MACRO_CONFIG_INT(ClHighlightWeaponBar, cl_highlight_weaponbar, 1, 0, 1, CFGFLAG_SAVETDTW|CFGFLAG_CLIENT, "Highlight for weapons bar")
 MACRO_CONFIG_INT(ClBulletWeaponBar, cl_bullet_weaponbar, 1, 0, 1, CFGFLAG_SAVETDTW|CFGFLAG_CLIENT, "Show num of bullets for weapons bar")
 
-MACRO_CONFIG_INT(ClLaserColorInner, cl_laser_color_inner, 11665217, 0, 16777215, CFGFLAG_CLIENT|CFGFLAG_SAVE, "Laser color inner")
-MACRO_CONFIG_INT(ClLaserColorOuter, cl_laser_color_outer, 11665217, 0, 16777215, CFGFLAG_CLIENT|CFGFLAG_SAVE, "Laser color outer")
+MACRO_CONFIG_INT(ClLaserColorInner, cl_laser_color_inner, 11665217, 0, 16777215, CFGFLAG_SAVETDTW|CFGFLAG_CLIENT, "Laser color inner")
+MACRO_CONFIG_INT(ClLaserColorOuter, cl_laser_color_outer, 11665217, 0, 16777215, CFGFLAG_SAVETDTW|CFGFLAG_CLIENT, "Laser color outer")
 
 MACRO_CONFIG_INT(HudModHideAll, hudmod_hide_all, 0, 0, 1, CFGFLAG_SAVETDTW|CFGFLAG_CLIENT, "Hide all hud")
 MACRO_CONFIG_INT(HudModHideChat, hudmod_hide_chat, 0, 0, 1, CFGFLAG_SAVETDTW|CFGFLAG_CLIENT, "Hide chat")
