@@ -122,7 +122,7 @@ Border
 == Создать края
 
 Browser
-== сервера
+== Сервера
 
 CCW
 == CCW
@@ -1162,196 +1162,197 @@ no limit
 ##### needs translation #####
 
 %d Bytes
-== 
+== %d Байтов
 
 %s wins!
-== 
+== %s победил!
 
 -Page %d-
-== 
+== -Страница %d-
 
 1
-== 
+== 1
 
 1:1
-== 
+== 1:1
 
 A+
-== 
+== A+
 
 A-
-== 
+== A-
 
 Adds border tiles
-== 
+== Добав. границы
 
 Align
-== 
+== Положение
 
 Aligns coordinates of the quad points
-== 
+== Выравнивает координаты четырех точек
 
 Clean-up game tiles
-== 
+== Очистить игровые тайлы
 
 Clear
-== 
+== Очистить
 
 Collision
-== 
+== Коллизии
 
 Create
-== 
+== Создать
 
 Create new folder
-== 
+== Создать новую папку
 
 Death
-== 
+== Смерть
 
 Demo details
-== 
+== Детали демо
 
 Error:
-== 
+== Ошибка:
 
 Exit the editor
-== 
+== Выйты из редактора
 
 Follower
-== 
+== Следователь
 
 Ingame mouse sens.
-== 
+== Чувств. мыши в игре
 
 Inner color
-== 
+== Внутренний цвет
 
 Laser color
-== 
+== Цвет лазера
 
 Length:
-== 
+== Длина
 
 Map:
-== 
+== Карта
 
 Menu mouse sens.
-== 
+== Чувств. мыши в меню
 
 Netversion:
-== 
+== Версия:
 
 New map
-== 
+== Новая карта
 
 New name:
-== 
+== Новое имя:
 
 Next
-== 
+== След.
 
 Outline color
-== 
+== Внешний цвет
 
 Previous
-== 
+== Пред.
 
 Removes game tiles that aren't based on a layer
-== 
+== Удалить игровые тайлы, которые не основаны на слой
 
 Rename demo
-== 
+== Изменить название демо
 
 Reset color
-== 
+== Сбросить цвета
 
 Select group. Double click to collapse.
-== 
+== Выберите группу. Дважды щелкните, чтобы свернуть
 
 Select group. Double click to expand.
-== 
+== Выберите группу. Дважды щелкните, чтобы развернуть.
 
 Select layer.
-== 
+== Выберите слой.
 
 Show friends only
-== 
+== Показать только друзей
 
 Size:
-== 
+== Размер:
 
 The file already exists.\nDo you want to overwrite the map?
-== 
+== Файл уже существует. \nХотите перезаписать карту?
 
 The map contains unsaved data, you might want to save it before you create a new map.\nContinue anyway?
-== 
+== Карта содержит несохраненные данные, вы можете сохранить их, прежде чем создавать новую карту. \nПродолжить в любом случае? 
+
 
 The map contains unsaved data, you might want to save it before you exit the editor.\nContinue anyway?
-== 
+== Карта содержит несохраненные данные, вы можете сохранить их, прежде чем выйдете из редактора.\nПродолжить в любом случае? 
 
 The map contains unsaved data, you might want to save it before you load a new map.\nContinue anyway?
-== 
+== Карта содержит несохраненные данные, вы можете сохранить их, прежде чем загрузите новую карту. \nПродолжить в любом случае? 
 
 There's an unsaved map in the editor, you might want to save it before you quit the game.
-== 
+== Есть несохраненная карта в редакторе, вы можете сохранить её, прежде чем выйти из игры. 
 
 Type:
-== 
+== Тип:
 
 Unable to create the folder
-== 
+== Не удается создать папку 
 
 Unable to rename the demo
-== 
+== Невозможно переименовать демо
 
 Unhookable
-== 
+== Нецепляемые
 
 Version:
-== 
+== Версия:
 
 X/X
-== 
+== X/X
 
 Y/Y
-== 
+== Y/Y
 
 [ctrl+i] Show tile informations
-== 
+== [ctrl+i] Показать информацию тайла
 
 editor
-== 
+== редактор
 
 failed to open file '%s'...
-== 
+== не удалось открыть файл '%s'...
 
 grabbing %f %f %f %f
-== 
+== захват %f %f %f %f
 
 invoked
-== 
+== вызванный
 
 mapres
-== 
+== mapres
 
 maps
-== 
+== карты
 
 min
-== 
+== мин.
 
 saving done
-== 
+== Сохранено
 
 saving quads layer
-== 
+== Сохранить слой квадов
 
 saving tiles layer
-== 
+== Сохранить слой тайлов
 
 saving to '%s'...
-== 
+== Сохранить в '%s'...
 
 ##### old translations #####
 
