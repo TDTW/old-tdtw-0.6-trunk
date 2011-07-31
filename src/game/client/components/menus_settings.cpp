@@ -1069,35 +1069,12 @@ void CMenus::RenderFontSelection(CUIRect MainView)
 void CMenus::RenderColFeat(CUIRect MainView)
 {
 	CUIRect Button, Antiping, Effects, LaserCol, Other, Highlights, Left;
-	MainView.HSplitTop(250.0f, &MainView, &Other);
+	MainView.HSplitBottom(120.0f, &MainView, &Other);
 	MainView.VSplitLeft(MainView.w/2-5.0f, &Left, &Effects);
 	
-	Left.HSplitTop(100.0f, &Antiping, &Highlights);
-	
-	RenderTools()->DrawUIRect(&Antiping, vec4(1,1,1,0.25f), CUI::CORNER_TL, 5.0f);
-	Antiping.Margin(10.0f, &Antiping);
+	Left.HSplitTop(100.0f, &Highlights, &LaserCol);
 		
-	TextRender()->Text(0, Antiping.x, Antiping.y-5, 18, Localize("Antiping"), -1);
-	Antiping.HSplitTop(20.0f, 0, &Antiping);
-	Antiping.HSplitTop(20.0f, &Button, &Antiping);
-	
-	if(DoButton_CheckBox(&g_Config.m_AntiPing, Localize("Antiping"), g_Config.m_AntiPing, &Button))
-		g_Config.m_AntiPing = g_Config.m_AntiPing?0:1;
-	
-	if(g_Config.m_AntiPing == 1 || g_Config.m_AntiPing == 2)
-	{
-		Antiping.HSplitTop(20.0f, &Button, &Antiping);
-		Button.VSplitLeft(15.0f, 0, &Button);
-		if(DoButton_CheckBox(&g_Config.m_AntiPingGrenade, Localize("Antiping only grenade"), g_Config.m_AntiPingGrenade, &Button))
-			g_Config.m_AntiPingGrenade ^=1;
-		if(g_Config.m_AntiPingGrenade == 1)
-			g_Config.m_AntiPing = 2;
-		else
-			g_Config.m_AntiPing = 1;
-	}
-	
-	Highlights.HSplitTop(10.0f, 0, &Highlights);
-	RenderTools()->DrawUIRect(&Highlights, vec4(1,1,1,0.25f), 0, 10.0f);
+	RenderTools()->DrawUIRect(&Highlights, vec4(1,1,1,0.25f), CUI::CORNER_TL, 5.0f);
 	Highlights.Margin(10.0f, &Highlights);
 	
 	TextRender()->Text(0, Highlights.x, Highlights.y-5, 18, Localize("Highlights in browser"), -1);
@@ -1111,28 +1088,9 @@ void CMenus::RenderColFeat(CUIRect MainView)
 	Highlights.HSplitTop(20.0f, &Button, &Highlights);
 	if(DoButton_CheckBox(&g_Config.m_ClHighlightPing, Localize("Highlight for ping"), g_Config.m_ClHighlightPing, &Button))
 		g_Config.m_ClHighlightPing ^= 1;
-	
-	Effects.VSplitLeft(10, &Left, &Effects);
-	Effects.HSplitTop(100.0f, &Effects, &LaserCol);
-	RenderTools()->DrawUIRect(&Effects, vec4(1,1,1,0.25f), CUI::CORNER_TR, 5.0f);
-	Effects.Margin(10.0f, &Effects);
-	
-	Other.HSplitTop(10.0f, &MainView, &Other);
-	RenderTools()->DrawUIRect(&Other, vec4(1,1,1,0.25f), CUI::CORNER_B, 5.0f);
-	Other.Margin(10.0f, &Other);
-			
-	TextRender()->Text(0, Effects.x, Effects.y-5, 18, Localize("Effects"), -1);
-	Effects.HSplitTop(20.0f, 0, &Effects);
-	Effects.HSplitTop(20.0f, &Button, &Effects);
-	if(DoButton_CheckBox(&g_Config.m_ClEffectsFlagtrail, Localize("FlagTrail"), g_Config.m_ClEffectsFlagtrail, &Button))
-		g_Config.m_ClEffectsFlagtrail ^= 1;	
 		
-	Effects.HSplitTop(20.0f, &Button, &Effects);	
-	if(DoButton_CheckBox(&g_Config.m_ClEffectsWeapontrail, Localize("WeaponTrail"), g_Config.m_ClEffectsWeapontrail, &Button))
-		g_Config.m_ClEffectsWeapontrail ^= 1;	
-	
 	LaserCol.HSplitTop(10.0f, 0, &LaserCol);	
-	RenderTools()->DrawUIRect(&LaserCol, vec4(1,1,1,0.25f), CUI::CORNER_TR, 5.0f);
+	RenderTools()->DrawUIRect(&LaserCol, vec4(1,1,1,0.25f), 0, 5.0f);
 	LaserCol.Margin(10.0f, &LaserCol);	
 	TextRender()->Text(0, LaserCol.x, LaserCol.y-5, 18, Localize("Laser color"), -1);
 	LaserCol.HSplitTop(20.0f, 0, &LaserCol);
@@ -1140,10 +1098,8 @@ void CMenus::RenderColFeat(CUIRect MainView)
 	// laser color
 	{
 		CUIRect Laser, Label, OutLine;
-		LaserCol.HSplitTop(95.0f, 0, &Laser);
-		Laser.VSplitLeft(40.0f, 0, &Laser);
 		LaserCol.VSplitLeft(10.0f, 0, &LaserCol);
-		LaserCol.VSplitLeft(LaserCol.w/2, &LaserCol, &OutLine);
+		LaserCol.HSplitTop(80.0f, &LaserCol, &OutLine);
 
 		int *pColor;
 		pColor = &g_Config.m_ClLaserColorInner;
@@ -1204,6 +1160,11 @@ void CMenus::RenderColFeat(CUIRect MainView)
 
 		*pColor2 = Color2;
 
+		OutLine.HSplitTop(15.0f, 0, &Laser);
+		Laser.HSplitTop(18.0f, 0, &Button);
+		Button.VSplitRight(20.0f, &Button, 0);
+		Laser.VSplitLeft(5.0f, 0, &Laser);
+		
 		// darw laser
 		vec2 From = vec2(Laser.x, Laser.y);
 		vec2 Pos = vec2(Laser.x+Laser.w-10.0f, Laser.y);
@@ -1259,22 +1220,59 @@ void CMenus::RenderColFeat(CUIRect MainView)
 		RenderTools()->DrawSprite(Laser.x, Laser.y, 60.0f);
 
 		Graphics()->QuadsEnd();
+				
+		//Button.Margin(10, &Button);
+		static int s_ResetButton = 0;
+		if(DoButton_Menu(&s_ResetButton, Localize("Reset color"), 0, &Button))
+		{
+			g_Config.m_ClLaserColorInner = 11665217;
+			g_Config.m_ClLaserColorOuter = 11665217;
+		}
 	}
-
-
-
-
-
-
-
-
-
-
-
-
 	
+	Effects.VSplitLeft(10, &Left, &Effects);
+	Effects.HSplitTop(80.0f, &Effects, &Antiping);
+	RenderTools()->DrawUIRect(&Effects, vec4(1,1,1,0.25f), CUI::CORNER_TR, 5.0f);
+	Effects.Margin(10.0f, &Effects);
 	
-		// this is kinda slow, but whatever
+	Other.HSplitTop(10.0f, 0, &Other);
+	RenderTools()->DrawUIRect(&Other, vec4(1,1,1,0.25f), CUI::CORNER_B, 5.0f);
+	Other.Margin(10.0f, &Other);
+			
+	TextRender()->Text(0, Effects.x, Effects.y-5, 18, Localize("Effects"), -1);
+	Effects.HSplitTop(20.0f, 0, &Effects);
+	Effects.HSplitTop(20.0f, &Button, &Effects);
+	if(DoButton_CheckBox(&g_Config.m_ClEffectsFlagtrail, Localize("FlagTrail"), g_Config.m_ClEffectsFlagtrail, &Button))
+		g_Config.m_ClEffectsFlagtrail ^= 1;	
+		
+	Effects.HSplitTop(20.0f, &Button, &Effects);	
+	if(DoButton_CheckBox(&g_Config.m_ClEffectsWeapontrail, Localize("WeaponTrail"), g_Config.m_ClEffectsWeapontrail, &Button))
+		g_Config.m_ClEffectsWeapontrail ^= 1;	
+	
+	Antiping.HSplitTop(10.0f, 0, &Antiping);
+	RenderTools()->DrawUIRect(&Antiping, vec4(1,1,1,0.25f), 0, 5.0f);
+	Antiping.Margin(10.0f, &Antiping);
+		
+	TextRender()->Text(0, Antiping.x, Antiping.y-5, 18, Localize("Antiping"), -1);
+	Antiping.HSplitTop(20.0f, 0, &Antiping);
+	Antiping.HSplitTop(20.0f, &Button, &Antiping);
+	
+	if(DoButton_CheckBox(&g_Config.m_AntiPing, Localize("Antiping"), g_Config.m_AntiPing, &Button))
+		g_Config.m_AntiPing = g_Config.m_AntiPing?0:1;
+	
+	if(g_Config.m_AntiPing == 1 || g_Config.m_AntiPing == 2)
+	{
+		Antiping.HSplitTop(20.0f, &Button, &Antiping);
+		Button.VSplitLeft(15.0f, 0, &Button);
+		if(DoButton_CheckBox(&g_Config.m_AntiPingGrenade, Localize("Antiping only grenade"), g_Config.m_AntiPingGrenade, &Button))
+			g_Config.m_AntiPingGrenade ^=1;
+		if(g_Config.m_AntiPingGrenade == 1)
+			g_Config.m_AntiPing = 2;
+		else
+			g_Config.m_AntiPing = 1;
+	}	
+	
+	// this is kinda slow, but whatever
 	for(int i = 0; i < g_KeyCount; i++)
 		gs_aKeys[i].m_KeyId = 0;
 

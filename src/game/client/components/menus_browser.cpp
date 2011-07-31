@@ -391,13 +391,11 @@ void CMenus::RenderServerbrowserServerList(CUIRect View)
 			}
 			else if(ID == COL_PLAYERS)
 			{
-				float perc = 0.0f;
-
  				str_format(aTemp, sizeof(aTemp), "%i/%i", pItem->m_NumClients, pItem->m_MaxClients);
-				perc = pItem->m_NumClients * 100.0f / pItem->m_MaxClients;  
 				
 				if(g_Config.m_ClHighlightPlayer == 1)
 				{
+					float perc = pItem->m_NumClients * 100.0f / pItem->m_MaxClients;  
 					if (perc >= 0.0f && perc <= 50.0f)
 						TextRender()->TextColor(perc*2/50.0f,1.0f,0.2f,1);
 					else if(perc > 50.0f)
@@ -415,17 +413,18 @@ void CMenus::RenderServerbrowserServerList(CUIRect View)
 			{			
 				if(g_Config.m_ClHighlightPing == 1)
 				{
-					float ping = pItem->m_Latency;
-					if (ping <= 45)
-						TextRender()->TextColor(0.5f,1,0.5f,1);
-					else if (ping <= 95)
-						TextRender()->TextColor(0.85f,1.0f,0.65f,1);
-					else if (ping <= 110)
-						TextRender()->TextColor(0.95f,0.85f,0.65f,1);
-					else if (ping <= 135)
-						TextRender()->TextColor(0.95f,0.45f,0.45f,1);
-					else
-						TextRender()->TextColor(0.95f,0.25f,0.25f,1);
+					float ping = pItem->m_Latency;						
+				
+					if(g_Config.m_ClHighlightPlayer == 1)
+					{
+						float perc = (ping - 20)*100/180;
+						if (perc >= 0.0f && perc <= 50.0f)
+							TextRender()->TextColor(perc*2/50.0f,1.0f,0.2f,1);
+						else if(perc > 50.0f)
+							TextRender()->TextColor(1.0f,1.0f-perc/2/100.0f,0.2f,1);
+						else
+							TextRender()->TextColor(1,1,1,1);		
+					}
 				}
 				str_format(aTemp, sizeof(aTemp), "%i", pItem->m_Latency);
 				UI()->DoLabelScaled(&Button, aTemp, 12.0f, 1);
