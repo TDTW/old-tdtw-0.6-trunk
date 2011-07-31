@@ -103,6 +103,9 @@ Anim
 Antiping
 == Антипинг
 
+Antiping ghost
+== Тень антипинга
+
 Antiping only grenade
 == Антипинг только гранат
 
@@ -465,6 +468,9 @@ Game types:
 
 General
 == Основные
+
+Ghost color
+== Цвет призрака
 
 Graphics
 == Графика
