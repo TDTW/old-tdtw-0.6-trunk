@@ -1,6 +1,9 @@
 
 ##### translated strings #####
 
+%d Bytes
+== %d Байтов
+
 %d of %d servers, %d players
 == %d/%d серверов, %d игроков
 
@@ -25,8 +28,26 @@
 %s Right click for context menu.
 == %s Нажми правую кнопку мыши для контекстного меню.
 
+%s wins!
+== %s победил!
+
 %s\n\n Reconnect in %d sec
 == %s\n\n Переподключение через %d сек
+
+-Page %d-
+== -Страница %d-
+
+1
+== 1
+
+1:1
+== 1:1
+
+A+
+== A+
+
+A-
+== A-
 
 Abort
 == Отмена
@@ -54,6 +75,15 @@ Address
 
 Adds a new group
 == Добавить новую группу
+
+Adds border tiles
+== Добав. границы
+
+Align
+== Положение
+
+Aligns coordinates of the quad points
+== Выравнивает координаты четырех точек
 
 All
 == Все
@@ -154,6 +184,12 @@ Chat speed
 Clan
 == Клан
 
+Clean-up game tiles
+== Очистить игровые тайлы
+
+Clear
+== Очистить
+
 Client
 == Клиент
 
@@ -171,6 +207,9 @@ Clip Y
 
 Close
 == Закрыть
+
+Collision
+== Коллизии
 
 Color
 == Цвет
@@ -211,6 +250,12 @@ Country
 Crc:
 == Crc-сумма:
 
+Create
+== Создать
+
+Create new folder
+== Создать новую папку
+
 Created:
 == Создан:
 
@@ -238,6 +283,9 @@ Current version: %s
 Custom colors
 == Свои цвета
 
+Death
+== Смерть
+
 Decrease animation speed
 == Уменьшить скорость анимации
 
@@ -261,6 +309,9 @@ Deletes the current quad
 
 Deletes the layer
 == Удалить слой
+
+Demo details
+== Детали демо
 
 Demofile: %s
 ==  MapHack
@@ -325,8 +376,14 @@ Error
 Error loading demo
 == ошибка при загрузке демо
 
+Error:
+== Ошибка:
+
 Exit
 == Выход
+
+Exit the editor
+== Выйты из редактора
 
 Exits from the editor
 == Выход из редактора
@@ -369,6 +426,9 @@ FlagTrail
 
 Folder
 == Папка
+
+Follower
+== Следователь
 
 Fonts
 == Шрифты
@@ -511,6 +571,12 @@ Increase animation speed
 Info
 == Инфо
 
+Ingame mouse sens.
+== Чувств. мыши в игре
+
+Inner color
+== Внутренний цвет
+
 Internet
 == Интернет
 
@@ -538,6 +604,9 @@ LAN
 Language
 == Язык
 
+Laser color
+== Цвет лазера
+
 Layers
 == Слои
 
@@ -552,6 +621,9 @@ Left mouse button to move. Hold shift to move the texture.
 
 Left mouse to drag. Hold ctrl to be more precise. Hold shift to alter time point aswell. Right click to delete.
 == Левая клавиша для перемещения. Зажмите Ctrl для большей точности. Зажмите Shift для изменения момента времени. Правый клик для удаления.
+
+Length:
+== Длина
 
 Lht.
 == Яркость
@@ -577,6 +649,9 @@ Make external
 Map
 == Карта
 
+Map:
+== Карта
+
 Max Screenshots
 == Макс. Скриншотов
 
@@ -588,6 +663,9 @@ Maximum Zoom
 
 Maximum ping:
 == Макс. пинг:
+
+Menu mouse sens.
+== Чувств. мыши в меню
 
 Minimum Zoom
 == Мин. Зум
@@ -619,17 +697,29 @@ Name plates size
 Name:
 == Имя:
 
+Netversion:
+== Версия:
+
 New
 == Новый
 
 New folder
 == Новая папка
 
+New map
+== Новая карта
+
+New name:
+== Новое имя:
+
 New weapon bar
 == Новая панель оружия
 
 News
 == Новости
+
+Next
+== След.
 
 Next Envelope
 == Следуюая кривая
@@ -678,6 +768,9 @@ Order
 
 Other
 == Другое
+
+Outline color
+== Внешний цвет
 
 Para X
 == Пара. X
@@ -742,6 +835,9 @@ Press right mouse button to create a new point
 Prev. weapon
 == Пред. оружие
 
+Previous
+== Пред.
+
 Previous Envelope
 == Предыдущая кривая
 
@@ -796,6 +892,9 @@ Remove
 Remove friend
 == Удалить друга
 
+Removes game tiles that aren't based on a layer
+== Удалить игровые тайлы, которые не основаны на слой
+
 Removes the image from the map
 == Удалить изображение из карты
 
@@ -805,6 +904,9 @@ Removes the image from the map file.
 Rename
 == Переименовать
 
+Rename demo
+== Изменить название демо
+
 Replace
 == Заменить
 
@@ -813,6 +915,9 @@ Replace Image
 
 Replaces the image with a new one
 == Заменить это изображение другим
+
+Reset color
+== Сбросить цвета
 
 Reset filter
 == Сбросить фильтры
@@ -871,8 +976,17 @@ Scoreboard
 Screenshot
 == Скриншот
 
+Select group. Double click to collapse.
+== Выберите группу. Дважды щелкните, чтобы свернуть
+
+Select group. Double click to expand.
+== Выберите группу. Дважды щелкните, чтобы развернуть.
+
 Select image
 == Выберите изображение
+
+Select layer.
+== Выберите слой.
 
 Server address:
 == Адрес сервера:
@@ -910,6 +1024,9 @@ Show fps
 Show friends
 == Показать друзей
 
+Show friends only
+== Показать только друзей
+
 Show ingame HUD
 == Показать внутриигровой интерфейс
 
@@ -927,6 +1044,9 @@ Show time msg
 
 Show weapon bar
 == Показывать панель оружия
+
+Size:
+== Размер:
 
 Skins
 == Скины
@@ -1006,8 +1126,23 @@ Texture Compression
 The audio device couldn't be initialised.
 == Аудио устройство не может быть инициализированно
 
+The file already exists.\nDo you want to overwrite the map?
+== Файл уже существует. \nХотите перезаписать карту?
+
+The map contains unsaved data, you might want to save it before you create a new map.\nContinue anyway?
+== Карта содержит несохраненные данные, вы можете сохранить их, прежде чем создавать новую карту. \nПродолжить в любом случае?
+
+The map contains unsaved data, you might want to save it before you exit the editor.\nContinue anyway?
+== Карта содержит несохраненные данные, вы можете сохранить их, прежде чем выйдете из редактора.\nПродолжить в любом случае?
+
+The map contains unsaved data, you might want to save it before you load a new map.\nContinue anyway?
+== Карта содержит несохраненные данные, вы можете сохранить их, прежде чем загрузите новую карту. \nПродолжить в любом случае?
+
 The server is running a non-standard tuning on a pure game type.
 == Этот сервер работает на нестандартных настройках стандартного типа игры
+
+There's an unsaved map in the editor, you might want to save it before you quit the game.
+== Есть несохраненная карта в редакторе, вы можете сохранить её, прежде чем выйти из игры.
 
 Tiles
 == Тайлы
@@ -1030,11 +1165,23 @@ Try again
 Type
 == Тип
 
+Type:
+== Тип:
+
 UI Color
 == Цвет интерфейса
 
+Unable to create the folder
+== Не удается создать папку
+
 Unable to delete the demo
 == Невозможно удалить демо
+
+Unable to rename the demo
+== Невозможно переименовать демо
+
+Unhookable
+== Нецепляемые
 
 Up
 == Вверх
@@ -1069,6 +1216,9 @@ V-Sync
 Version
 == Версия
 
+Version:
+== Версия:
+
 Vote command:
 == Команда голосования:
 
@@ -1102,8 +1252,14 @@ Width
 X-axis of the envelope
 == Горизонталь кривой
 
+X/X
+== X/X
+
 Y-axis of the envelope
 == Вертикаль кривой
+
+Y/Y
+== Y/Y
 
 Yes
 == Да
@@ -1150,176 +1306,14 @@ Zoom
 [ctrl+h] Toggle High Detail
 == [ctrl+h] Переключить высокую детализацию
 
+[ctrl+i] Show tile informations
+== [ctrl+i] Показать информацию тайла
+
 [ctrl+m] Toggle animation
 == [ctrl+m] Переключить анимацию
 
 [ctrl+p] Toggles proof borders. These borders represent what a player maximum can see.
 == [ctrl+p] Показать или скрыть границы, в пределах которых игрок может видеть карту
-
-no limit
-== нет лимита
-
-##### needs translation #####
-
-%d Bytes
-== %d Байтов
-
-%s wins!
-== %s победил!
-
--Page %d-
-== -Страница %d-
-
-1
-== 1
-
-1:1
-== 1:1
-
-A+
-== A+
-
-A-
-== A-
-
-Adds border tiles
-== Добав. границы
-
-Align
-== Положение
-
-Aligns coordinates of the quad points
-== Выравнивает координаты четырех точек
-
-Clean-up game tiles
-== Очистить игровые тайлы
-
-Clear
-== Очистить
-
-Collision
-== Коллизии
-
-Create
-== Создать
-
-Create new folder
-== Создать новую папку
-
-Death
-== Смерть
-
-Demo details
-== Детали демо
-
-Error:
-== Ошибка:
-
-Exit the editor
-== Выйты из редактора
-
-Follower
-== Следователь
-
-Ingame mouse sens.
-== Чувств. мыши в игре
-
-Inner color
-== Внутренний цвет
-
-Laser color
-== Цвет лазера
-
-Length:
-== Длина
-
-Map:
-== Карта
-
-Menu mouse sens.
-== Чувств. мыши в меню
-
-Netversion:
-== Версия:
-
-New map
-== Новая карта
-
-New name:
-== Новое имя:
-
-Next
-== След.
-
-Outline color
-== Внешний цвет
-
-Previous
-== Пред.
-
-Removes game tiles that aren't based on a layer
-== Удалить игровые тайлы, которые не основаны на слой
-
-Rename demo
-== Изменить название демо
-
-Reset color
-== Сбросить цвета
-
-Select group. Double click to collapse.
-== Выберите группу. Дважды щелкните, чтобы свернуть
-
-Select group. Double click to expand.
-== Выберите группу. Дважды щелкните, чтобы развернуть.
-
-Select layer.
-== Выберите слой.
-
-Show friends only
-== Показать только друзей
-
-Size:
-== Размер:
-
-The file already exists.\nDo you want to overwrite the map?
-== Файл уже существует. \nХотите перезаписать карту?
-
-The map contains unsaved data, you might want to save it before you create a new map.\nContinue anyway?
-== Карта содержит несохраненные данные, вы можете сохранить их, прежде чем создавать новую карту. \nПродолжить в любом случае? 
-
-
-The map contains unsaved data, you might want to save it before you exit the editor.\nContinue anyway?
-== Карта содержит несохраненные данные, вы можете сохранить их, прежде чем выйдете из редактора.\nПродолжить в любом случае? 
-
-The map contains unsaved data, you might want to save it before you load a new map.\nContinue anyway?
-== Карта содержит несохраненные данные, вы можете сохранить их, прежде чем загрузите новую карту. \nПродолжить в любом случае? 
-
-There's an unsaved map in the editor, you might want to save it before you quit the game.
-== Есть несохраненная карта в редакторе, вы можете сохранить её, прежде чем выйти из игры. 
-
-Type:
-== Тип:
-
-Unable to create the folder
-== Не удается создать папку 
-
-Unable to rename the demo
-== Невозможно переименовать демо
-
-Unhookable
-== Нецепляемые
-
-Version:
-== Версия:
-
-X/X
-== X/X
-
-Y/Y
-== Y/Y
-
-[ctrl+i] Show tile informations
-== [ctrl+i] Показать информацию тайла
 
 editor
 == редактор
@@ -1342,6 +1336,9 @@ maps
 min
 == мин.
 
+no limit
+== нет лимита
+
 saving done
 == Сохранено
 
@@ -1353,6 +1350,8 @@ saving tiles layer
 
 saving to '%s'...
 == Сохранить в '%s'...
+
+##### needs translation #####
 
 ##### old translations #####
 
@@ -1368,9 +1367,6 @@ Do you really want to vote for kick %s?
 Red
 == Красный
 
-Add friend:
-== Добав. друга:
-
 Green
 == Зеленый
 
@@ -1385,6 +1381,9 @@ Adds a new quad
 
 Players list   %i/%i
 == Список игроков   %i/%i
+
+Zoom Out
+== Отдалить
 
 No friends connected
 == Друзья не найдены
@@ -1437,14 +1436,8 @@ Use MapHack
 Players list
 == Список игроков
 
-Zoom Out
-== Отдалить
-
 Select layer. Right click for properties.
 == Выберите слой. Правый клик открывает свойства.
-
-Clan:
-== Клан:
 
 Decrease
 == Уменьшить
@@ -1457,6 +1450,9 @@ Friends -
 
 friends found
 == друзей найд.
+
+ADD
+== Добавить
 
 Red team (%d)
 == Красные
@@ -1473,20 +1469,26 @@ Searching for friends...
 YES
 == Да
 
+Add friend:
+== Добав. друга:
+
 Mini Scoreboard
 == Мини табло
+
+Clan:
+== Клан:
 
 Stop recording
 == Остановить запись
 
-Start recording
-== Начать запись
+MapHack
+== МапХак
 
 Add Quad
 == Добавить квад
 
-MapHack
-== МапХак
+Start recording
+== Начать запись
 
 Friends list
 == Список друзей
@@ -1497,20 +1499,20 @@ Friends details
 Spectators (%d)
 == Наблюдатели
 
+Search friends
+== Найдены друзья
+
 Players (%d)
 == Игроки (%d)
 
 Rotation of the brush in degrees. Use left mouse button to drag and change the value. Hold shift to be more precise.
 == Поворот кисти в градусах. Левая клавиша для перемещения и изменения значения. Зажмите Shift для большей точности.
 
-Search friends
-== Найдены друзья
+CLEAR
+== Отчистить
 
 add
 == доб.
-
-CLEAR
-== Отчистить
 
 There is none to add
 == Нет никого для добавления
@@ -1530,11 +1532,11 @@ Increase
 NO
 == Нет
 
+Dyn camera toggle
+== Вкл динам. камеру
+
 Do you really want to add %s to your friends?
 == Вы серьезно хотите добавить %s в друзья?
-
-ADD
-== Добавить
 
 Select group. Right click for properties.
 == Выберите группу. Правый клик открывает свойства.
@@ -1544,9 +1546,6 @@ Kick
 
 Constructs collision from this layer
 == Создать коллизии из этого слоя
-
-Dyn camera toggle
-== Вкл динам. камеру
 
 Blue team (%d)
 == Синие

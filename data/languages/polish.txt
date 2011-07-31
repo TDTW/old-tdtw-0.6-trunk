@@ -1355,12 +1355,12 @@ saving to '%s'...
 
 ##### old translations #####
 
-utracić swojej pracy!
-== 
-
 Time limit: %d min
 == Limit czasu: %d min
 
 Mouse sens.
 == Czułość myszy
+
+utracić swojej pracy!
+== 
 
