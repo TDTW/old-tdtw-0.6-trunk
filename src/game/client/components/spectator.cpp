@@ -211,7 +211,7 @@ void CSpectator::OnRender()
 	Width += 10*3.0f*Graphics()->ScreenAspect()+10;
 	Height += 20*3.0f*Graphics()->ScreenAspect()+10;
 	
-	Screen.HSplitTop(Screen.h/2, &TopMenu, &BottomMenu);
+	Screen.HSplitTop(Screen.h/2-20, &TopMenu, &BottomMenu);
 	TopMenu.HSplitBottom(5, &TopMenu, 0);
 	//TopMenu.VMargin(15*3.0f*Graphics()->ScreenAspect(), &TopMenu);
 	
@@ -222,16 +222,8 @@ void CSpectator::OnRender()
 	{
 		CUIRect Left, Middle, Right;
 		CUIRect Button, Button2;
-		
-		int Temp = TopMenu.w/8;
-		TopMenu.VSplitLeft(Temp, &Button, &TopMenu);
-		TopMenu.VSplitRight(Temp, &TopMenu, &Button2);	
-		Button.VSplitRight(5, &Button, 0);
-		Button.HSplitBottom(30, 0, &Button);
-		Button2.VSplitLeft(5, 0, &Button2);
-		Button2.HSplitBottom(30, 0, &Button2);
-		
-		Temp = TopMenu.w/3;
+				
+		int Temp = TopMenu.w/3;
 		TopMenu.VSplitLeft(Temp, &Left, &TopMenu);
 		TopMenu.VSplitRight(Temp, &Middle, &Right);
 		Middle.HMargin(5, &Middle);
@@ -251,8 +243,6 @@ void CSpectator::OnRender()
 		else if(Button2vec > 0.0f) 
 			Button2vec -= 0.01f;
 			
-		RenderTools()->DrawUIRect(&Button2, vec4(0.0f, 0.0f, 0.0f, Button2vec), CUI::CORNER_ALL, 5.0f);
-		RenderTools()->DrawUIRect(&Button, ms_ColorTabbarActive, CUI::CORNER_ALL, 5.0f);
 		RenderTools()->DrawUIRect(&Left, ms_ColorTabbarActive, CUI::CORNER_ALL, 10.0f);
 		RenderTools()->DrawUIRect(&Middle, ms_ColorTabbarActive, CUI::CORNER_ALL, 10.0f);
 		RenderTools()->DrawUIRect(&Right, ms_ColorTabbarActive, CUI::CORNER_ALL, 10.0f);
@@ -269,27 +259,7 @@ void CSpectator::OnRender()
 		Middle.HSplitBottom(24, &Middle, &TempCui);
 		RenderTools()->DrawUIRect(&TempCui, ms_ColorTabbarActive, CUI::CORNER_B, 10.0f);
 		UI()->DoLabel(&TempCui, Localize("Follower"),20.0f*UI()->Scale(),  0);
-
-				
-		if(InView(&Button, Width, Height))		
-			RenderTools()->DrawUIRect(&Button, ms_ColorTabbarActive2, CUI::CORNER_ALL, 5.0f);
-		if(Input()->KeyPressed(KEY_MOUSE_1) && InView(&Button, Width, Height))
-			RenderTools()->DrawUIRect(&Button, ms_ColorTabbarActive, CUI::CORNER_ALL, 5.0f);
-		if(Input()->KeyDown(KEY_MOUSE_1) && InView(&Button, Width, Height))
-		{
-			m_SelectedSpectatorID = SPEC_FREEVIEW;
-			Spectate(m_SelectedSpectatorID);
-			m_Selected = -1;
-		}
-		if(m_Selected == -1)
-			TextRender()->TextOutlineColor(0.0f, 0.0f, 6.0f, 0.5f);
-		TextRender()->Text(0, Button.x+7, Button.y+2, 16.0f*UI()->Scale(), Localize("Free-View"), Button.w-4);		
-		TextRender()->TextOutlineColor(0.0f, 0.0f, 0.0f, 0.3f);
-		
-		TextRender()->TextColor(1.0f, 1.0f, 1.0f, Button2vec*1.6f);
-		TextRender()->Text(0, Button2.x+5, Button2.y, 22.0f*UI()->Scale(), Localize("Loading"), Button2.w-4);
-		TextRender()->TextColor(1.0f, 1.0f, 1.0f, 1.0f);
-		
+						
 		int NewSpectatorID_Next;
 		bool GotNewSpectatorID_Next = false;
 
@@ -415,7 +385,7 @@ void CSpectator::OnRender()
 		}
 	}	
 	
-	float TempWidth = BottomMenu.h/2.3f, TempHeight = BottomMenu.h/2.3f;	
+	float TempWidth = BottomMenu.h/2.5f, TempHeight = BottomMenu.h/2.5f;	
 	int Count = 0;	
 	for(int i = 0; i < 16; i++)
 	{
@@ -424,12 +394,12 @@ void CSpectator::OnRender()
 		Count++;				
 	}
 	
-	CUIRect ButtonPlayer, BottomMenu1, BottomMenu2;
+	CUIRect ButtonPlayer, BottomMenu1, BottomMenu2, Button, Button2;
 		
 	BottomMenu.VSplitLeft(2.0f, 0, &BottomMenu);
 	BottomMenu.HSplitTop(TempHeight+5.0f, &BottomMenu1, &BottomMenu2);
-	BottomMenu2.HSplitTop(5.0f, 0, &BottomMenu2);
-	BottomMenu2.HSplitTop(TempHeight, &BottomMenu2, 0);
+	BottomMenu2.HSplitTop(5.0f, 0, &BottomMenu2);	
+	BottomMenu2.HSplitTop(TempHeight, &BottomMenu2, &Button);
 	
 	int MaxCount = floor((BottomMenu1.w+5.0f) / TempWidth);
 	
@@ -441,8 +411,34 @@ void CSpectator::OnRender()
 	else
 	{
 		BottomMenu1.VMargin((BottomMenu1.w-((TempHeight+5.0f)*Count))/2, &BottomMenu1);
-	}
+	}	
 	
+	Button.VSplitLeft(10.0f, 0, &Button);
+	Button.VSplitLeft(200.0f, &Button, &Button2);
+	Button2.VSplitRight(10.0f, &Button2, 0);
+	Button2.VSplitRight(200.0f, 0, &Button2);
+	
+	RenderTools()->DrawUIRect(&Button, ms_ColorTabbarActive, CUI::CORNER_ALL, 10.0f);
+	RenderTools()->DrawUIRect(&Button2, ms_ColorTabbarActive, CUI::CORNER_ALL, 10.0f);
+	if(InView(&Button, Width, Height))		
+		RenderTools()->DrawUIRect(&Button, ms_ColorTabbarActive2, CUI::CORNER_ALL, 10.0f);
+	if(Input()->KeyPressed(KEY_MOUSE_1) && InView(&Button, Width, Height))
+		RenderTools()->DrawUIRect(&Button, ms_ColorTabbarActive, CUI::CORNER_ALL, 10.0f);
+	if(Input()->KeyDown(KEY_MOUSE_1) && InView(&Button, Width, Height))
+	{
+		m_SelectedSpectatorID = SPEC_FREEVIEW;
+		Spectate(m_SelectedSpectatorID);
+		m_Selected = -1;
+	}
+	if(m_Selected == -1)
+		TextRender()->TextOutlineColor(0.0f, 0.0f, 6.0f, 0.5f);
+	TextRender()->Text(0, Button.x+7, Button.y+2, 18.0f*UI()->Scale(), Localize("Free-View"), Button.w-4);		
+	TextRender()->TextOutlineColor(0.0f, 0.0f, 0.0f, 0.3f);
+	
+	TextRender()->TextColor(1.0f, 1.0f, 1.0f, Button2vec*1.6f);
+	TextRender()->Text(0, Button2.x+10, Button2.y, 22.0f*UI()->Scale(), Localize("Loading"), Button2.w-4);
+	TextRender()->TextColor(1.0f, 1.0f, 1.0f, 1.0f);
+		
 	Count = 0;
 	for(int j = 0; j < 16; j++)
 	{				
