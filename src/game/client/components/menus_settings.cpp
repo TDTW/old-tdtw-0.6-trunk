@@ -123,10 +123,11 @@ void CMenus::RenderSettingsGame(CUIRect MainView)
 			Button.HMargin(2.0f, &Button);
 			g_Config.m_ClNameplatesSize = (int)(DoScrollbarH(&g_Config.m_ClNameplatesSize, &Button, g_Config.m_ClNameplatesSize/100.0f)*100.0f+0.1f);
 
-			Left.HSplitTop(20.0f, &Button, &Left);
+			Right.HSplitTop(20.0f, &Button, &Right);
 			if(DoButton_CheckBox(&g_Config.m_ClNameplatesTeamcolors, Localize("Use team colors for name plates"), g_Config.m_ClNameplatesTeamcolors, &Button))
 				g_Config.m_ClNameplatesTeamcolors ^= 1;
-			
+				
+			Right.HSplitTop(5.0f, 0, &Right);			
 			Right.HSplitTop(20.0f, &Button, &Right);
 			if(DoButton_CheckBox(&g_Config.m_ClClanplates, Localize("Use clan plates"), g_Config.m_ClClanplates, &Button))
 				g_Config.m_ClClanplates ^= 1;
