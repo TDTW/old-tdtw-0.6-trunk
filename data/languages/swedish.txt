@@ -316,9 +316,6 @@ Maximum ping:
 Miscellaneous
 == Övrigt
 
-Mouse sens.
-== Muskänslighet
-
 Move left
 == Gå vänster
 
@@ -601,9 +598,6 @@ There's an unsaved map in the editor, you might want to save it before you quit 
 Time limit
 == Tidsbegränsning
 
-Time limit: %d min
-== Tidsgräns: %d min
-
 Try again
 == Försök igen
 
@@ -675,5 +669,695 @@ no limit
 
 ##### needs translation #####
 
+%s Right click for context menu.
+== 
+
+%s\n\n Reconnect in %d sec
+== 
+
+1
+== 
+
+1:1
+== 
+
+A+
+== 
+
+A-
+== 
+
+Add Image
+== 
+
+Add group
+== 
+
+Add quads layer
+== 
+
+Add tile layer
+== 
+
+Adds a new group
+== 
+
+Adds border tiles
+== 
+
+Align
+== 
+
+Aligns coordinates of the quad points
+== 
+
+Alpha value of the envelope
+== 
+
+Anim
+== 
+
+Antiping
+== 
+
+Antiping only grenade
+== 
+
+Append
+== 
+
+Append map
+== 
+
+Aspect ratio
+== 
+
+Background blend
+== 
+
+Blue value of the envelope
+== 
+
+Border
+== 
+
+Browser
+== 
+
+CCW
+== 
+
+CW
+== 
+
+Cancel
+== 
+
+Chat effects
+== 
+
+Chat height
+== 
+
+Chat speed
+== 
+
+Clean-up game tiles
+== 
+
+Clear
+== 
+
+Clip H
+== 
+
+Clip W
+== 
+
+Clip X
+== 
+
+Clip Y
+== 
+
+Collision
+== 
+
+Color
+== 
+
+Color Env
+== 
+
+Color TO
+== 
+
+Color+
+== 
+
+Create
+== 
+
+Create new folder
+== 
+
+Creates a new color envelope
+== 
+
+Creates a new map
+== 
+
+Creates a new pos envelope
+== 
+
+Creates a new quad layer
+== 
+
+Creates a new tile layer
+== 
+
+Death
+== 
+
+Decrease animation speed
+== 
+
+Delete group
+== 
+
+Delete layer
+== 
+
+Delete this envelope
+== 
+
+Deletes the current quad
+== 
+
+Deletes the layer
+== 
+
+Detail
+== 
+
+Down
+== 
+
+Effects
+== 
+
+Embed
+== 
+
+Embedded
+== 
+
+Embeds the image into the map file.
+== 
+
+Enable/disable group for saving
+== 
+
+Enable/disable layer for saving
+== 
+
+Envelopes
+== 
+
+Error:
+== 
+
+Exit
+== 
+
+Exit the editor
+== 
+
+Exits from the editor
+== 
+
+External
+== 
+
+Features
+== 
+
+File
+== 
+
+File: %s
+== 
+
+Filename:
+== 
+
+FlagTrail
+== 
+
+Follower
+== 
+
+Fonts
+== 
+
+Game over with score  %d : %d
+== 
+
+Green value of the envelope
+== 
+
+Group
+== 
+
+HD
+== 
+
+Height
+== 
+
+Hide all
+== 
+
+Hide broadcast
+== 
+
+Hide chat
+== 
+
+Hide cursor
+== 
+
+Hide game timer
+== 
+
+Hide health and ammo
+== 
+
+Hide kill messages
+== 
+
+Hide score hud
+== 
+
+Hide spectator hud
+== 
+
+Hide sudden death
+== 
+
+Hide teambalance warning
+== 
+
+Hide voting
+== 
+
+Hide warmup timer
+== 
+
+Highlight for gametypes
+== 
+
+Highlight for number of players
+== 
+
+Highlight for ping
+== 
+
+Highlight weapon bar
+== 
+
+Highlights in browser
+== 
+
+Hud
+== 
+
+Image
+== 
+
+Images
+== 
+
+Increase animation speed
+== 
+
+Ingame mouse sens.
+== 
+
+Inner color
+== 
+
+Laser color
+== 
+
+Layers
+== 
+
+Left
+== 
+
+Left mouse button to move. Hold shift to move pivot. Hold ctrl to rotate.
+== 
+
+Left mouse button to move. Hold shift to move the texture.
+== 
+
+Left mouse to drag. Hold ctrl to be more precise. Hold shift to alter time point aswell. Right click to delete.
+== 
+
+Load
+== 
+
+Load a new image to use in the map
+== 
+
+Load map
+== 
+
+Make external
+== 
+
+Maximum Zoom
+== 
+
+Menu mouse sens.
+== 
+
+Minimum Zoom
+== 
+
+Name:
+== 
+
+New
+== 
+
+New folder
+== 
+
+New map
+== 
+
+New weapon bar
+== 
+
+Next
+== 
+
+Next Envelope
+== 
+
+None
+== 
+
+Normal animation speed
+== 
+
+Notification weapons on pickup
+== 
+
+Opens a map and adds everything from that map to the current one
+== 
+
+Opens a map for editing
+== 
+
+Order
+== 
+
+Other
+== 
+
+Outline color
+== 
+
+Para X
+== 
+
+Para Y
+== 
+
+Pos X
+== 
+
+Pos Y
+== 
+
+Pos. Env
+== 
+
+Pos. TO
+== 
+
+Pos.+
+== 
+
+Press right mouse button to create a new point
+== 
+
+Previous
+== 
+
+Previous Envelope
+== 
+
+Proof
+== 
+
+Red value of the envelope
+== 
+
+Refocus
+== 
+
+Removes game tiles that aren't based on a layer
+== 
+
+Removes the image from the map
+== 
+
+Removes the image from the map file.
+== 
+
+Replace
+== 
+
+Replace Image
+== 
+
+Replaces the image with a new one
+== 
+
+Reset color
+== 
+
+Resizes the current Quad based on the aspect ratio of the image
+== 
+
+Right
+== 
+
+Rotation of the envelope
+== 
+
+Save
+== 
+
+Save As
+== 
+
+Save map
+== 
+
+Saves the current map
+== 
+
+Saves the current map under a new name
+== 
+
+Select group. Double click to collapse.
+== 
+
+Select group. Double click to expand.
+== 
+
+Select image
+== 
+
+Select layer.
+== 
+
+Shift
+== 
+
+Show ammo bar
+== 
+
+Show fps
+== 
+
+Show friends
+== 
+
+Show num of bullets
+== 
+
+Show time msg
+== 
+
+Show weapon bar
+== 
+
+Square
+== 
+
+Squares the current quad
+== 
+
+Standart hud and chat
+== 
+
+Switch between images and layers managment.
+== 
+
+Switch curve type
+== 
+
+TDTW
+== 
+
+The file already exists.\nDo you want to overwrite the map?
+== 
+
+The map contains unsaved data, you might want to save it before you create a new map.\nContinue anyway?
+== 
+
+The map contains unsaved data, you might want to save it before you exit the editor.\nContinue anyway?
+== 
+
+The map contains unsaved data, you might want to save it before you load a new map.\nContinue anyway?
+== 
+
+Tiles
+== 
+
+Toggle group visibility
+== 
+
+Toggle layer visibility
+== 
+
+Toggles the envelope editor.
+== 
+
+Unable to create the folder
+== 
+
+Unhookable
+== 
+
+Up
+== 
+
+Use Clipping
+== 
+
+Use clan plates
+== 
+
+Use left mouse button to drag and change the color value. Hold shift to be more precise.
+== 
+
+Use left mouse button to drag and change the value. Hold shift to be more precise.
+== 
+
+Use left mouse button to drag and create a brush.
+== 
+
+Use left mouse button to paint with the brush. Right button clears the brush.
+== 
+
+WeaponTrail
+== 
+
+Width
+== 
+
+X-axis of the envelope
+== 
+
+X/X
+== 
+
+Y-axis of the envelope
+== 
+
+Y/Y
+== 
+
+ZI
+== 
+
+ZO
+== 
+
+Zoom
+== 
+
+[HOME] Restore map focus
+== 
+
+[M] Flip brush vertical
+== 
+
+[N] Flip brush horizontal
+== 
+
+[NumPad*] Zoom to normal and remove editor offset
+== 
+
+[NumPad+] Zoom in
+== 
+
+[NumPad-] Zoom out
+== 
+
+[R] Rotates the brush counter clockwise
+== 
+
+[T] Rotates the brush clockwise
+== 
+
+[ctrl+h] Toggle High Detail
+== 
+
+[ctrl+i] Show tile informations
+== 
+
+[ctrl+m] Toggle animation
+== 
+
+[ctrl+p] Toggles proof borders. These borders represent what a player maximum can see.
+== 
+
+editor
+== 
+
+failed to open file '%s'...
+== 
+
+grabbing %f %f %f %f
+== 
+
+invoked
+== 
+
+mapres
+== 
+
+maps
+== 
+
+min
+== 
+
+saving done
+== 
+
+saving quads layer
+== 
+
+saving tiles layer
+== 
+
+saving to '%s'...
+== 
+
 ##### old translations #####
+
+Time limit: %d min
+== Tidsgräns: %d min
+
+Mouse sens.
+== Muskänslighet
 
