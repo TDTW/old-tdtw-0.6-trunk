@@ -1130,7 +1130,7 @@ void CMenus::RenderColFeat(CUIRect MainView)
 		for(int s = 0; s < 3; s++)
 		{
 			LaserCol.HSplitTop(20.0f, &Label, &LaserCol);
-			Label.VSplitLeft(40.0f, &Label, &Button);
+			Label.VSplitLeft(100.0f, &Label, &Button);
 			Button.HMargin(2.0f, &Button);
 
 			float k = ((PrevColor>>((2-s)*8))&0xff)  / 255.0f;
@@ -1279,8 +1279,8 @@ void CMenus::RenderColFeat(CUIRect MainView)
 	if(g_Config.m_AntiPing == 1)
 	{
 		CUIRect aRects, Label, TopLeft;
-		Antiping.HSplitTop(20.0f, 0, &aRects);	
-		aRects.VSplitLeft(15.0f, 0, &aRects);
+		Antiping.VSplitLeft(15.0f, 0, &Antiping);
+		Antiping.HSplitTop(20.0f, &Label, &aRects);	
 		
 		int *paColors;
 		paColors = &g_Config.m_PlayerColorGhost;
@@ -1336,6 +1336,7 @@ void CMenus::RenderColFeat(CUIRect MainView)
 		
 		aRects.HSplitTop(20.0f, 0, &Label);
 		Label.VSplitLeft(230.0f, &Label, 0);
+		Label.HSplitTop(50.0f, &Label, 0);
 		RenderTools()->DrawUIRect(&Label, vec4(1.0f, 1.0f, 1.0f, 0.25f), CUI::CORNER_ALL, 5.0f);
 		RenderTools()->RenderTee(CAnimState::GetIdle(), &OwnSkinInfo, 0, vec2(1, 0), vec2(Label.x+30.0f, Label.y+28.0f));
 		Label.HSplitTop(15.0f, 0, &Label);
