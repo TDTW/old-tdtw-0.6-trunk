@@ -957,7 +957,7 @@ void CEditor::DoToolbar(CUIRect ToolBar)
 		if(DoButton_Editor(&s_BorderBut, Localize("Border"), pT?0:-1, &Button, 0, Localize("Adds border tiles")))
 		{
 			if(pT)
-                DoMapBorder();
+				DoMapBorder();
 		}
 	}
 
