@@ -1,4 +1,3 @@
-
 ##### translated strings #####
 
 %d Bytes
@@ -95,7 +94,7 @@ Alpha value of the envelope
 == Прозрачность кривой
 
 Always show name plates
-== Всегда показывать ники игроков
+== Всегда показывать имена игроков
 
 Anim
 == Аним.
@@ -125,7 +124,7 @@ Are you sure that you want to remove the player from your friends list?
 == Вы действительно хотите удалить этого игрока из списка друзей?
 
 As this is the first time you launch the game, please enter your nick name below. It's recommended that you check the settings to adjust them to your liking before joining a server.
-== Так как это ваш первый запуск игры, пожалуйста, введите свой ник в поле ниже. Также рекоммендуется проверить настройки игры и поменять некоторые из них перед тем, как начать играть.
+== Пожалуйста, введите своё имя. Также рекоммендуется проверить настройки игры и поменять некоторые из них перед тем, как начать играть.
 
 Aspect ratio
 == Соотношение сторон
@@ -734,7 +733,7 @@ Next weapon
 == След. оружие
 
 Nickname
-== Ник
+== Имя
 
 No
 == Нет
@@ -1037,7 +1036,7 @@ Show ingame HUD
 == Показать внутриигровой интерфейс
 
 Show name plates
-== Показывать ники игроков
+== Показывать имена игроков
 
 Show num of bullets
 == Показывать кол-во патронов
@@ -1100,7 +1099,7 @@ Stop record
 == Стоп записи
 
 Strict gametype filter
-== Следить за след.
+== Строгий фильтр р-мов
 
 Sudden Death
 == Решающее очко
@@ -1214,7 +1213,7 @@ Use sounds
 == Использовать звуки
 
 Use team colors for name plates
-== Командные цвета для ников игроков
+== Командные цвета для имен игроков
 
 V-Sync
 == Вертикальная синхронизация
