@@ -717,6 +717,9 @@ Anim
 Antiping
 == 
 
+Antiping ghost
+== 
+
 Antiping only grenade
 == 
 
@@ -898,6 +901,9 @@ Fonts
 == 
 
 Game over with score  %d : %d
+== 
+
+Ghost color
 == 
 
 Green value of the envelope

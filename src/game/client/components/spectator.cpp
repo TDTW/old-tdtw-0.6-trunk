@@ -418,8 +418,9 @@ void CSpectator::OnRender()
 	Button2.VSplitRight(10.0f, &Button2, 0);
 	Button2.VSplitRight(200.0f, 0, &Button2);
 	
+	vec4 ms_ColorTabbarActive3 = vec4(0.0f, 0.0f, 0.0f, Button2vec*1.6f);
 	RenderTools()->DrawUIRect(&Button, ms_ColorTabbarActive, CUI::CORNER_ALL, 10.0f);
-	RenderTools()->DrawUIRect(&Button2, ms_ColorTabbarActive, CUI::CORNER_ALL, 10.0f);
+	RenderTools()->DrawUIRect(&Button2, ms_ColorTabbarActive3, CUI::CORNER_ALL, 10.0f);
 	if(InView(&Button, Width, Height))		
 		RenderTools()->DrawUIRect(&Button, ms_ColorTabbarActive2, CUI::CORNER_ALL, 10.0f);
 	if(Input()->KeyPressed(KEY_MOUSE_1) && InView(&Button, Width, Height))

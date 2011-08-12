@@ -528,8 +528,11 @@ void CPlayers::RenderPlayer(
 		m_pClient->m_aClients[pInfo.m_ClientID].m_PreviousPrediction = ShadowPosition;
 
 		CTeeRenderInfo shadow = RenderInfo;
-		shadow.m_ColorBody = m_pClient->m_pSkins->GetColorV4(g_Config.m_PlayerColorGhost);
-		shadow.m_ColorFeet = m_pClient->m_pSkins->GetColorV4(g_Config.m_PlayerColorGhost);
+		if(g_Config.m_AntiPingTeeColor == 0)
+		{
+			shadow.m_ColorBody = m_pClient->m_pSkins->GetColorV4(g_Config.m_PlayerColorGhost);
+			shadow.m_ColorFeet = m_pClient->m_pSkins->GetColorV4(g_Config.m_PlayerColorGhost);
+		}
 		shadow.m_ColorBody.a = g_Config.m_PlayerColorGhostAlpha/255.0f;
 		shadow.m_ColorFeet.a = g_Config.m_PlayerColorGhostAlpha/255.0f;
 

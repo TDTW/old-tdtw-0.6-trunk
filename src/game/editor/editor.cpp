@@ -957,7 +957,7 @@ void CEditor::DoToolbar(CUIRect ToolBar)
 		if(DoButton_Editor(&s_BorderBut, Localize("Border"), pT?0:-1, &Button, 0, Localize("Adds border tiles")))
 		{
 			if(pT)
-                DoMapBorder();
+				DoMapBorder();
 		}
 	}
 
@@ -1056,58 +1056,82 @@ void CEditor::DoQuad(CQuad *q, int Index)
 
 	if(UI()->ActiveItem() == pID)
 	{
-		// check if we only should move pivot
-		if(s_Operation == OP_MOVE_PIVOT)
+		if(m_MouseDeltaWx*m_MouseDeltaWx+m_MouseDeltaWy*m_MouseDeltaWy > 0.5f)
 		{
-			q->m_aPoints[4].x += f2fx(wx-s_LastWx);
-			q->m_aPoints[4].y += f2fx(wy-s_LastWy);
-		}
-		else if(s_Operation == OP_MOVE_ALL)
-		{
-			// move all points including pivot
-			if(m_GridActive)
+			// check if we only should move pivot
+			if(s_Operation == OP_MOVE_PIVOT)
 			{
-				int LineDistance = GetLineDistance();
+				if(m_GridActive)
+				{
+					int LineDistance = GetLineDistance();
 
-				float x = 0.0f;
-				float y = 0.0f;
-				if(wx >= 0)
-					x = (int)((wx+(LineDistance/2)*m_GridFactor)/(LineDistance*m_GridFactor)) * (LineDistance*m_GridFactor);
+					float x = 0.0f;
+					float y = 0.0f;
+					if(wx >= 0)
+						x = (int)((wx+(LineDistance/2)*m_GridFactor)/(LineDistance*m_GridFactor)) * (LineDistance*m_GridFactor);
+					else
+						x = (int)((wx-(LineDistance/2)*m_GridFactor)/(LineDistance*m_GridFactor)) * (LineDistance*m_GridFactor);
+					if(wy >= 0)
+						y = (int)((wy+(LineDistance/2)*m_GridFactor)/(LineDistance*m_GridFactor)) * (LineDistance*m_GridFactor);
+					else
+						y = (int)((wy-(LineDistance/2)*m_GridFactor)/(LineDistance*m_GridFactor)) * (LineDistance*m_GridFactor);
+
+					q->m_aPoints[4].x = f2fx(x);
+					q->m_aPoints[4].y = f2fx(y);
+				}
 				else
-					x = (int)((wx-(LineDistance/2)*m_GridFactor)/(LineDistance*m_GridFactor)) * (LineDistance*m_GridFactor);
-				if(wy >= 0)
-					y = (int)((wy+(LineDistance/2)*m_GridFactor)/(LineDistance*m_GridFactor)) * (LineDistance*m_GridFactor);
+				{
+					q->m_aPoints[4].x += f2fx(wx-s_LastWx);
+					q->m_aPoints[4].y += f2fx(wy-s_LastWy);
+				}
+			}
+			else if(s_Operation == OP_MOVE_ALL)
+			{
+				// move all points including pivot
+				if(m_GridActive)
+				{
+					int LineDistance = GetLineDistance();
+
+					float x = 0.0f;
+					float y = 0.0f;
+					if(wx >= 0)
+						x = (int)((wx+(LineDistance/2)*m_GridFactor)/(LineDistance*m_GridFactor)) * (LineDistance*m_GridFactor);
+					else
+						x = (int)((wx-(LineDistance/2)*m_GridFactor)/(LineDistance*m_GridFactor)) * (LineDistance*m_GridFactor);
+					if(wy >= 0)
+						y = (int)((wy+(LineDistance/2)*m_GridFactor)/(LineDistance*m_GridFactor)) * (LineDistance*m_GridFactor);
+					else
+						y = (int)((wy-(LineDistance/2)*m_GridFactor)/(LineDistance*m_GridFactor)) * (LineDistance*m_GridFactor);
+				
+					int OldX = q->m_aPoints[4].x;
+					int OldY = q->m_aPoints[4].y;
+					q->m_aPoints[4].x = f2fx(x);
+					q->m_aPoints[4].y = f2fx(y);
+					int DiffX = q->m_aPoints[4].x - OldX;
+					int DiffY = q->m_aPoints[4].y - OldY;
+				
+					for(int v = 0; v < 4; v++)
+					{
+						q->m_aPoints[v].x += DiffX;
+						q->m_aPoints[v].y += DiffY;
+					}
+				}
 				else
-					y = (int)((wy-(LineDistance/2)*m_GridFactor)/(LineDistance*m_GridFactor)) * (LineDistance*m_GridFactor);
-				
-				int OldX = q->m_aPoints[4].x;
-				int OldY = q->m_aPoints[4].y;
-				q->m_aPoints[4].x = f2fx(x);
-				q->m_aPoints[4].y = f2fx(y);
-				int DiffX = q->m_aPoints[4].x - OldX;
-				int DiffY = q->m_aPoints[4].y - OldY;
-				
+				{
+					for(int v = 0; v < 5; v++)
+					{
+							q->m_aPoints[v].x += f2fx(wx-s_LastWx);
+							q->m_aPoints[v].y += f2fx(wy-s_LastWy);
+					}
+				}
+			}
+			else if(s_Operation == OP_ROTATE)
+			{
 				for(int v = 0; v < 4; v++)
 				{
-					q->m_aPoints[v].x += DiffX;
-					q->m_aPoints[v].y += DiffY;
+					q->m_aPoints[v] = s_RotatePoints[v];
+					Rotate(&q->m_aPoints[4], &q->m_aPoints[v], s_RotateAngle);
 				}
-			}
-			else
-			{
-				for(int v = 0; v < 5; v++)
-				{
-						q->m_aPoints[v].x += f2fx(wx-s_LastWx);
-						q->m_aPoints[v].y += f2fx(wy-s_LastWy);
-				}
-			}
-		}
-		else if(s_Operation == OP_ROTATE)
-		{
-			for(int v = 0; v < 4; v++)
-			{
-				q->m_aPoints[v] = s_RotatePoints[v];
-				Rotate(&q->m_aPoints[4], &q->m_aPoints[v], s_RotateAngle);
 			}
 		}
 
@@ -1163,6 +1187,8 @@ void CEditor::DoQuad(CQuad *q, int Index)
 				s_Operation = OP_MOVE_ALL;
 
 			UI()->SetActiveItem(pID);
+			if(m_SelectedQuad != Index)
+				m_SelectedPoints = 0;
 			m_SelectedQuad = Index;
 			s_LastWx = wx;
 			s_LastWy = wy;
@@ -1170,7 +1196,9 @@ void CEditor::DoQuad(CQuad *q, int Index)
 
 		if(UI()->MouseButton(1))
 		{
-			m_SelectedQuad = Index;
+			if(m_SelectedQuad != Index)
+				m_SelectedPoints = 0;
+			m_SelectedQuad = Index;	
 			s_Operation = OP_CONTEXT_MENU;
 			UI()->SetActiveItem(pID);
 		}
@@ -1331,7 +1359,6 @@ void CEditor::DoQuadPoint(CQuad *pQuad, int QuadIndex, int V)
 					m_SelectedPoints |= 1<<V;
 				else
 					m_SelectedPoints = 1<<V;
-				s_Moved = true;
 			}
 
 			m_SelectedQuad = QuadIndex;
@@ -2052,7 +2079,7 @@ void CEditor::RenderLayers(CUIRect ToolBox, CUIRect ToolBar, CUIRect View)
 
 					static int s_GroupPopupId = 0;
 					if(Result == 2)
-						UiInvokePopupMenu(&s_GroupPopupId, 0, UI()->MouseX(), UI()->MouseY(), 120, 220, PopupGroup);
+						UiInvokePopupMenu(&s_GroupPopupId, 0, UI()->MouseX(), UI()->MouseY(), 145, 220, PopupGroup);
 
 					if(m_Map.m_lGroups[g]->m_lLayers.size() && Input()->MouseDoubleClick())
 						m_Map.m_lGroups[g]->m_Collapse ^= 1;
@@ -2390,6 +2417,9 @@ void CEditor::RenderImages(CUIRect ToolBox, CUIRect ToolBar, CUIRect View)
 					r.w = r.h;
 				else
 					r.h = r.w;
+				float Max = (float)(max(m_Map.m_lImages[i]->m_Width, m_Map.m_lImages[i]->m_Height));
+				r.w *= m_Map.m_lImages[i]->m_Width/Max;
+				r.h *= m_Map.m_lImages[i]->m_Height/Max;
 				Graphics()->TextureSet(m_Map.m_lImages[i]->m_TexID);
 				Graphics()->BlendNormal();
 				Graphics()->QuadsBegin();
@@ -2399,6 +2429,15 @@ void CEditor::RenderImages(CUIRect ToolBox, CUIRect ToolBar, CUIRect View)
 
 			}
 		}
+
+		// separator
+		ToolBox.HSplitTop(5.0f, &Slot, &ToolBox);
+		ImageCur += 5.0f;
+		IGraphics::CLineItem LineItem(Slot.x, Slot.y+Slot.h/2, Slot.x+Slot.w, Slot.y+Slot.h/2);
+		Graphics()->TextureSet(-1);
+		Graphics()->LinesBegin();
+		Graphics()->LinesDraw(&LineItem, 1);
+		Graphics()->LinesEnd();
 	}
 
 	if(ImageCur + 27.0f > ImageStopAt)
