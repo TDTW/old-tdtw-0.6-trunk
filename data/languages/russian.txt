@@ -1,3 +1,4 @@
+
 ##### translated strings #####
 
 %d Bytes
@@ -103,7 +104,7 @@ Antiping
 == Антипинг
 
 Antiping ghost
-== Тень антипинга
+== Призрак антипинга
 
 Antiping only grenade
 == Антипинг только гранат
@@ -1069,10 +1070,10 @@ Spectate
 == Наблюдать
 
 Spectate next
-== Наблюдать следующего
+== Наблюдать след.
 
 Spectate previous
-== Наблюдать предыдущего
+== Наблюдать пред.
 
 Spectator mode
 == Режим наблюдателя
@@ -1358,6 +1359,9 @@ saving to '%s'...
 
 ##### needs translation #####
 
+Use tee color
+== Использовать цвет игрока
+
 ##### old translations #####
 
 Zoom In
@@ -1486,14 +1490,14 @@ Clan:
 Stop recording
 == Остановить запись
 
-MapHack
-== МапХак
+Start recording
+== Начать запись
 
 Add Quad
 == Добавить квад
 
-Start recording
-== Начать запись
+MapHack
+== МапХак
 
 Friends list
 == Список друзей
@@ -1558,8 +1562,3 @@ Blue team (%d)
 %d%% searching
 == %d%% поиск
 
-Ghost color
-== Цвет призрака
-
-Antiping ghost
-== Призрак антипинга

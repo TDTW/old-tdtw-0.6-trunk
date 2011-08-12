@@ -1251,6 +1251,9 @@ Use left mouse button to paint with the brush. Right button clears the brush.
 Use team colors for name plates
 == 
 
+Use tee color
+== 
+
 Version:
 == 
 
