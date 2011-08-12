@@ -65,6 +65,7 @@ MACRO_CONFIG_INT(ZoomMax, zoom_max, 160, 110, 500, CFGFLAG_SAVETDTW|CFGFLAG_CLIE
 MACRO_CONFIG_INT(ZoomMin, zoom_min, 40, 20, 90, CFGFLAG_SAVETDTW|CFGFLAG_CLIENT, "Zoom minimum")
 
 MACRO_CONFIG_INT(AntiPing, cl_antiping, 0, 0, 2, CFGFLAG_SAVETDTW|CFGFLAG_CLIENT, "Antiping")
+MACRO_CONFIG_INT(AntiPingTeeColor, cl_antiping_tee_color, 1, 0, 1, CFGFLAG_SAVETDTW|CFGFLAG_CLIENT, "Antiping")
 MACRO_CONFIG_INT(AntiPingGrenade, cl_antiping_grenade, 0, 0, 1, CFGFLAG_SAVETDTW|CFGFLAG_CLIENT, "Antiping")
 
 MACRO_CONFIG_INT(ClStandartHud, cl_standart_hud, 0, 0, 1, CFGFLAG_SAVETDTW|CFGFLAG_CLIENT, "standart hud")

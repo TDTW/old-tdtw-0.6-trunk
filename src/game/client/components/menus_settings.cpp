@@ -1280,6 +1280,11 @@ void CMenus::RenderColFeat(CUIRect MainView)
 	{
 		CUIRect aRects, Label, TopLeft;
 		Antiping.VSplitLeft(15.0f, 0, &Antiping);
+		Antiping.HSplitTop(20.0f, &Label, &Antiping);	
+		
+		if(DoButton_CheckBox(&g_Config.m_AntiPingTeeColor, Localize("Use tee color"), g_Config.m_AntiPingTeeColor, &Label))
+			g_Config.m_AntiPingTeeColor ^=1;
+			
 		Antiping.HSplitTop(20.0f, &Label, &aRects);	
 		
 		int *paColors;
@@ -1298,17 +1303,37 @@ void CMenus::RenderColFeat(CUIRect MainView)
 
 		int PrevColor = *paColors;
 		int Color = 0;
-		for(int s = 0; s < 3; s++)
+		if(g_Config.m_AntiPingTeeColor == 0)
 		{
-			aRects.HSplitTop(20.0f, &Label, &aRects);
-			Label.VSplitLeft(100.0f, &Label, &Button);
-			Button.HMargin(2.0f, &Button);
+			for(int s = 0; s < 3; s++)
+			{
+				aRects.HSplitTop(20.0f, &Label, &aRects);
+				Label.VSplitLeft(100.0f, &Label, &Button);
+				Button.HMargin(2.0f, &Button);
 
-			float k = ((PrevColor>>((2-s)*8))&0xff) / 255.0f;
-			k = DoScrollbarH(&s_aColorSlider[s], &Button, k);
-			Color <<= 8;
-			Color += clamp((int)(k*255), 0, 255);
-			UI()->DoLabelScaled(&Label, paLabels[s], 14.0f, -1);
+				float k = ((PrevColor>>((2-s)*8))&0xff) / 255.0f;
+				k = DoScrollbarH(&s_aColorSlider[s], &Button, k);
+				Color <<= 8;
+				Color += clamp((int)(k*255), 0, 255);
+				UI()->DoLabelScaled(&Label, paLabels[s], 14.0f, -1);
+			}
+		}
+		else
+		{
+			for(int s = 0; s < 3; s++)
+			{		
+				float k = ((PrevColor>>((2-s)*8))&0xff);
+				if(s == 1)
+					k = 255;
+				else if(s == 2)
+					k = 0;
+				else
+					k++;
+				if(k >= 255 && s == 0)
+					k = 0;
+				Color <<= 8;
+				Color += clamp((int)(k), 0, 255);
+			}
 		}
 
 		*paColors = Color;
