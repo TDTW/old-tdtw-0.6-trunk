@@ -1553,3 +1553,8 @@ Blue team (%d)
 %d%% searching
 == %d%% поиск
 
+Ghost color
+== Цвет призрака
+
+Antiping ghost
+== Призрак антипинга
