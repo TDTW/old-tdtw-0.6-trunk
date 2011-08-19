@@ -828,12 +828,12 @@ void CEditor::DoToolbar(CUIRect ToolBar)
 	// zoom group
 	TB_Top.VSplitLeft(30.0f, &Button, &TB_Top);
 	static int s_ZoomOutButton = 0;
-	if(DoButton_Ex(&s_ZoomOutButton, "Localize(ZO)", 0, &Button, 0, "Localize([NumPad-] Zoom out)", CUI::CORNER_L))
+	if(DoButton_Ex(&s_ZoomOutButton, Localize("ZO"), 0, &Button, 0, Localize("[NumPad-] Zoom out"), CUI::CORNER_L))
 		m_ZoomLevel += 50;
 
 	TB_Top.VSplitLeft(30.0f, &Button, &TB_Top);
 	static int s_ZoomNormalButton = 0;
-	if(DoButton_Ex(&s_ZoomNormalButton, "Localize(1:1)", 0, &Button, 0, "Localize([NumPad*] Zoom to normal and remove editor offset)", 0))
+	if(DoButton_Ex(&s_ZoomNormalButton, Localize("1:1"), 0, &Button, 0, Localize("[NumPad*] Zoom to normal and remove editor offset"), 0))
 	{
 		m_EditorOffsetX = 0;
 		m_EditorOffsetY = 0;
@@ -842,7 +842,7 @@ void CEditor::DoToolbar(CUIRect ToolBar)
 
 	TB_Top.VSplitLeft(30.0f, &Button, &TB_Top);
 	static int s_ZoomInButton = 0;
-	if(DoButton_Ex(&s_ZoomInButton, "Localize(ZI)", 0, &Button, 0, "Localize([NumPad+] Zoom in)", CUI::CORNER_R))
+	if(DoButton_Ex(&s_ZoomInButton, Localize("ZI"), 0, &Button, 0, Localize("[NumPad+] Zoom in"), CUI::CORNER_R))
 		m_ZoomLevel -= 50;
 
 	TB_Top.VSplitLeft(10.0f, 0, &TB_Top);
