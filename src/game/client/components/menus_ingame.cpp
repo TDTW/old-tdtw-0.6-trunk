@@ -427,7 +427,6 @@ void CMenus::RenderServerControlKick(CUIRect MainView, bool FilterSpectators)
 void CMenus::RenderIngameServerbrowser(CUIRect MainView)
 {
 	CUIRect Top, Button, Temp3;	
-	int NewPage = 1;
 	MainView.HSplitTop(20.0f, &Top, &MainView);
 	RenderTools()->DrawUIRect(&Top, ms_ColorTabbarActive, CUI::CORNER_T, 10.0f);
 	MainView.HSplitTop(20.0f, &Top, &MainView);

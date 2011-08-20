@@ -213,15 +213,9 @@ void CSpectator::OnRender()
 	
 	Screen.HSplitTop(Screen.h/2-20, &TopMenu, &BottomMenu);
 	TopMenu.HSplitBottom(5, &TopMenu, 0);
-	//TopMenu.VMargin(15*3.0f*Graphics()->ScreenAspect(), &TopMenu);
-	
-	// RenderTools()->DrawUIRect(&Screen, ms_ColorTabbarActive, CUI::CORNER_ALL, 10.0f);
-	// RenderTools()->DrawUIRect(&TopMenu, ms_ColorTabbarActive, CUI::CORNER_ALL, 10.0f);
-	//RenderTools()->DrawUIRect(&BottomMenu, ms_ColorTabbarActive, CUI::CORNER_ALL, 10.0f);
 
 	{
 		CUIRect Left, Middle, Right;
-		CUIRect Button, Button2;
 				
 		int Temp = TopMenu.w/3;
 		TopMenu.VSplitLeft(Temp, &Left, &TopMenu);
@@ -230,8 +224,6 @@ void CSpectator::OnRender()
 		Left.VMargin(5, &Left);
 		Right.VMargin(5, &Right);
 		
-		//Right.HSplitTop(25, 0, &Right);
-		//Right.VSplitRight(Right.w/3, &Right, 0);
 		Left.HSplitTop(10, 0, &Left);
 		Right.HSplitTop(10, 0, &Right);
 		
@@ -260,7 +252,7 @@ void CSpectator::OnRender()
 		RenderTools()->DrawUIRect(&TempCui, ms_ColorTabbarActive, CUI::CORNER_B, 10.0f);
 		UI()->DoLabel(&TempCui, Localize("Follower"),20.0f*UI()->Scale(),  0);
 						
-		int NewSpectatorID_Next;
+		int NewSpectatorID_Next = -1;
 		bool GotNewSpectatorID_Next = false;
 
 		if(m_pClient->m_Snap.m_SpecInfo.m_SpectatorID == SPEC_FREEVIEW)
@@ -322,7 +314,7 @@ void CSpectator::OnRender()
 			m_Selected = NewSpectatorID_Next;
 		}
 			
-		int NewSpectatorID_Prev;
+		int NewSpectatorID_Prev = -1;
 		bool GotNewSpectatorID_Prev = false;
 
 		if(m_pClient->m_Snap.m_SpecInfo.m_SpectatorID == SPEC_FREEVIEW)
@@ -400,9 +392,7 @@ void CSpectator::OnRender()
 	BottomMenu.HSplitTop(TempHeight+5.0f, &BottomMenu1, &BottomMenu2);
 	BottomMenu2.HSplitTop(5.0f, 0, &BottomMenu2);	
 	BottomMenu2.HSplitTop(TempHeight, &BottomMenu2, &Button);
-	
-	int MaxCount = floor((BottomMenu1.w+5.0f) / TempWidth);
-	
+		
 	if(Count > 8)
 	{
 		BottomMenu1.VMargin((BottomMenu1.w-((TempHeight+5.0f)*8))/2, &BottomMenu1);

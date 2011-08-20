@@ -1278,7 +1278,7 @@ void CMenus::RenderColFeat(CUIRect MainView)
 		
 	if(g_Config.m_AntiPing == 1)
 	{
-		CUIRect aRects, Label, TopLeft;
+		CUIRect aRects, Label;
 		Antiping.VSplitLeft(15.0f, 0, &Antiping);
 		Antiping.HSplitTop(20.0f, &Label, &Antiping);	
 		
@@ -1295,7 +1295,7 @@ void CMenus::RenderColFeat(CUIRect MainView)
 			Localize("Sat."),
 			Localize("Lht."),
 			Localize("Alpha")};
-		static int s_aColorSlider[3] = {{0}};
+		static int s_aColorSlider[3] = {0};
 
 		UI()->DoLabelScaled(&Label, Localize("Ghost color"), 14.0f, -1);
 		aRects.VSplitLeft(20.0f, 0, &aRects);
