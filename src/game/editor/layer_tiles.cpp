@@ -432,8 +432,8 @@ int CLayerTiles::RenderProperties(CUIRect *pToolBox)
 		{Localize("Shift"), 0, PROPTYPE_SHIFT, 0, 0},
 		{Localize("Image"), m_Image, PROPTYPE_IMAGE, 0, 0},
 		{Localize("Color"), Color, PROPTYPE_COLOR, 0, 0},
-		{"Color Env", m_ColorEnv+1, PROPTYPE_INT_STEP, 0, m_pEditor->m_Map.m_lEnvelopes.size()+1},
-		{"Color TO", m_ColorEnvOffset, PROPTYPE_INT_SCROLL, -1000000, 1000000},
+		{Localize("Color Env"), m_ColorEnv+1, PROPTYPE_INT_STEP, 0, m_pEditor->m_Map.m_lEnvelopes.size()+1},
+		{Localize("Color TO"), m_ColorEnvOffset, PROPTYPE_INT_SCROLL, -1000000, 1000000},
 		{0},
 	};
 

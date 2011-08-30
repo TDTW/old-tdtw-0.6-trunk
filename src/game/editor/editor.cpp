@@ -760,7 +760,7 @@ void CEditor::DoToolbar(CUIRect ToolBar)
 			}
 		}
 		else
-			InvokeFileDialog(IStorage::TYPE_ALL, FILETYPE_MAP, Localize("Load map"), Localize("Load"), Localize("maps"), "", CallbackOpenMap, this);
+			InvokeFileDialog(IStorage::TYPE_ALL, FILETYPE_MAP, Localize("Load map"), Localize("Load"), "maps", "", CallbackOpenMap, this);
 	}
 
 	// ctrl+s to save
@@ -776,7 +776,7 @@ void CEditor::DoToolbar(CUIRect ToolBar)
 			}
 		}
 		else
-			InvokeFileDialog(IStorage::TYPE_SAVE, FILETYPE_MAP, Localize("Save map"), Localize("Save"), Localize("maps"), "", CallbackSaveMap, this);
+			InvokeFileDialog(IStorage::TYPE_SAVE, FILETYPE_MAP, Localize("Save map"), Localize("Save"), "maps", "", CallbackSaveMap, this);
 	}
 
 	// detail button
@@ -2490,7 +2490,7 @@ int CEditor::PopupImage(CEditor *pEditor, CUIRect View)
 	View.HSplitTop(12.0f, &Slot, &View);
 	if(pEditor->DoButton_MenuItem(&s_ReplaceButton, Localize("Replace"), 0, &Slot, 0, Localize("Replaces the image with a new one")))
 	{
-		pEditor->InvokeFileDialog(IStorage::TYPE_ALL, FILETYPE_IMG, Localize("Replace Image"), "Replace", "mapres", "", ReplaceImage, pEditor);
+		pEditor->InvokeFileDialog(IStorage::TYPE_ALL, FILETYPE_IMG, Localize("Replace Image"), Localize("Replace"), "mapres", "", ReplaceImage, pEditor);
 		return 1;
 	}
 
@@ -2682,7 +2682,7 @@ void CEditor::RenderImages(CUIRect ToolBox, CUIRect ToolBar, CUIRect View)
 	static int s_NewImageButton = 0;
 	ToolBox.HSplitTop(12.0f, &Slot, &ToolBox);
 	if(DoButton_Editor(&s_NewImageButton, Localize("Add"), 0, &Slot, 0, Localize("Load a new image to use in the map")))
-		InvokeFileDialog(IStorage::TYPE_ALL, FILETYPE_IMG, Localize("Add Image"), Localize("Add"), Localize("mapres"), "", AddImage, this);
+		InvokeFileDialog(IStorage::TYPE_ALL, FILETYPE_IMG, Localize("Add Image"), Localize("Add"), "mapres", "", AddImage, this);
 }
 
 
@@ -3476,7 +3476,7 @@ int CEditor::PopupMenuFile(CEditor *pEditor, CUIRect View)
 			pEditor->m_PopupEventActivated = true;
 		}
 		else
-			pEditor->InvokeFileDialog(IStorage::TYPE_ALL, FILETYPE_MAP, Localize("Load map"), Localize("Load"), Localize("maps"), "", pEditor->CallbackOpenMap, pEditor);
+			pEditor->InvokeFileDialog(IStorage::TYPE_ALL, FILETYPE_MAP, Localize("Load map"), Localize("Load"), "maps", "", pEditor->CallbackOpenMap, pEditor);
 		return 1;
 	}
 
@@ -3484,7 +3484,7 @@ int CEditor::PopupMenuFile(CEditor *pEditor, CUIRect View)
 	View.HSplitTop(12.0f, &Slot, &View);
 	if(pEditor->DoButton_MenuItem(&s_AppendButton, Localize("Append"), 0, &Slot, 0, Localize("Opens a map and adds everything from that map to the current one")))
 	{
-		pEditor->InvokeFileDialog(IStorage::TYPE_ALL, FILETYPE_MAP, Localize("Append map"), Localize("Append"), Localize("maps"), "", pEditor->CallbackAppendMap, pEditor);
+		pEditor->InvokeFileDialog(IStorage::TYPE_ALL, FILETYPE_MAP, Localize("Append map"), Localize("Append"), "maps", "", pEditor->CallbackAppendMap, pEditor);
 		return 1;
 	}
 
@@ -3499,7 +3499,7 @@ int CEditor::PopupMenuFile(CEditor *pEditor, CUIRect View)
 			pEditor->m_PopupEventActivated = true;
 		}
 		else
-			pEditor->InvokeFileDialog(IStorage::TYPE_SAVE, FILETYPE_MAP, Localize("Save map"), Localize("Save"), Localize("maps"), "", pEditor->CallbackSaveMap, pEditor);
+			pEditor->InvokeFileDialog(IStorage::TYPE_SAVE, FILETYPE_MAP, Localize("Save map"), Localize("Save"), "maps", "", pEditor->CallbackSaveMap, pEditor);
 		return 1;
 	}
 
@@ -3507,7 +3507,7 @@ int CEditor::PopupMenuFile(CEditor *pEditor, CUIRect View)
 	View.HSplitTop(12.0f, &Slot, &View);
 	if(pEditor->DoButton_MenuItem(&s_SaveAsButton, Localize("Save As"), 0, &Slot, 0, Localize("Saves the current map under a new name")))
 	{
-		pEditor->InvokeFileDialog(IStorage::TYPE_SAVE, FILETYPE_MAP, Localize("Save map"), Localize("Save"), Localize("maps"), "", pEditor->CallbackSaveMap, pEditor);
+		pEditor->InvokeFileDialog(IStorage::TYPE_SAVE, FILETYPE_MAP, Localize("Save map"), Localize("Save"), "maps", "", pEditor->CallbackSaveMap, pEditor);
 		return 1;
 	}
 
